@@ -1,0 +1,10 @@
+2025/03/10-00:20:51.206 1030 Reusing MANIFEST D:\AI_System\chrome_profile\Default\IndexedDB\chrome-extension_dbjbempljhcmhlfpfacalomonjpalpko_0.indexeddb.leveldb/MANIFEST-000001
+2025/03/10-00:20:51.206 1030 Recovering log #22
+2025/03/10-00:20:51.221 1030 Reusing old log D:\AI_System\chrome_profile\Default\IndexedDB\chrome-extension_dbjbempljhcmhlfpfacalomonjpalpko_0.indexeddb.leveldb/000022.log 
+2025/03/10-00:22:36.333 3424 Level-0 table #28: started
+2025/03/10-00:22:36.350 3424 Level-0 table #28: 975157 bytes OK
+2025/03/10-00:22:36.353 3424 Delete type=0 #22
+2025/03/10-00:22:36.378 e78 Compacting 1@1 + 1@2 files
+2025/03/10-00:22:36.383 e78 Generated table #29@1: 273 keys, 24815 bytes
+2025/03/10-00:22:36.383 e78 Compacted 1@1 + 1@2 files => 24815 bytes
+2025/03/10-00:22:36.384 e78 compacted to: files[ 0 0 1 0 0 0 0 ]

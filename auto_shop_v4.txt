@@ -1,0 +1,64 @@
+"""
+全自动电商终极版 v5.0
+"""
+import os
+import shutil
+import time
+from pathlib import Path
+from PIL import Image
+import undetected_chromedriver as uc
+
+# ----------------- 配置区 -----------------
+WORKSPACE = Path("D:/AI_System")
+CHROME_PROFILE = WORKSPACE / "chrome_profile"
+CHROME_VERSION = 134  # 必须与chrome://version中的主版本一致
+
+# ----------------- 核心类 -----------------
+class AutoShop:
+    def __init__(self):
+        self.driver = None
+        
+    def _get_chrome_options(self):
+        """修复所有已知选项问题"""
+        options = uc.ChromeOptions()
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_argument("--no-first-run")
+        options.add_argument("--no-service-autorun")
+        return options
+        
+    def init_browser(self):
+        """终极浏览器初始化"""
+        self.driver = uc.Chrome(
+            user_data_dir=str(CHROME_PROFILE),
+            options=self._get_chrome_options(),
+            version_main=CHROME_VERSION,
+            driver_executable_path=None,  # 自动查找驱动
+        )
+        
+    def generate_test_image(self):
+        """生成验证图片"""
+        test_img = WORKSPACE / "generated" / "final_test.png"
+        Image.new('RGB', (1242, 2688), (255,0,0)).save(test_img)  # 手机壳标准尺寸
+        return test_img
+    
+    def test_run(self):
+        """终极验证流程"""
+        print("🟢 启动终极验证...")
+        try:
+            self.init_browser()
+            print(f"✅ 浏览器已启动，版本：{CHROME_VERSION}")
+            
+            img_path = self.generate_test_image()
+            print(f"✅ 测试图片生成于：{img_path}")
+            
+            dest = WORKSPACE / "published" / "Local_Amazon" / "red"
+            dest.mkdir(parents=True, exist_ok=True)
+            shutil.copy(img_path, dest / img_path.name)
+            
+            print("🔥 验证成功！5秒后关闭浏览器...")
+            time.sleep(5)
+        finally:
+            self.driver.quit()
+
+if __name__ == "__main__":
+    AutoShop().test_run()

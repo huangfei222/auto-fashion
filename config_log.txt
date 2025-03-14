@@ -1,0 +1,3 @@
+项目路径：D:\AI_System
+GitHub仓库：huangfei222/auto-fashion
+已完成步骤：Git初始化、LFS配置

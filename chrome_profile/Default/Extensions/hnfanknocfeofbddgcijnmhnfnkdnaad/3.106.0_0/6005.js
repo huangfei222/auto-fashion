@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcb_wallet_extension=self.webpackChunkcb_wallet_extension||[]).push([[6005],{42242:(s,t,e)=>{e.d(t,{n:()=>u});var n=e(14041),c=e(86090),l=e(54736);function u(){const s=(0,c.W6)();return(0,n.useCallback)(((t,e)=>{const n=e?(0,c.tW)(`/settings/${t}`,e):`/settings/${t}`,u=t.split("/")[0];(0,l.Wx)(u),(0,l.MN)(u),s.push(n)}),[s])}}}]);
+//# sourceMappingURL=6005.js.map

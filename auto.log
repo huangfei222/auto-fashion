@@ -1,0 +1,593 @@
+[2025-03-08 14:02:55,477] ✅ 浏览器初始化完成
+[2025-03-08 14:02:55,477] 🔄 正在定位目标服务器...
+[2025-03-08 14:04:28,719] ⚠ 自动定位失败，进入手动模式
+[2025-03-08 14:04:28,840] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-08 14:04:40,655] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-08 14:04:40,656] 🔄 正在定位目标频道...
+[2025-03-08 14:04:40,707] ✅ 已进入目标频道
+[2025-03-08 14:04:41,010] ✅ 提示词已发送
+[2025-03-08 14:04:41,011] 🎉 流程执行成功！
+[2025-03-08 14:06:23,799] ✅ 浏览器初始化完成
+[2025-03-08 14:06:23,799] 🔄 正在定位目标服务器...
+[2025-03-08 14:07:55,103] ⚠ 自动定位失败，进入手动模式
+[2025-03-08 14:07:55,236] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-08 14:08:34,164] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-08 14:08:34,164] 🔄 正在定位目标频道...
+[2025-03-08 14:08:34,218] ✅ 已进入目标频道
+[2025-03-08 14:08:34,550] ✅ 提示词已发送
+[2025-03-08 14:08:34,550] 🎉 流程执行成功！
+[2025-03-08 15:23:22,111] ✅ 浏览器初始化完成
+[2025-03-08 15:23:22,112] 🔄 正在定位目标服务器...
+[2025-03-08 15:23:51,429] ✅ 使用策略 ('xpath', '//div[contains(@aria-label, "creator Ai")]') 定位成功
+[2025-03-08 15:23:52,515] 💥 流程异常终止: Message: element click intercepted: Element <div class="headerButton_f37cb1" aria-expanded="false" aria-label="creator Ai的服务器，服务器操作" role="button" tabindex="0"></div> is not clickable at point (192, 24). Other element would receive the click: <h2 class="defaultColor__4bd52 lineClamp1__4bd52 text-md/semibold_cf4812 defaultColor__5345c name_f37cb1" data-text-variant="text-md/semibold">...</h2>
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x0032EE10]
+	(No symbol) [0x0032D1B4]
+	(No symbol) [0x0032AD57]
+	(No symbol) [0x0032A041]
+	(No symbol) [0x0031E695]
+	(No symbol) [0x0034D7FC]
+	(No symbol) [0x0031E124]
+	(No symbol) [0x0034DA74]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 15:23:52,516] 💣 主程序崩溃: Message: element click intercepted: Element <div class="headerButton_f37cb1" aria-expanded="false" aria-label="creator Ai的服务器，服务器操作" role="button" tabindex="0"></div> is not clickable at point (192, 24). Other element would receive the click: <h2 class="defaultColor__4bd52 lineClamp1__4bd52 text-md/semibold_cf4812 defaultColor__5345c name_f37cb1" data-text-variant="text-md/semibold">...</h2>
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x0032EE10]
+	(No symbol) [0x0032D1B4]
+	(No symbol) [0x0032AD57]
+	(No symbol) [0x0032A041]
+	(No symbol) [0x0031E695]
+	(No symbol) [0x0034D7FC]
+	(No symbol) [0x0031E124]
+	(No symbol) [0x0034DA74]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 15:33:47,569] ✅ 浏览器初始化完成
+[2025-03-08 15:33:47,569] 🔄 正在智能定位目标服务器...
+[2025-03-08 15:34:26,376] 💣 主程序崩溃: Message: 
+
+[2025-03-08 15:50:44,927] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 15:50:48,043] ✅ 浏览器准备就绪
+[2025-03-08 15:50:51,213] 🔄 正在定位服务器...
+[2025-03-08 15:51:01,740] ⚠ 自动定位失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x0094CED3+25523]
+	(No symbol) [0x008D23B4]
+	(No symbol) [0x007A06E3]
+	(No symbol) [0x007E8B79]
+	(No symbol) [0x007E8ECB]
+	(No symbol) [0x00831B32]
+	(No symbol) [0x0080D844]
+	(No symbol) [0x0082F273]
+	(No symbol) [0x0080D5F6]
+	(No symbol) [0x007DC55F]
+	(No symbol) [0x007DD8A4]
+	GetHandleVerifier [0x00C52713+3193843]
+	GetHandleVerifier [0x00C669E9+3276489]
+	GetHandleVerifier [0x00C60F0C+3253228]
+	GetHandleVerifier [0x009EB0C0+673184]
+	(No symbol) [0x008DB43D]
+	(No symbol) [0x008D8568]
+	(No symbol) [0x008D8709]
+	(No symbol) [0x008CAE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 15:51:01,742] 🖱 进入手动选择模式
+[2025-03-08 15:51:01,757] 🔴 已高亮显示所有服务器
+[2025-03-08 15:51:01,757] ⏳ 请在 10 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:02,768] ⏳ 请在 9 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:03,775] ⏳ 请在 8 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:04,785] ⏳ 请在 7 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:05,796] ⏳ 请在 6 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:06,808] ⏳ 请在 5 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:07,823] ⏳ 请在 4 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:08,831] ⏳ 请在 3 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:09,839] ⏳ 请在 2 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:10,852] ⏳ 请在 1 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:17,148] ❌ 未检测到目标频道，请检查：
+[2025-03-08 15:51:17,149] 1. 是否点击正确的服务器
+[2025-03-08 15:51:17,156] 2. 配置的频道名称是否准确
+[2025-03-08 15:51:43,599] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 15:51:44,488] ✅ 浏览器准备就绪
+[2025-03-08 15:51:47,627] 🔄 正在定位服务器...
+[2025-03-08 15:51:58,144] ⚠ 自动定位失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x00ABCED3+25523]
+	(No symbol) [0x00A423B4]
+	(No symbol) [0x009106E3]
+	(No symbol) [0x00958B79]
+	(No symbol) [0x00958ECB]
+	(No symbol) [0x009A1B32]
+	(No symbol) [0x0097D844]
+	(No symbol) [0x0099F273]
+	(No symbol) [0x0097D5F6]
+	(No symbol) [0x0094C55F]
+	(No symbol) [0x0094D8A4]
+	GetHandleVerifier [0x00DC2713+3193843]
+	GetHandleVerifier [0x00DD69E9+3276489]
+	GetHandleVerifier [0x00DD0F0C+3253228]
+	GetHandleVerifier [0x00B5B0C0+673184]
+	(No symbol) [0x00A4B43D]
+	(No symbol) [0x00A48568]
+	(No symbol) [0x00A48709]
+	(No symbol) [0x00A3AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 15:51:58,147] 🖱 进入手动选择模式
+[2025-03-08 15:51:58,164] 🔴 已高亮显示所有服务器
+[2025-03-08 15:51:58,165] ⏳ 请在 10 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:51:59,170] ⏳ 请在 9 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:00,182] ⏳ 请在 8 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:01,188] ⏳ 请在 7 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:02,194] ⏳ 请在 6 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:03,197] ⏳ 请在 5 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:04,208] ⏳ 请在 4 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:05,216] ⏳ 请在 3 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:06,226] ⏳ 请在 2 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:07,242] ⏳ 请在 1 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:08,272] ✅ 服务器选择验证通过
+[2025-03-08 15:52:08,272] 🎉 运行成功！
+[2025-03-08 15:52:31,804] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 15:52:32,641] ✅ 浏览器准备就绪
+[2025-03-08 15:52:35,762] 🔄 正在定位服务器...
+[2025-03-08 15:52:46,240] ⚠ 自动定位失败：Message: 
+Stacktrace:
+	GetHandleVerifier [0x008ECED3+25523]
+	(No symbol) [0x008723B4]
+	(No symbol) [0x007406E3]
+	(No symbol) [0x00788B79]
+	(No symbol) [0x00788ECB]
+	(No symbol) [0x007D1B32]
+	(No symbol) [0x007AD844]
+	(No symbol) [0x007CF273]
+	(No symbol) [0x007AD5F6]
+	(No symbol) [0x0077C55F]
+	(No symbol) [0x0077D8A4]
+	GetHandleVerifier [0x00BF2713+3193843]
+	GetHandleVerifier [0x00C069E9+3276489]
+	GetHandleVerifier [0x00C00F0C+3253228]
+	GetHandleVerifier [0x0098B0C0+673184]
+	(No symbol) [0x0087B43D]
+	(No symbol) [0x00878568]
+	(No symbol) [0x00878709]
+	(No symbol) [0x0086AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 15:52:46,242] 🖱 进入手动选择模式
+[2025-03-08 15:52:46,254] 🔴 已高亮显示所有服务器
+[2025-03-08 15:52:46,254] ⏳ 请在 10 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:47,271] ⏳ 请在 9 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:48,284] ⏳ 请在 8 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:49,296] ⏳ 请在 7 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:50,299] ⏳ 请在 6 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:51,311] ⏳ 请在 5 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:52,323] ⏳ 请在 4 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:53,338] ⏳ 请在 3 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:54,344] ⏳ 请在 2 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:55,358] ⏳ 请在 1 秒内点击目标服务器（红色高亮）...
+[2025-03-08 15:52:56,392] ✅ 服务器选择验证通过
+[2025-03-08 15:52:56,393] 🎉 运行成功！
+[2025-03-08 17:56:32,257] ✅ 浏览器初始化完成
+[2025-03-08 17:56:32,257] 🔄 正在定位目标服务器...
+[2025-03-08 17:56:32,947] 💥 流程异常终止: 'name_keyword'
+[2025-03-08 17:56:32,948] 💣 主程序崩溃: 'name_keyword'
+[2025-03-08 19:22:22,023] 💣 主程序崩溃: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+[2025-03-08 19:22:34,741] 💣 主程序崩溃: WebDriver.__init__() got an unexpected keyword argument 'executable_path'
+[2025-03-08 19:57:44,546] ✅ 浏览器初始化完成
+[2025-03-08 19:57:44,546] 🔄 正在验证登录状态...
+[2025-03-08 19:58:02,261] ⚠ 需要手动登录
+[2025-03-08 19:59:11,330] ✅ 会话状态已保存
+[2025-03-08 19:59:12,226] 🔄 正在定位自定义服务器...
+[2025-03-08 20:00:12,964] 💥 流程异常: ❌ 服务器定位失败
+[2025-03-08 20:00:12,966] 💣 主程序崩溃: ❌ 服务器定位失败
+[2025-03-08 20:08:25,781] ✅ 浏览器初始化完成
+[2025-03-08 20:08:25,781] 🔄 正在定位目标服务器...
+[2025-03-08 20:09:59,442] ⚠ 自动定位失败，进入手动模式
+[2025-03-08 20:09:59,559] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-08 20:10:21,598] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-08 20:10:21,598] 🔄 正在定位目标频道...
+[2025-03-08 20:10:21,641] ✅ 已进入目标频道
+[2025-03-08 20:10:21,951] ✅ 提示词已发送
+[2025-03-08 20:10:21,951] 🎉 流程执行成功！
+[2025-03-08 20:16:09,587] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:52993
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00E7CED3+25523]
+	(No symbol) [0x00E023B4]
+	(No symbol) [0x00CD055E]
+	(No symbol) [0x00CC427A]
+	(No symbol) [0x00D08DF6]
+	(No symbol) [0x00CFF4DF]
+	(No symbol) [0x00CFF316]
+	(No symbol) [0x00D496DD]
+	(No symbol) [0x00D4910A]
+	(No symbol) [0x00D3D5F6]
+	(No symbol) [0x00D0C55F]
+	(No symbol) [0x00D0D8A4]
+	GetHandleVerifier [0x01182713+3193843]
+	GetHandleVerifier [0x011969E9+3276489]
+	GetHandleVerifier [0x01190F0C+3253228]
+	GetHandleVerifier [0x00F1B0C0+673184]
+	(No symbol) [0x00E0B43D]
+	(No symbol) [0x00E08568]
+	(No symbol) [0x00E08709]
+	(No symbol) [0x00DFAE90]
+	BaseThreadInitThunk [0x75F55D49+25]
+	RtlInitializeExceptionChain [0x77EABD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77EABCF1+561]
+
+[2025-03-08 20:34:35,220] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:53185
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00E7CED3+25523]
+	(No symbol) [0x00E023B4]
+	(No symbol) [0x00CD055E]
+	(No symbol) [0x00CC427A]
+	(No symbol) [0x00D08DF6]
+	(No symbol) [0x00CFF4DF]
+	(No symbol) [0x00CFF316]
+	(No symbol) [0x00D496DD]
+	(No symbol) [0x00D4910A]
+	(No symbol) [0x00D3D5F6]
+	(No symbol) [0x00D0C55F]
+	(No symbol) [0x00D0D8A4]
+	GetHandleVerifier [0x01182713+3193843]
+	GetHandleVerifier [0x011969E9+3276489]
+	GetHandleVerifier [0x01190F0C+3253228]
+	GetHandleVerifier [0x00F1B0C0+673184]
+	(No symbol) [0x00E0B43D]
+	(No symbol) [0x00E08568]
+	(No symbol) [0x00E08709]
+	(No symbol) [0x00DFAE90]
+	BaseThreadInitThunk [0x75F55D49+25]
+	RtlInitializeExceptionChain [0x77EABD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77EABCF1+561]
+
+[2025-03-08 20:35:55,158] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:53260
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00E7CED3+25523]
+	(No symbol) [0x00E023B4]
+	(No symbol) [0x00CD055E]
+	(No symbol) [0x00CC427A]
+	(No symbol) [0x00D08DF6]
+	(No symbol) [0x00CFF4DF]
+	(No symbol) [0x00CFF316]
+	(No symbol) [0x00D496DD]
+	(No symbol) [0x00D4910A]
+	(No symbol) [0x00D3D5F6]
+	(No symbol) [0x00D0C55F]
+	(No symbol) [0x00D0D8A4]
+	GetHandleVerifier [0x01182713+3193843]
+	GetHandleVerifier [0x011969E9+3276489]
+	GetHandleVerifier [0x01190F0C+3253228]
+	GetHandleVerifier [0x00F1B0C0+673184]
+	(No symbol) [0x00E0B43D]
+	(No symbol) [0x00E08568]
+	(No symbol) [0x00E08709]
+	(No symbol) [0x00DFAE90]
+	BaseThreadInitThunk [0x75F55D49+25]
+	RtlInitializeExceptionChain [0x77EABD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77EABCF1+561]
+
+[2025-03-08 21:01:11,885] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:53499
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00E7CED3+25523]
+	(No symbol) [0x00E023B4]
+	(No symbol) [0x00CD055E]
+	(No symbol) [0x00CC427A]
+	(No symbol) [0x00D08DF6]
+	(No symbol) [0x00CFF4DF]
+	(No symbol) [0x00CFF316]
+	(No symbol) [0x00D496DD]
+	(No symbol) [0x00D4910A]
+	(No symbol) [0x00D3D5F6]
+	(No symbol) [0x00D0C55F]
+	(No symbol) [0x00D0D8A4]
+	GetHandleVerifier [0x01182713+3193843]
+	GetHandleVerifier [0x011969E9+3276489]
+	GetHandleVerifier [0x01190F0C+3253228]
+	GetHandleVerifier [0x00F1B0C0+673184]
+	(No symbol) [0x00E0B43D]
+	(No symbol) [0x00E08568]
+	(No symbol) [0x00E08709]
+	(No symbol) [0x00DFAE90]
+	BaseThreadInitThunk [0x75F55D49+25]
+	RtlInitializeExceptionChain [0x77EABD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77EABCF1+561]
+
+[2025-03-08 21:30:16,007] patching driver executable D:/AI_System/venv/Scripts/chromedriver.exe
+[2025-03-08 21:31:29,083] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:57674
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00007FF6E847DF85+26693]
+	(No symbol) [0x00007FF6E83DEAD0]
+	(No symbol) [0x00007FF6E8268FFC]
+	(No symbol) [0x00007FF6E8259DD1]
+	(No symbol) [0x00007FF6E82AC132]
+	(No symbol) [0x00007FF6E82A117E]
+	(No symbol) [0x00007FF6E82F5C58]
+	(No symbol) [0x00007FF6E82F5210]
+	(No symbol) [0x00007FF6E82E76C3]
+	(No symbol) [0x00007FF6E82B0490]
+	(No symbol) [0x00007FF6E82B1743]
+	GetHandleVerifier [0x00007FF6E87D436D+3525677]
+	GetHandleVerifier [0x00007FF6E87E7F3B+3606523]
+	GetHandleVerifier [0x00007FF6E87DCEE3+3561379]
+	GetHandleVerifier [0x00007FF6E8547C0A+853194]
+	(No symbol) [0x00007FF6E83E990F]
+	(No symbol) [0x00007FF6E83E5674]
+	(No symbol) [0x00007FF6E83E5816]
+	(No symbol) [0x00007FF6E83D4D89]
+	BaseThreadInitThunk [0x00007FFA5B03DBE7+23]
+	RtlUserThreadStart [0x00007FFA5C005A6C+44]
+
+[2025-03-08 21:33:54,655] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:57764
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00007FF6E847DF85+26693]
+	(No symbol) [0x00007FF6E83DEAD0]
+	(No symbol) [0x00007FF6E8268FFC]
+	(No symbol) [0x00007FF6E8259DD1]
+	(No symbol) [0x00007FF6E82AC132]
+	(No symbol) [0x00007FF6E82A117E]
+	(No symbol) [0x00007FF6E82F5C58]
+	(No symbol) [0x00007FF6E82F5210]
+	(No symbol) [0x00007FF6E82E76C3]
+	(No symbol) [0x00007FF6E82B0490]
+	(No symbol) [0x00007FF6E82B1743]
+	GetHandleVerifier [0x00007FF6E87D436D+3525677]
+	GetHandleVerifier [0x00007FF6E87E7F3B+3606523]
+	GetHandleVerifier [0x00007FF6E87DCEE3+3561379]
+	GetHandleVerifier [0x00007FF6E8547C0A+853194]
+	(No symbol) [0x00007FF6E83E990F]
+	(No symbol) [0x00007FF6E83E5674]
+	(No symbol) [0x00007FF6E83E5816]
+	(No symbol) [0x00007FF6E83D4D89]
+	BaseThreadInitThunk [0x00007FFA5B03DBE7+23]
+	RtlUserThreadStart [0x00007FFA5C005A6C+44]
+
+[2025-03-08 21:43:06,475] patching driver executable D:/AI_System/venv/Scripts/chromedriver.exe
+[2025-03-08 21:44:18,608] 💣 主程序崩溃: Message: session not created: cannot connect to chrome at 127.0.0.1:58370
+from chrome not reachable
+Stacktrace:
+	GetHandleVerifier [0x00BECED3+25523]
+	(No symbol) [0x00B723B4]
+	(No symbol) [0x00A4055E]
+	(No symbol) [0x00A3427A]
+	(No symbol) [0x00A78DF6]
+	(No symbol) [0x00A6F4DF]
+	(No symbol) [0x00A6F316]
+	(No symbol) [0x00AB96DD]
+	(No symbol) [0x00AB910A]
+	(No symbol) [0x00AAD5F6]
+	(No symbol) [0x00A7C55F]
+	(No symbol) [0x00A7D8A4]
+	GetHandleVerifier [0x00EF2713+3193843]
+	GetHandleVerifier [0x00F069E9+3276489]
+	GetHandleVerifier [0x00F00F0C+3253228]
+	GetHandleVerifier [0x00C8B0C0+673184]
+	(No symbol) [0x00B7B43D]
+	(No symbol) [0x00B78568]
+	(No symbol) [0x00B78709]
+	(No symbol) [0x00B6AE90]
+	BaseThreadInitThunk [0x758C5D49+25]
+	RtlInitializeExceptionChain [0x7796BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x7796BCF1+561]
+
+[2025-03-08 22:43:17,696] ✅ 浏览器初始化完成
+[2025-03-08 22:43:17,696] 💣 主程序崩溃: 'ServerNavigator' object has no attribute 'execute'
+[2025-03-08 22:43:48,012] ✅ 浏览器初始化完成
+[2025-03-08 22:43:48,012] 💣 主程序崩溃: 'ServerNavigator' object has no attribute 'execute'
+[2025-03-08 22:48:18,053] ✅ 浏览器初始化完成
+[2025-03-08 22:48:18,054] 💣 主程序崩溃: 'ServerNavigator' object has no attribute 'execute'
+[2025-03-08 23:23:29,414] 💥 运行失败: name 'WebDriverWait' is not defined
+[2025-03-08 23:29:30,520] 💥 运行失败: name 'WebDriverWait' is not defined
+[2025-03-08 23:40:44,458] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 23:41:21,047] 💥 运行失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0065CED3+25523]
+	(No symbol) [0x005E23B4]
+	(No symbol) [0x004B06E3]
+	(No symbol) [0x004F8B79]
+	(No symbol) [0x004F8ECB]
+	(No symbol) [0x00541B32]
+	(No symbol) [0x0051D844]
+	(No symbol) [0x0053F273]
+	(No symbol) [0x0051D5F6]
+	(No symbol) [0x004EC55F]
+	(No symbol) [0x004ED8A4]
+	GetHandleVerifier [0x00962713+3193843]
+	GetHandleVerifier [0x009769E9+3276489]
+	GetHandleVerifier [0x00970F0C+3253228]
+	GetHandleVerifier [0x006FB0C0+673184]
+	(No symbol) [0x005EB43D]
+	(No symbol) [0x005E8568]
+	(No symbol) [0x005E8709]
+	(No symbol) [0x005DAE90]
+	BaseThreadInitThunk [0x758C5D49+25]
+	RtlInitializeExceptionChain [0x7796BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x7796BCF1+561]
+
+[2025-03-08 23:41:48,563] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 23:42:23,846] 💥 运行失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00F5CED3+25523]
+	(No symbol) [0x00EE23B4]
+	(No symbol) [0x00DB06E3]
+	(No symbol) [0x00DF8B79]
+	(No symbol) [0x00DF8ECB]
+	(No symbol) [0x00E41B32]
+	(No symbol) [0x00E1D844]
+	(No symbol) [0x00E3F273]
+	(No symbol) [0x00E1D5F6]
+	(No symbol) [0x00DEC55F]
+	(No symbol) [0x00DED8A4]
+	GetHandleVerifier [0x01262713+3193843]
+	GetHandleVerifier [0x012769E9+3276489]
+	GetHandleVerifier [0x01270F0C+3253228]
+	GetHandleVerifier [0x00FFB0C0+673184]
+	(No symbol) [0x00EEB43D]
+	(No symbol) [0x00EE8568]
+	(No symbol) [0x00EE8709]
+	(No symbol) [0x00EDAE90]
+	BaseThreadInitThunk [0x758C5D49+25]
+	RtlInitializeExceptionChain [0x7796BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x7796BCF1+561]
+
+[2025-03-09 00:05:52,521] 💥 运行失败: name 'WebDriverWait' is not defined
+[2025-03-09 00:16:21,172] ✅ 浏览器初始化完成
+[2025-03-09 00:16:21,173] 🔄 正在定位目标服务器...
+[2025-03-09 00:17:57,026] ⚠ 自动定位失败，进入手动模式
+[2025-03-09 00:17:57,133] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-09 00:18:11,042] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-09 00:18:11,042] 🔄 正在定位目标频道...
+[2025-03-09 00:18:11,113] ✅ 已进入目标频道
+[2025-03-09 00:18:11,494] ✅ 提示词已发送
+[2025-03-09 00:18:11,495] 🎉 流程执行成功！
+[2025-03-09 00:00:03,360] patching driver executable D:\AI_System\modules\chromedriver.exe
+[2025-03-09 13:28:52,605] ✅ 浏览器初始化完成
+[2025-03-09 13:28:52,606] 🔄 正在定位目标服务器...
+[2025-03-09 13:30:26,646] ⚠ 自动定位失败，进入手动模式
+[2025-03-09 13:30:26,753] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-09 13:30:39,165] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-09 13:30:39,166] 🔄 正在定位目标频道...
+[2025-03-09 13:30:39,219] ✅ 已进入目标频道
+[2025-03-09 13:30:39,536] ✅ 提示词已发送
+[2025-03-09 13:30:39,536] 🎉 流程执行成功！
+[2025-03-09 19:28:15,836] ✅ 浏览器初始化完成
+[2025-03-09 19:28:15,837] 🔄 正在定位目标服务器...
+[2025-03-09 23:11:04,483] ✅ 浏览器初始化成功
+[2025-03-09 23:11:04,484] 🌐 正在访问: https://discord.com/channels/1344917223021744221/1344921569541095446
+[2025-03-09 23:11:36,559] 🔧 调试文件已保存: navigate_fail_20250309_231136.*
+[2025-03-09 23:11:36,560] ⚠ 直接访问失败，启用备用方案
+[2025-03-09 23:12:37,671] 🔧 调试文件已保存: fallback_fail_20250309_231237.*
+[2025-03-09 23:12:37,671] 💥 导航失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00C5CED3+25523]
+	(No symbol) [0x00BE23B4]
+	(No symbol) [0x00AB06E3]
+	(No symbol) [0x00AF8B79]
+	(No symbol) [0x00AF8ECB]
+	(No symbol) [0x00B41B32]
+	(No symbol) [0x00B1D844]
+	(No symbol) [0x00B3F273]
+	(No symbol) [0x00B1D5F6]
+	(No symbol) [0x00AEC55F]
+	(No symbol) [0x00AED8A4]
+	GetHandleVerifier [0x00F62713+3193843]
+	GetHandleVerifier [0x00F769E9+3276489]
+	GetHandleVerifier [0x00F70F0C+3253228]
+	GetHandleVerifier [0x00CFB0C0+673184]
+	(No symbol) [0x00BEB43D]
+	(No symbol) [0x00BE8568]
+	(No symbol) [0x00BE8709]
+	(No symbol) [0x00BDAE90]
+	BaseThreadInitThunk [0x75D25D49+25]
+	RtlInitializeExceptionChain [0x77CFBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77CFBCF1+561]
+
+[2025-03-09 23:12:37,768] 🔧 调试文件已保存: execute_fail_20250309_231237.*
+[2025-03-09 23:12:37,768] 💥 执行异常: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00C5CED3+25523]
+	(No symbol) [0x00BE23B4]
+	(No symbol) [0x00AB06E3]
+	(No symbol) [0x00AF8B79]
+	(No symbol) [0x00AF8ECB]
+	(No symbol) [0x00B41B32]
+	(No symbol) [0x00B1D844]
+	(No symbol) [0x00B3F273]
+	(No symbol) [0x00B1D5F6]
+	(No symbol) [0x00AEC55F]
+	(No symbol) [0x00AED8A4]
+	GetHandleVerifier [0x00F62713+3193843]
+	GetHandleVerifier [0x00F769E9+3276489]
+	GetHandleVerifier [0x00F70F0C+3253228]
+	GetHandleVerifier [0x00CFB0C0+673184]
+	(No symbol) [0x00BEB43D]
+	(No symbol) [0x00BE8568]
+	(No symbol) [0x00BE8709]
+	(No symbol) [0x00BDAE90]
+	BaseThreadInitThunk [0x75D25D49+25]
+	RtlInitializeExceptionChain [0x77CFBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77CFBCF1+561]
+
+[2025-03-09 23:12:37,770] 💣 致命错误: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00C5CED3+25523]
+	(No symbol) [0x00BE23B4]
+	(No symbol) [0x00AB06E3]
+	(No symbol) [0x00AF8B79]
+	(No symbol) [0x00AF8ECB]
+	(No symbol) [0x00B41B32]
+	(No symbol) [0x00B1D844]
+	(No symbol) [0x00B3F273]
+	(No symbol) [0x00B1D5F6]
+	(No symbol) [0x00AEC55F]
+	(No symbol) [0x00AED8A4]
+	GetHandleVerifier [0x00F62713+3193843]
+	GetHandleVerifier [0x00F769E9+3276489]
+	GetHandleVerifier [0x00F70F0C+3253228]
+	GetHandleVerifier [0x00CFB0C0+673184]
+	(No symbol) [0x00BEB43D]
+	(No symbol) [0x00BE8568]
+	(No symbol) [0x00BE8709]
+	(No symbol) [0x00BDAE90]
+	BaseThreadInitThunk [0x75D25D49+25]
+	RtlInitializeExceptionChain [0x77CFBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77CFBCF1+561]
+
+[2025-03-10 00:20:51,234] ✅ 浏览器初始化完成
+[2025-03-10 00:20:51,234] 🔄 正在定位目标服务器...
+[2025-03-10 00:22:25,438] ⚠ 自动定位失败，进入手动模式
+[2025-03-10 00:22:25,544] ⚠ 已保存调试文件：before_server_select.png
+[2025-03-10 00:22:39,083] ⚠ 已保存调试文件：after_server_select.png
+[2025-03-10 00:22:39,083] 🔄 正在定位目标频道...
+[2025-03-10 00:22:39,133] ✅ 已进入目标频道
+[2025-03-10 00:22:39,436] ✅ 提示词已发送
+[2025-03-10 00:22:39,436] 🎉 流程执行成功！

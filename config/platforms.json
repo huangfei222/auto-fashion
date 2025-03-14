@@ -1,0 +1,26 @@
+{
+    "手机壳": {
+        "min_width": 2000,
+        "min_height": 2000,
+        "min_dpi": 150,
+        "sharpness_threshold": 100
+    },
+    "T恤": {
+        "min_width": 4500,
+        "min_height": 5400,
+        "min_dpi": 300,
+        "sharpness_threshold": 150
+    },
+    "壁纸": {
+        "min_width": 3840,
+        "min_height": 2160,
+        "min_dpi": 72,
+        "sharpness_threshold": 200
+    },
+    "NFT": {
+        "min_width": 4096,
+        "min_height": 4096,
+        "min_dpi": 300,
+        "sharpness_threshold": 250
+    }
+}

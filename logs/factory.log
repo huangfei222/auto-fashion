@@ -1,0 +1,36 @@
+[2025-03-07 21:08:04,459] INFO: ==================================================
+[2025-03-07 21:08:04,460] INFO: 智能分类生产系统启动
+[2025-03-07 21:08:04,460] INFO: 正在处理分类: T恤
+[2025-03-07 21:08:04,460] INFO: 正在处理分类: 壁纸
+[2025-03-07 21:08:04,460] INFO: 正在处理分类: 手机壳
+[2025-03-07 21:08:04,461] INFO: 正在处理分类: 海报
+[2025-03-07 21:08:04,461] INFO: 正在处理分类: 通用
+[2025-03-07 21:08:04,461] INFO: 生产完成! 总数: 0, 成功: 0, 失败: 0
+[2025-03-07 21:28:19,744] INFO: ==================================================
+[2025-03-07 21:28:19,744] INFO: 智能分类生产系统启动
+[2025-03-07 21:28:19,744] INFO: 正在处理分类: T恤
+[2025-03-07 21:28:20,901] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_1e3eb3a4-b4a6-4838-9bde-a78eff757570_shirt.png
+[2025-03-07 21:28:22,046] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_af19b88c-5b4d-446a-a7a4-0393b7c50b62_shirt.png
+[2025-03-07 21:28:23,197] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_eee66424-64ec-41d7-a63d-6583db85ffe8_shirt.png
+[2025-03-07 21:28:24,345] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_fde09159-4428-470e-ac96-34cef1c3d7ce_shirt.png
+[2025-03-07 21:28:25,507] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_abstract_t-shirt_design_streetwear_styl_f7826315-f176-4fe2-94d2-27bcb487bd84_shirt.png
+[2025-03-07 21:28:25,507] INFO: 正在处理分类: 壁纸
+[2025-03-07 21:28:26,720] INFO: 🖼️ 壁纸生成: D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_0f53bee0-fdfe-4651-afe7-43a68712528b_横版.jpg, D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_0f53bee0-fdfe-4651-afe7-43a68712528b_竖版.jpg
+[2025-03-07 21:28:27,971] INFO: 🖼️ 壁纸生成: D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_20db7d15-9c83-4661-b79b-c535821684e4_横版.jpg, D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_20db7d15-9c83-4661-b79b-c535821684e4_竖版.jpg
+[2025-03-07 21:28:29,322] INFO: 🖼️ 壁纸生成: D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_9c1023c2-2d55-4742-9807-976569b2b084_横版.jpg, D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_9c1023c2-2d55-4742-9807-976569b2b084_竖版.jpg
+[2025-03-07 21:28:30,566] INFO: 🖼️ 壁纸生成: D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_acd043d6-cf47-49b3-9fc3-0a090bf588de_横版.jpg, D:\AI_System\data\output\壁纸\creatorai0316_50827_Islamic_geometric_patterns_meet_Taoist_yin-_acd043d6-cf47-49b3-9fc3-0a090bf588de_竖版.jpg
+[2025-03-07 21:28:30,571] INFO: 正在处理分类: 手机壳
+[2025-03-07 21:28:32,500] INFO: 📱 手机壳生成: D:\AI_System\data\output\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_1a99c874-caf1-44b7-9eb6-c7161bee2991_case.png
+[2025-03-07 21:28:34,014] INFO: 📱 手机壳生成: D:\AI_System\data\output\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_5d52259c-a5f6-45ff-8962-e7a37ab46471_case.png
+[2025-03-07 21:28:35,587] INFO: 📱 手机壳生成: D:\AI_System\data\output\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_834d6d84-2c10-4f0b-af48-8015bbb0356e_case.png
+[2025-03-07 21:28:37,092] INFO: 📱 手机壳生成: D:\AI_System\data\output\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_85d93275-5867-4573-991d-9554c9287829_case.png
+[2025-03-07 21:28:38,692] INFO: 📱 手机壳生成: D:\AI_System\data\output\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_8932ab4d-bb4d-44cf-8d13-1a0243b1af13_case.png
+[2025-03-07 21:28:38,694] INFO: 正在处理分类: 海报
+[2025-03-07 21:28:38,694] INFO: 正在处理分类: 通用
+[2025-03-07 21:28:38,694] INFO: 生产完成! 总数: 14, 成功: 14, 失败: 0
+[2025-03-13 19:56:26,636] INFO: ==================================================
+[2025-03-13 19:56:26,636] INFO: 智能分类生产系统启动
+[2025-03-13 19:56:26,637] INFO: 正在处理分类: T恤
+[2025-03-13 19:56:28,200] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_Hindu_mandala_with_henna_patterns_burnout_t_a81ecdd1-db3e-435f-94ed-abc1ffd481b8_00_shirt.png
+[2025-03-13 19:56:29,724] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_Hindu_mandala_with_henna_patterns_burnout_t_a81ecdd1-db3e-435f-94ed-abc1ffd481b8_01_shirt.png
+[2025-03-13 19:56:31,280] INFO: 👕 T恤生成: D:\AI_System\data\output\T恤\creatorai0316_50827_Hindu_mandala_with_henna_patterns_burnout_t_a81ecdd1-db3e-435f-94ed-abc1ffd481b8_02_shirt.png

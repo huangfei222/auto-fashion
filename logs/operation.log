@@ -1,0 +1,12 @@
+[2025-03-10 21:49:37,259] INFO: === 开始全自动生产 ===
+[2025-03-10 21:49:37,485] ERROR: 生产失败 D:\AI_System\data\raw\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_1e3eb3a4-b4a6-4838-9bde-a78eff757570.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\tshirt_front.png'
+[2025-03-10 21:49:37,675] ERROR: 生产失败 D:\AI_System\data\raw\T恤\creatorai0316_50827_abstractgraphic_tee_design_spiritual_te_af19b88c-5b4d-446a-a7a4-0393b7c50b62.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\tshirt_front.png'
+[2025-03-10 21:49:37,904] ERROR: 生产失败 D:\AI_System\data\raw\T恤\creatorai0316_50827_abstract_t-shirt_design_streetwear_styl_a271fe7d-c14a-4f37-bfb5-3bbc83cca0c4.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\tshirt_front.png'
+[2025-03-10 21:49:38,112] ERROR: 生产失败 D:\AI_System\data\raw\T恤\creatorai0316_50827_abstract_t-shirt_design_streetwear_styl_f7826315-f176-4fe2-94d2-27bcb487bd84.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\tshirt_front.png'
+[2025-03-10 21:49:38,333] ERROR: 生产失败 D:\AI_System\data\raw\壁纸\creatorai0316_50827_mysticalwallpaper_4k_resolution_dark__632debef-e200-49d4-8f96-3f7a6c3c079a.png: 'GlobalAutoPilot' object has no attribute 'make_wallpaper'
+[2025-03-10 21:49:38,554] ERROR: 生产失败 D:\AI_System\data\raw\壁纸\creatorai0316_50827_mysticalwallpaper_4k_resolution_dark__af559556-70d5-48c9-afdd-cd621565d527.png: 'GlobalAutoPilot' object has no attribute 'make_wallpaper'
+[2025-03-10 21:49:38,761] ERROR: 生产失败 D:\AI_System\data\raw\壁纸\creatorai0316_50827_mysticalwallpaper_4k_resolution_dark__cf85a866-afd0-4f43-8d5f-30a7789b4f8a.png: 'GlobalAutoPilot' object has no attribute 'make_wallpaper'
+[2025-03-10 21:49:38,983] ERROR: 生产失败 D:\AI_System\data\raw\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_a758f5dd-ccd9-4f97-b059-7b52eb426468.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\phone_case.png'
+[2025-03-10 21:49:39,207] ERROR: 生产失败 D:\AI_System\data\raw\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_c0765854-8fef-414d-9ea5-02ef6426a335.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\phone_case.png'
+[2025-03-10 21:49:39,414] ERROR: 生产失败 D:\AI_System\data\raw\手机壳\creatorai0316_50827_Prompts_starting_with__are_not_accepted._De_dab71f59-4b98-4e33-92d0-569ea5d2a256.png: [Errno 2] No such file or directory: 'D:\\AI_System\\templates\\phone_case.png'
+[2025-03-10 21:49:39,414] INFO: === 全流程完成！输出至 /output ===

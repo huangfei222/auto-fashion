@@ -1,0 +1,5 @@
+[2024-03-09 迁移记录]
+- 新增标准化目录：config/pending, scripts/tmp
+- 保留原有配置文件：config/platforms.json
+- 更新目录指纹锚点：.deploy_lock
+- 旧锁文件重命名：existing.lock → archive.lock

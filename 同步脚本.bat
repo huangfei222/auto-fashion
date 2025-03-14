@@ -1,0 +1,1 @@
+rclone sync D:/AI_System/output google:AI_System_Backup --progress --log-file=D:/AI_System/logs/sync.log

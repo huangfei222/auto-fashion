@@ -1,0 +1,159 @@
+import os
+import json
+import time
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+import subprocess
+import hashlib
+
+# ------------------ 配置加载 -------------------
+with open('D:/AI_System/config.json') as f:
+    config = json.load(f)
+
+RAW_BASE = 'D:/AI_System/data/raw'
+OUTPUT_BASE = 'D:/AI_System/output'
+TEMPLATE_DIR = 'D:/AI_System/templates'
+LOG_FILE = 'D:/AI_System/logs/production.log'
+
+# ------------------ 智能分辨率提升算法 -------------------
+def enhance_resolution(input_path, output_path, product_type):
+    """专业级AI分辨率提升"""
+    target_sizes = {
+        '手机壳': (4000, 4000),
+        '海报': (6000, 9000),
+        '壁纸': (3840, 2160),
+        'T恤': (5000, 6000)
+    }
+    
+    # 使用ImageMagick的深度学习增强模块
+    subprocess.run([
+        'magick', input_path,
+        '-filter', 'DnnDenoise',
+        '-distort-resize', f"{target_sizes[product_type][0]}x{target_sizes[product_type][1]}^",
+        '-sharpen', '0x1.5',
+        '-quality', '98',
+        '-profile', 'D:/AI_System/color_profiles/AdobeRGB.icc',
+        output_path
+    ], check=True)
+
+# ------------------ 动态水印系统 -------------------
+def add_dynamic_watermark(image_path, product_type):
+    """智能隐形水印系统"""
+    with Image.open(image_path) as img:
+        # 生成唯一指纹水印
+        with open(image_path, 'rb') as f:
+            file_hash = hashlib.sha256(f.read()).hexdigest()[:20]
+        
+        watermark = Image.new('RGBA', img.size, (0,0,0,0))
+        draw = ImageDraw.Draw(watermark)
+        
+        # 根据产品类型调整水印参数
+        params = {
+            '手机壳': {'size': 30, 'opacity': 15, 'position': (100, 100)},
+            '海报': {'size': 50, 'opacity': 20, 'position': (img.width//2, img.height-200)},
+            '壁纸': {'size': 40, 'opacity': 10, 'pattern': 'diagonal'},
+            'T恤': {'size': 25, 'opacity': 12, 'position': 'edge'}
+        }[product_type]
+        
+        font = ImageFont.truetype('arial.ttf', params['size'])
+        
+        # 生成隐形水印文本
+        text = f"©{time.strftime('%Y')} {file_hash}"
+        if 'pattern' in params:
+            for i in range(0, img.width, 500):
+                for j in range(0, img.height, 300):
+                    draw.text((i,j), text, fill=(255,255,255,params['opacity']), font=font)
+        else:
+            draw.text(params['position'], text, fill=(255,255,255,params['opacity']), font=font)
+        
+        # 合并水印
+        watermarked = Image.alpha_composite(img.convert('RGBA'), watermark)
+        watermarked.save(image_path)
+
+# ------------------ 平台适配转换 -------------------
+def convert_for_platform(source_path, platform, product_type):
+    """多平台格式转换系统"""
+    output_dir = os.path.join(OUTPUT_BASE, platform, product_type)
+    os.makedirs(output_dir, exist_ok=True)
+    
+    platform_formats = {
+        'Amazon': ('png', 3000, 3000),
+        'Etsy': ('jpg', 2500, 2500),
+        'Redbubble': ('png', 4000, 4000),
+        'Shopify': ('webp', 3840, 2160)
+    }
+    
+    ext, w, h = platform_formats[platform]
+    output_path = os.path.join(output_dir, 
+        f"{os.path.splitext(os.path.basename(source_path))[0]}_{platform}.{ext}")
+    
+    # 专业格式转换
+    subprocess.run([
+        'magick', source_path,
+        '-resize', f"{w}x{h}^",
+        '-gravity', 'center',
+        '-extent', f"{w}x{h}",
+        '-background', 'white' if product_type == 'T恤' else 'none',
+        output_path
+    ], check=True)
+    
+    return output_path
+
+# ------------------ 文件监控类 -------------------
+class ProductionHandler(FileSystemEventHandler):
+    def on_created(self, event):
+        if not event.is_directory:
+            for product_type in ['手机壳', '海报', '壁纸', 'T恤']:
+                if product_type in event.src_path:
+                    process_file(event.src_path, product_type)
+                    break
+
+def process_file(input_path, product_type):
+    try:
+        # 创建临时工作区
+        tmp_dir = os.path.join(RAW_BASE, 'processing', os.path.basename(input_path))
+        os.makedirs(tmp_dir, exist_ok=True)
+        
+        # 1. 提升分辨率
+        enhanced_path = os.path.join(tmp_dir, 'enhanced.png')
+        enhance_resolution(input_path, enhanced_path, product_type)
+        
+        # 2. 添加动态水印
+        add_dynamic_watermark(enhanced_path, product_type)
+        
+        # 3. 多平台转换
+        for platform in ['Amazon', 'Etsy', 'Redbubble', 'Shopify']:
+            final_path = convert_for_platform(enhanced_path, platform, product_type)
+            
+            # 4. 自动质量检测
+            if os.path.getsize(final_path) < 102400:  # 100KB
+                raise ValueError(f"文件过小可能损坏: {final_path}")
+            
+            # 5. 记录日志
+            with open(LOG_FILE, 'a') as f:
+                f.write(f"{time.ctime()} | 成功处理: {final_path}\n")
+                
+    except Exception as e:
+        with open(LOG_FILE, 'a') as f:
+            f.write(f"{time.ctime()} | 错误: {str(e)}\n")
+
+# ------------------ 启动系统 -------------------
+if __name__ == "__main__":
+    event_handler = ProductionHandler()
+    observer = Observer()
+    
+    # 监控所有产品目录
+    for product in ['手机壳', '海报', '壁纸', 'T恤']:
+        path = os.path.join(RAW_BASE, product)
+        observer.schedule(event_handler, path, recursive=False)
+    
+    print("=== AI生产系统已启动 ===")
+    observer.start()
+    
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()

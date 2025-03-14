@@ -1,0 +1,32 @@
+{
+   "action": {
+      "default_icon": "img/logo.png",
+      "default_title": "__MSG_extName__"
+   },
+   "background": {
+      "service_worker": "js/background.js"
+   },
+   "content_scripts": [ {
+      "css": [ "css/inject.css" ],
+      "js": [ "js/content-script.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_end"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_extDes__",
+   "homepage_url": "https://chrome.google.com/webstore/detail/cknbjddgncdahggojmpllojloapoedao",
+   "host_permissions": [ "\u003Call_urls>" ],
+   "icons": {
+      "128": "img/logo.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwUYMZ4PtF6I/9MZ4sAmnUHlv9Ltqxx52OR8GkIbiR+kvCKnEjJ/DDo+OVQ7M64lvxw2etvnaNuXbZO1HzPhidnuWBNsN0NtBuO+bW4ttZJ0KVa3qm8/iec82Gm9GineIR8YajXJAO9yTX2JFutHuOXYLtYAxYcmU2yrCsbITtDN/IbdD+ft87OOsV4nMBWk130EHuSXVhOGFap3W4SmTM+JRzS9OssfwJ8KiaW0bKo1DVsuypW5bYSsOy/rIMgOhCiyZcfnd3U+Sl39rkn6maYmK1LRdhikviYljsFv7GApO9aKNNiv47muVGP+KOZxzzukcnvtj5ejYr9N1B9v2OQIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_extName__",
+   "permissions": [ "tabs", "storage" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.1",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "/img/logo.png", "/popup.html" ]
+   } ]
+}

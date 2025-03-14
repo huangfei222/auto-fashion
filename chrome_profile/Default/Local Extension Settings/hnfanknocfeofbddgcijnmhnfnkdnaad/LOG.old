@@ -1,0 +1,15 @@
+2025/03/10-00:20:51.204 e78 Reusing MANIFEST D:\AI_System\chrome_profile\Default\Local Extension Settings\hnfanknocfeofbddgcijnmhnfnkdnaad/MANIFEST-000001
+2025/03/10-00:20:51.204 e78 Recovering log #16
+2025/03/10-00:20:51.204 e78 Reusing old log D:\AI_System\chrome_profile\Default\Local Extension Settings\hnfanknocfeofbddgcijnmhnfnkdnaad/000016.log 
+2025/03/10-00:20:54.481 3424 Level-0 table #20: started
+2025/03/10-00:20:54.497 3424 Level-0 table #20: 2068881 bytes OK
+2025/03/10-00:20:54.499 3424 Delete type=0 #16
+2025/03/10-00:20:54.499 3424 Compacting 4@0 + 1@1 files
+2025/03/10-00:20:54.516 3424 Generated table #21@0: 3 keys, 2068630 bytes
+2025/03/10-00:20:54.516 3424 Compacted 4@0 + 1@1 files => 2068630 bytes
+2025/03/10-00:20:54.517 3424 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/03/10-00:20:54.517 3424 Delete type=2 #8
+2025/03/10-00:20:54.517 3424 Delete type=2 #11
+2025/03/10-00:20:54.517 3424 Delete type=2 #14
+2025/03/10-00:20:54.517 3424 Delete type=2 #17
+2025/03/10-00:20:54.517 3424 Delete type=2 #20

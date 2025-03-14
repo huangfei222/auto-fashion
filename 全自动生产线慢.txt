@@ -1,0 +1,219 @@
+# AI_Global_Factory_TurboUltra.py
+import os
+import sys
+from pathlib import Path
+from multiprocessing import cpu_count
+from concurrent.futures import ProcessPoolExecutor
+from time import perf_counter
+
+try:
+    from PIL import Image, ImageEnhance
+except ImportError:
+    print("自动安装依赖...")
+    os.system(f"{sys.executable} -m pip install pillow==10.3.0 -q")
+    from PIL import Image, ImageEnhance
+
+class TurboFactory:
+    VERSION = "TurboUltra 8.0"
+    
+    def __init__(self):
+        self.base_dir = Path("D:/AI_System")
+        self.templates = {}
+        self._init_system()
+        self._preload_assets()
+        
+    def _init_system(self):
+        """闪电初始化系统"""
+        products = ["手机壳", "T恤", "壁纸", "海报"]
+        platforms = ["Amazon", "Etsy", "Redbubble", "Shopify"]
+        
+        # 并行创建目录结构
+        with ProcessPoolExecutor() as exec:
+            for product in products:
+                exec.submit((self.base_dir/"data"/"raw"/product).mkdir, parents=True, exist_ok=True)
+                for platform in platforms:
+                    exec.submit((self.base_dir/"output"/platform/product).mkdir, parents=True, exist_ok=True)
+        
+        # 生成模板文件
+        self._gen_template("手机壳", 2000, 2000)
+        self._gen_template("T恤", 4500, 5400)
+        self._gen_template("海报", 6000, 9000)
+        self._gen_template("壁纸", 3840, 2160)
+
+    def _preload_assets(self):
+        """预加载所有模板"""
+        template_map = {
+            "手机壳": (2000, 2000),
+            "T恤": (4500, 5400),
+            "海报": (6000, 9000)
+        }
+        for name, size in template_map.items():
+            path = self.base_dir/"templates"/f"{name}_template.png"
+            if not path.exists():
+                Image.new("RGBA", size, (255,255,255,0)).save(path)
+            self.templates[name] = Image.open(path).convert("RGBA")
+
+    def _gen_template(self, product, w, h):
+        """生成产品模板"""
+        path = self.base_dir/"templates"/f"{product}_template.png"
+        if not path.exists():
+            Image.new("RGBA", (w, h), (255,255,255,0)).save(path)
+
+    def _turbo_enhance(self, img, min_size):
+        """修复括号问题的增强引擎"""
+        if img.width < min_size[0]:
+            new_width = min_size[0]
+            new_height = int(img.height * (min_size[0] / img.width))
+            img = img.resize(
+                (new_width, new_height),  # 正确闭合括号
+                Image.Resampling.LANCZOS
+            )
+        return ImageEnhance.Sharpness(img).enhance(1.5)
+
+    def _hyper_process(self, product_type, processor, min_size):
+        """量子处理流水线"""
+        input_dir = self.base_dir/"data"/"raw"/product_type
+        files = [f for f in input_dir.glob("*.png") if f.is_file()]
+        
+        with ProcessPoolExecutor(max_workers=cpu_count()*2) as exec:
+            futures = [exec.submit(self._process_single, f, product_type, processor, min_size) for f in files]
+            for future in futures:
+                try:
+                    future.result(timeout=15)
+                except Exception as e:
+                    print(f"⚡ 极速跳过：{str(e)}")
+
+    def _process_single(self, img_file, product_type, processor, min_size):
+        """单文件闪电处理"""
+        try:
+            t_start = perf_counter()
+            with Image.open(img_file) as img:
+                result = processor(img.convert("RGBA"), min_size)
+                self._save_all_platforms(result, product_type, img_file.stem)
+            print(f"✅ {product_type}生产成功 | 耗时：{perf_counter()-t_start:.2f}s | 文件：{img_file.name}")
+        except Exception as e:
+            print(f"🔥 异常跳过：{img_file.name} | 原因：{str(e)}")
+
+    # ========== 核心生产线 ==========
+    def phone_processor(self, img, min_size):
+        enhanced = self._turbo_enhance(img, min_size)
+        template = self.templates["手机壳"].copy()
+        x = (template.width - enhanced.width) // 2
+        y = (template.height - enhanced.height) // 2
+        template.alpha_composite(enhanced, (x, y))
+        return template
+
+    def tshirt_processor(self, img, min_size):
+        enhanced = self._turbo_enhance(img, min_size)
+        template = self.templates["T恤"].copy()
+        x = (template.width - enhanced.width) // 2
+        y = int(template.height * 0.3)
+        template.alpha_composite(enhanced, (x, y))
+        return template
+
+    def poster_processor(self, img, min_size):
+        enhanced = self._turbo_enhance(img, min_size)
+        template = self.templates["海报"].copy()
+        x = (template.width - enhanced.width) // 2
+        y = (template.height - enhanced.height) // 2
+        template.alpha_composite(enhanced, (x, y))
+        return template
+
+    def wallpaper_processor(self, img, min_size):
+        enhanced = self._turbo_enhance(img, min_size)
+        return {
+            "横版": enhanced.crop((0, 0, 3840, 2160)),
+            "竖版": enhanced.crop((0, 0, 2160, 3840))
+        }
+
+    def _save_all_platforms(self, img_data, category, base_name):
+        """全平台存储系统"""
+        try:
+            # Amazon
+            self._save_amazon(img_data, category, base_name)
+            # Etsy
+            self._save_etsy(img_data, category, base_name)
+            # Redbubble
+            self._save_redbubble(img_data, category, base_name)
+            # Shopify
+            self._save_shopify(img_data, category, base_name)
+        except Exception as e:
+            print(f"💾 存储异常跳过：{str(e)}")
+
+    def _save_amazon(self, img, category, name):
+        """Amazon专业存储"""
+        if isinstance(img, dict):
+            for size, img_part in img.items():
+                bg = Image.new("RGB", img_part.size, (255,255,255))
+                bg.paste(img_part, mask=img_part.split()[3])
+                bg.convert("CMYK").save(
+                    self.base_dir/"output"/"Amazon"/category/f"{name}_{size}.tif",
+                    "TIFF", dpi=(300,300), compression="jpeg")
+        else:
+            bg = Image.new("RGB", img.size, (255,255,255))
+            bg.paste(img, mask=img.split()[3])
+            bg.convert("CMYK").save(
+                self.base_dir/"output"/"Amazon"/category/f"{name}.tif",
+                "TIFF", dpi=(300,300), compression="jpeg")
+
+    def _save_etsy(self, img, category, name):
+        """Etsy优化存储"""
+        def _optimize(img_part):
+            img_rgb = img_part.convert("RGB")
+            if max(img_rgb.size) > 3000:
+                return img_rgb.resize((3000,3000), Image.Resampling.LANCZOS)
+            return img_rgb
+            
+        if isinstance(img, dict):
+            for size, img_part in img.items():
+                _optimize(img_part).save(
+                    self.base_dir/"output"/"Etsy"/category/f"{name}_{size}.jpg",
+                    "JPEG", quality=90, optimize=True)
+        else:
+            _optimize(img).save(
+                self.base_dir/"output"/"Etsy"/category/f"{name}.jpg",
+                "JPEG", quality=90, optimize=True)
+
+    def _save_redbubble(self, img, category, name):
+        """Redbubble透明存储"""
+        if isinstance(img, dict):
+            for size, img_part in img.items():
+                img_part.save(
+                    self.base_dir/"output"/"Redbubble"/category/f"{name}_{size}.png",
+                    "PNG", optimize=True)
+        else:
+            img.save(
+                self.base_dir/"output"/"Redbubble"/category/f"{name}.png",
+                "PNG", optimize=True)
+
+    def _save_shopify(self, img, category, name):
+        """Shopify双格式存储"""
+        def _save_dual(img_part, path):
+            img_part.save(path.with_suffix(".webp"), "WEBP", quality=95, method=6)
+            img_part.save(path.with_suffix(".png"), "PNG", optimize=True)
+            
+        if isinstance(img, dict):
+            for size, img_part in img.items():
+                _save_dual(img_part, self.base_dir/"output"/"Shopify"/category/f"{name}_{size}")
+        else:
+            _save_dual(img, self.base_dir/"output"/"Shopify"/category/name)
+
+    def launch(self):
+        """一键启动"""
+        print(f"\n{'='*40}\n🚀 量子电商工厂 {self.VERSION}\n{'='*40}")
+        t_start = perf_counter()
+        
+        try:
+            with ProcessPoolExecutor(max_workers=4) as exec:
+                exec.submit(self._hyper_process, "手机壳", self.phone_processor, (1800,1800))
+                exec.submit(self._hyper_process, "T恤", self.tshirt_processor, (3500,3500))
+                exec.submit(self._hyper_process, "海报", self.poster_processor, (3000,4500))
+                exec.submit(self._hyper_process, "壁纸", self.wallpaper_processor, (4096,4096))
+        except KeyboardInterrupt:
+            print("\n🛑 用户终止操作")
+        finally:
+            print(f"\n🌟 生产完成 | 总耗时：{perf_counter()-t_start:.2f}秒")
+            print("输出目录：D:/AI_System/output")
+
+if __name__ == "__main__":
+    TurboFactory().launch()

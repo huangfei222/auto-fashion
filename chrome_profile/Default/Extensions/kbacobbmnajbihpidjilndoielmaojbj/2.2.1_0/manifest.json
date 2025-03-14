@@ -1,0 +1,24 @@
+{
+   "action": {
+      "default_icon": "icon-128.png",
+      "default_popup": "popup.html"
+   },
+   "background": {
+      "service_worker": "background.bundle.js"
+   },
+   "description": "A chrome extension that helps to automate actions in a web page",
+   "icons": {
+      "128": "icon-128.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlRqmlvpx3Sgbqa5GayxN1S1tJFL5L3Rp9euvNJjbmFiA3+jvyeTRR8qWGAInK/IyUV8AGgVNdSYp4n6tvk9bO3TxMVa69pAdkC4Ks98Bi8/zsRcgcyj5ES6B9rXLHBz7rRAIgZ8mXwA9U45MEOM+irLI206ckAirz3Ij22cUDy1buvMYLYkkJwxl81JdcNjpT9G24qr+OcU7hK8I7EakZIklqW8EeeM2V9wqRTBqg3GJm5yyvkRknl8QZn+BZbg3DhWT9GRqgea/4O+uooVMDd58URSahEnNMNVnaYJ0LD+COCsxCAzLqCLW890J5FNWnS91QK3jdRhj46kraqtrbQIDAQAB",
+   "manifest_version": 3,
+   "name": "Web Automa - Web page automation tool",
+   "options_page": "options.html",
+   "permissions": [ "storage", "activeTab", "scripting", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "2.2.1",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "content.popup.min.css", "contentScript.bundle.js", "content.styles.css", "icon-128.png" ]
+   } ]
+}

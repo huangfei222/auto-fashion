@@ -1,0 +1,11 @@
+{
+    "resolution_enhance": {
+        "algorithm": "lanczos",
+        "target_dpi": 300
+    },
+    "watermark": {
+        "font": "C:/Windows/Fonts/arial.ttf",
+        "opacity": 20
+    },
+    "platforms": ["Amazon", "Etsy", "Redbubble", "Shopify"]
+}

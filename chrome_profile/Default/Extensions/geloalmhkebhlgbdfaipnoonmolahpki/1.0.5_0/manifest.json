@@ -1,0 +1,39 @@
+{
+   "action": {
+      "default_icon": {
+         "19": "logo_icon_19.png",
+         "38": "logo_icon_38.png"
+      },
+      "default_title": "Save to SocialBee"
+   },
+   "background": {
+      "import": [ "data/chrome/socialbee-chrome-port-wrapper.js", "data/shared/libs/jquery-3.4.1.min.js" ],
+      "service_worker": "data/main.js"
+   },
+   "content_scripts": [ {
+      "css": [ "data/shared/socialbee-overlay.css" ],
+      "js": [ "data/chrome/socialbee-chrome-port-wrapper.js", "data/chrome/socialbee-chrome-data-wrapper.js", "data/chrome/socialbee-chrome-embed.js", "data/shared/libs/jquery-3.4.1.min.js", "data/shared/libs/postmessage.js", "data/shared/libs/keymaster.js", "data/shared/libs/he.js", "data/shared/socialbee-overlay.js", "data/shared/embeds/socialbee-scraper.js", "data/shared/embeds/socialbee-hotkey.js", "data/shared/embeds/socialbee-tpc-check.js", "data/chrome/socialbee-chrome.js" ],
+      "matches": [ "*://*/*" ]
+   } ],
+   "content_security_policy": {
+   },
+   "description": "SocialBee puts your Social Media on Autopilot. Organize your content in categories and save lots of time in the meanwhile.",
+   "homepage_url": "https://socialbee.com/",
+   "host_permissions": [ "http://*/*", "https://*/*" ],
+   "icons": {
+      "128": "logo_icon_128.png",
+      "16": "logo_icon_small.png",
+      "48": "logo_icon_large.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgTEHPpu9Y/dqb0CK2HV1NShKHznpoN9K+hMveSMQirGrtQCSTMDP2WrcFg4zJ1fxoucnsfPMV9mjvJBFuCQzmh2x0HlOvWk1I8VZJtl695umhH0BkD+s0LAkMawC1dlmMrWk9dsXdpTNZ/wjEEFqnWy+K0ZvNsiLPnyog9N+NrEyMVdOaEfXC9HUPrOaJowblMnmlO6bdnJBQ+2jR2qKDCQr4A/hlOxSiik+JBBVPKmT/3DWXgk+2Ql+QU0ErPddP1mAXXmAVgd1XBfWgkANrBftmGQW/j3JhVLRWoSpMiQwDOJXVPEt4WQmzSpyn7O9448mXWa+pxqiTHKX6wJMTQIDAQAB",
+   "manifest_version": 3,
+   "name": "SocialBee",
+   "permissions": [ "contextMenus", "storage" ],
+   "short_name": "SBee",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.5",
+   "web_accessible_resources": [ {
+      "matches": [ "\u003Call_urls>" ],
+      "resources": [ "manifest.json", "data/shared/img/*", "data/shared/tpc-check.html", "data/shared/socialbee-frame-container.html", "data/shared/socialbee-frame-container.js" ]
+   } ]
+}

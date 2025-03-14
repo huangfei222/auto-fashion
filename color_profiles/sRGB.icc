@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcms xmlns="http://www.color.org/profile.xsd">
+  <Header>
+    <ProfileVersion>2.1.0</ProfileVersion>
+    <DeviceClass>display</DeviceClass>
+    <ColorSpace>RGB</ColorSpace>
+    <ConnectionSpace>XYZ</ConnectionSpace>
+  </Header>
+  <TagTable>
+    <TagSignature>desc</TagSignature>
+    <TextDescription>
+      <ASCII>sRGB IEC61966-2.1</ASCII>
+    </TextDescription>
+  </TagTable>
+</lcms>

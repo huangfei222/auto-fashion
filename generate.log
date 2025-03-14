@@ -1,0 +1,27 @@
+[2025-03-08 17:14:42,301][INFO] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-08 17:14:47,014][ERROR] 💢 提示词发送失败: Message: javascript error: Cannot set properties of null (setting 'innerText')
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x00C7CED3+25523]
+	(No symbol) [0x00C023B4]
+	(No symbol) [0x00AD06E3]
+	(No symbol) [0x00AD70CE]
+	(No symbol) [0x00AD95C5]
+	(No symbol) [0x00B60295]
+	(No symbol) [0x00B3D7FC]
+	(No symbol) [0x00B5F273]
+	(No symbol) [0x00B3D5F6]
+	(No symbol) [0x00B0C55F]
+	(No symbol) [0x00B0D8A4]
+	GetHandleVerifier [0x00F82713+3193843]
+	GetHandleVerifier [0x00F969E9+3276489]
+	GetHandleVerifier [0x00F90F0C+3253228]
+	GetHandleVerifier [0x00D1B0C0+673184]
+	(No symbol) [0x00C0B43D]
+	(No symbol) [0x00C08568]
+	(No symbol) [0x00C08709]
+	(No symbol) [0x00BFAE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+

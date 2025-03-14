@@ -1,0 +1,26 @@
+import requests
+from PIL import Image
+import os
+from io import BytesIO
+
+# 配置路径（直接复制这段）
+save_folder = "D:/AI_System/data/raw/电子模板/"
+os.makedirs(save_folder, exist_ok=True)  # 自动创建文件夹
+
+# 替换为你的实际图片URL（看下文如何获取）
+image_url = "https://cdn.discordapp.com/attachments/xxxx/xxxx/xxxx.png"
+
+try:
+    # 下载图片
+    response = requests.get(image_url)
+    response.raise_for_status()  # 检查是否下载成功
+    
+    # 转换为图片对象
+    img = Image.open(BytesIO(response.content))
+    
+    # 保存文件（文件名自动编号）
+    filename = f"design_{len(os.listdir(save_folder)) + 1}.png"
+    img.save(os.path.join(save_folder, filename))
+    print(f"图片已保存到：{save_folder}{filename}")
+except Exception as e:
+    print("下载失败！错误原因：", str(e))

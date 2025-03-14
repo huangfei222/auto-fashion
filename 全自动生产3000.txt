@@ -1,0 +1,198 @@
+# AI_Global_Factory_UltimateFinal.py
+import os
+import sys
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
+from time import perf_counter
+
+try:
+    from PIL import Image, ImageEnhance
+except ImportError:
+    print("自动安装依赖...")
+    os.system(f"{sys.executable} -m pip install pillow==10.3.0 -q")
+    from PIL import Image, ImageEnhance
+
+class UltimateFactory:
+    VERSION = "UltimateFinal 35.0"
+    
+    # 各平台规范配置
+    PLATFORM_SPECS = {
+        "Amazon": {
+            "手机壳": (2000, 2000),
+            "T恤": (4500, 5400),
+            "海报": (6000, 9000),
+            "壁纸": {"横版": (3840, 2160), "竖版": (2160, 3840)}
+        },
+        "Etsy": {
+            "手机壳": (3000, 3000),
+            "T恤": (3000, 3000),
+            "海报": None,  # 保持原尺寸
+            "壁纸": None
+        },
+        "Redbubble": "transparent",
+        "Shopify": "dual_format"
+    }
+    
+    def __init__(self):
+        self.base_dir = Path("D:/AI_System")
+        self._verify_directories()
+        self.executor = ThreadPoolExecutor(max_workers=os.cpu_count()*4)
+        
+    def _verify_directories(self):
+        """智能目录验证"""
+        for product in ["手机壳", "T恤", "壁纸", "海报"]:
+            (self.base_dir/"data"/"raw"/product).mkdir(parents=True, exist_ok=True)
+            for platform in self.PLATFORM_SPECS.keys():
+                (self.base_dir/"output"/platform/product).mkdir(parents=True, exist_ok=True)
+
+    def process_image(self, img_file, product_type):
+        """核心处理引擎"""
+        try:
+            t_start = perf_counter()
+            with Image.open(img_file) as img:
+                # 专业级增强
+                enhanced = self._enhance_image(img.convert("RGBA"), product_type)
+                
+                # 生成平台适配版本
+                platform_data = self._generate_platform_versions(enhanced, product_type)
+                
+                # 保存所有平台文件
+                self._save_all_platforms(platform_data, product_type, img_file.stem)
+                
+            return f"✅ {product_type}生产成功 | 耗时：{perf_counter()-t_start:.2f}s | 文件：{img_file.name}"
+        except Exception as e:
+            return f"❌ 失败：{img_file.name} | 原因：{str(e)}"
+
+    def _enhance_image(self, img, product_type):
+        """智能增强系统"""
+        min_sizes = {
+            "手机壳": 1800,
+            "T恤": 3500,
+            "海报": 3000,
+            "壁纸": 4096
+        }
+        if img.width < min_sizes[product_type]:
+            new_width = min_sizes[product_type]
+            new_height = int(img.height * (new_width / img.width))
+            img = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+        return ImageEnhance.Sharpness(img).enhance(1.5)
+
+    def _generate_platform_versions(self, img, product_type):
+        """生成全平台适配版本"""
+        versions = {}
+        
+        # Amazon处理
+        if product_type == "壁纸":
+            versions["Amazon"] = {
+                "横版": img.crop(self._calculate_crop(img.size, "横版")),
+                "竖版": img.crop(self._calculate_crop(img.size, "竖版"))
+            }
+        else:
+            template_size = self.PLATFORM_SPECS["Amazon"][product_type]
+            versions["Amazon"] = self._apply_template(img, template_size)
+        
+        # Etsy处理
+        if product_type in ["手机壳", "T恤"]:
+            versions["Etsy"] = img.resize((3000,3000), Image.Resampling.LANCZOS)
+        else:
+            versions["Etsy"] = img  # 海报/壁纸保持原尺寸
+            
+        # 其他平台
+        versions["Redbubble"] = img
+        versions["Shopify"] = img
+        
+        return versions
+
+    def _calculate_crop(self, size, version_type):
+        """壁纸精准裁剪算法"""
+        w, h = size
+        if version_type == "横版":
+            return ((w-3840)//2, (h-2160)//2, (w+3840)//2, (h+2160)//2)
+        return ((w-2160)//2, (h-3840)//2, (w+2160)//2, (h+3840)//2)
+
+    def _apply_template(self, img, template_size):
+        """应用平台模板"""
+        template = Image.new("RGBA", template_size, (255,255,255,0))
+        x = (template_size[0] - img.width) // 2
+        y = (template_size[1] - img.height) // 2
+        template.alpha_composite(img, (x, y))
+        return template
+
+    def _save_all_platforms(self, data, product_type, base_name):
+        """全平台存储系统"""
+        try:
+            # Amazon
+            if product_type == "壁纸":
+                for size_type in ["横版", "竖版"]:
+                    self._save_amazon(data["Amazon"][size_type], product_type, f"{base_name}_{size_type}")
+            else:
+                self._save_amazon(data["Amazon"], product_type, base_name)
+            
+            # Etsy
+            data["Etsy"].convert("RGB").save(
+                self.base_dir/"output"/"Etsy"/product_type/f"{base_name}.jpg",
+                "JPEG", quality=95, optimize=True)
+            
+            # Redbubble
+            data["Redbubble"].save(
+                self.base_dir/"output"/"Redbubble"/product_type/f"{base_name}.png",
+                "PNG", optimize=True)
+            
+            # Shopify双格式
+            data["Shopify"].save(
+                self.base_dir/"output"/"Shopify"/product_type/f"{base_name}.webp",
+                "WEBP", quality=100, method=6)
+            data["Shopify"].save(
+                self.base_dir/"output"/"Shopify"/product_type/f"{base_name}.png",
+                "PNG", optimize=True)
+            
+            # 壁纸特殊处理
+            if product_type == "壁纸":
+                for size_type in ["横版", "竖版"]:
+                    data["Amazon"][size_type].save(
+                        self.base_dir/"output"/"Redbubble"/product_type/f"{base_name}_{size_type}.png",
+                        "PNG", optimize=True)
+                    data["Amazon"][size_type].save(
+                        self.base_dir/"output"/"Shopify"/product_type/f"{base_name}_{size_type}.webp",
+                        "WEBP", quality=100)
+                    data["Amazon"][size_type].save(
+                        self.base_dir/"output"/"Shopify"/product_type/f"{base_name}_{size_type}.png",
+                        "PNG", optimize=True)
+        except Exception as e:
+            print(f"💾 存储异常：{str(e)}")
+
+    def _save_amazon(self, img, product_type, name):
+        """Amazon专业存储"""
+        bg = Image.new("RGB", img.size, (255,255,255))
+        bg.paste(img, mask=img.split()[3])
+        bg.convert("CMYK").save(
+            self.base_dir/"output"/"Amazon"/product_type/f"{name}.tif",
+            "TIFF", dpi=(300,300), compression="lzw")
+
+    def launch(self):
+        """启动生产系统"""
+        print(f"\n{'='*40}\n🏭 终极生产系统 {self.VERSION}\n{'='*40}")
+        start_time = perf_counter()
+        
+        futures = []
+        for product_type in ["手机壳", "T恤", "海报", "壁纸"]:
+            input_dir = self.base_dir/"data"/"raw"/product_type
+            if not input_dir.exists():
+                continue
+                
+            for img_file in input_dir.glob("*.png"):
+                futures.append(self.executor.submit(
+                    self.process_image, img_file, product_type
+                ))
+        
+        for future in futures:
+            try:
+                print(future.result(timeout=300))
+            except Exception as e:
+                print(f"⏱️ 超时跳过：{str(e)}")
+        
+        print(f"\n🏁 生产完成 | 总耗时：{perf_counter()-start_time:.2f}秒")
+        print("输出目录：D:/AI_System/output")
+
+if __name__ == "__main__":
+    UltimateFactory().launch()

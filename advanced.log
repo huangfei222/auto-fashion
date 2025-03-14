@@ -1,0 +1,252 @@
+[2025-03-08 02:19:03,913][INFO] 🖥 浏览器初始化完成
+[2025-03-08 02:19:04,620][INFO] 🚀 正在执行服务器导航...
+[2025-03-08 02:19:11,744][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 02:19:40,824][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 02:19:49,788][WARNING] 定位策略 {'type': 'xpath', 'value': "//div[@aria-label='creator Ai的服务器']"} 失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0084CED3+25523]
+	(No symbol) [0x007D23B4]
+	(No symbol) [0x006A06E3]
+	(No symbol) [0x006E8B79]
+	(No symbol) [0x006E8ECB]
+	(No symbol) [0x00731B32]
+	(No symbol) [0x0070D844]
+	(No symbol) [0x0072F273]
+	(No symbol) [0x0070D5F6]
+	(No symbol) [0x006DC55F]
+	(No symbol) [0x006DD8A4]
+	GetHandleVerifier [0x00B52713+3193843]
+	GetHandleVerifier [0x00B669E9+3276489]
+	GetHandleVerifier [0x00B60F0C+3253228]
+	GetHandleVerifier [0x008EB0C0+673184]
+	(No symbol) [0x007DB43D]
+	(No symbol) [0x007D8568]
+	(No symbol) [0x007D8709]
+	(No symbol) [0x007CAE90]
+	BaseThreadInitThunk [0x76CC5D49+25]
+	RtlInitializeExceptionChain [0x77AEBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77AEBCF1+561]
+
+[2025-03-08 02:19:49,800][WARNING] 定位策略 {'type': 'css', 'value': "div[class*='headerButton']"} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0084CED3+25523]
+	(No symbol) [0x007D23B4]
+	(No symbol) [0x006A06E3]
+	(No symbol) [0x006E86A8]
+	(No symbol) [0x006E8ECB]
+	(No symbol) [0x00731B32]
+	(No symbol) [0x0070D844]
+	(No symbol) [0x0072F273]
+	(No symbol) [0x0070D5F6]
+	(No symbol) [0x006DC55F]
+	(No symbol) [0x006DD8A4]
+	GetHandleVerifier [0x00B52713+3193843]
+	GetHandleVerifier [0x00B669E9+3276489]
+	GetHandleVerifier [0x00B60F0C+3253228]
+	GetHandleVerifier [0x008EB0C0+673184]
+	(No symbol) [0x007DB43D]
+	(No symbol) [0x007D8568]
+	(No symbol) [0x007D8709]
+	(No symbol) [0x007CAE90]
+	BaseThreadInitThunk [0x76CC5D49+25]
+	RtlInitializeExceptionChain [0x77AEBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77AEBCF1+561]
+
+[2025-03-08 02:19:49,803][WARNING] 定位策略 {'type': 'position', 'value': 1} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0084CED3+25523]
+	(No symbol) [0x007D23B4]
+	(No symbol) [0x006A06E3]
+	(No symbol) [0x006E86A8]
+	(No symbol) [0x006E8ECB]
+	(No symbol) [0x00731B32]
+	(No symbol) [0x0070D844]
+	(No symbol) [0x0072F273]
+	(No symbol) [0x0070D5F6]
+	(No symbol) [0x006DC55F]
+	(No symbol) [0x006DD8A4]
+	GetHandleVerifier [0x00B52713+3193843]
+	GetHandleVerifier [0x00B669E9+3276489]
+	GetHandleVerifier [0x00B60F0C+3253228]
+	GetHandleVerifier [0x008EB0C0+673184]
+	(No symbol) [0x007DB43D]
+	(No symbol) [0x007D8568]
+	(No symbol) [0x007D8709]
+	(No symbol) [0x007CAE90]
+	BaseThreadInitThunk [0x76CC5D49+25]
+	RtlInitializeExceptionChain [0x77AEBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77AEBCF1+561]
+
+[2025-03-08 02:19:49,965][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 02:19:50,016][INFO] 📁 调试信息已保存至：D:/AI_System/debug
+[2025-03-08 02:19:50,017][ERROR] 💣 致命错误: 💥 所有导航策略失败
+[2025-03-08 17:05:51,560][INFO] 🖥 浏览器初始化完成
+[2025-03-08 17:05:54,038][INFO] 🚀 正在执行服务器导航...
+[2025-03-08 17:05:54,157][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:06:04,256][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:06:20,506][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:06:35,750][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:06:39,411][WARNING] 定位策略 {'type': 'xpath', 'value': "//div[@aria-label='creator Ai的服务器']"} 失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x00328B79]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:06:39,422][WARNING] 定位策略 {'type': 'css', 'value': "div[class*='headerButton']"} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x003286A8]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:06:39,424][WARNING] 定位策略 {'type': 'position', 'value': 3} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x003286A8]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:06:39,491][INFO] 📁 调试信息已保存至：D:/AI_System/debug
+[2025-03-08 17:06:39,491][ERROR] 💣 致命错误: 💥 所有导航策略失败
+[2025-03-08 17:08:29,016][INFO] 🖥 浏览器初始化完成
+[2025-03-08 17:08:29,753][INFO] 🚀 正在执行服务器导航...
+[2025-03-08 17:08:46,163][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:09:02,444][WARNING] Connection pool is full, discarding connection: localhost. Connection pool size: 1
+[2025-03-08 17:09:15,068][WARNING] 定位策略 {'type': 'xpath', 'value': "//div[@aria-label='creator Ai的服务器']"} 失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x00328B79]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:09:15,079][WARNING] 定位策略 {'type': 'css', 'value': "div[class*='headerButton']"} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x003286A8]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:09:15,082][WARNING] 定位策略 {'type': 'position', 'value': 3} 失败: Message: invalid argument: invalid locator
+  (Session info: chrome=134.0.6998.36)
+Stacktrace:
+	GetHandleVerifier [0x0048CED3+25523]
+	(No symbol) [0x004123B4]
+	(No symbol) [0x002E06E3]
+	(No symbol) [0x003286A8]
+	(No symbol) [0x00328ECB]
+	(No symbol) [0x00371B32]
+	(No symbol) [0x0034D844]
+	(No symbol) [0x0036F273]
+	(No symbol) [0x0034D5F6]
+	(No symbol) [0x0031C55F]
+	(No symbol) [0x0031D8A4]
+	GetHandleVerifier [0x00792713+3193843]
+	GetHandleVerifier [0x007A69E9+3276489]
+	GetHandleVerifier [0x007A0F0C+3253228]
+	GetHandleVerifier [0x0052B0C0+673184]
+	(No symbol) [0x0041B43D]
+	(No symbol) [0x00418568]
+	(No symbol) [0x00418709]
+	(No symbol) [0x0040AE90]
+	BaseThreadInitThunk [0x76CA5D49+25]
+	RtlInitializeExceptionChain [0x77B7BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B7BCF1+561]
+
+[2025-03-08 17:09:15,162][INFO] 📁 调试信息已保存至：D:/AI_System/debug
+[2025-03-08 17:09:15,163][ERROR] 💣 致命错误: 💥 所有导航策略失败

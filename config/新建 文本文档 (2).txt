@@ -1,0 +1,15 @@
+# Etsy配置
+ETSY_EMAIL = "你的注册邮箱"
+ETSY_PASSWORD = "你的密码"
+
+# Amazon配置
+AMAZON_USER = "seller@example.com"
+AMAZON_PASSWORD = "amzn_password"
+
+# Redbubble配置
+REDBUBBLE_USER = "your_username"
+REDBUBBLE_PASSWORD = "rb_password"
+
+# Shopify配置
+SHOPIFY_STORE = "your-store.myshopify.com"
+SHOPIFY_PASSWORD = "shppa_xxxx"

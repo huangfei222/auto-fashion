@@ -1,0 +1,300 @@
+[2025-03-10 11:45:53,479][DEBUG] Started executable: `D:\AI_System\venv\Scripts\chromedriver.exe` in a child process with pid: 11580
+[2025-03-10 11:45:54,009][DEBUG] POST http://localhost:51173/session {"capabilities": {"firstMatch": [{}], "alwaysMatch": {"browserName": "chrome", "pageLoadStrategy": "normal", "goog:chromeOptions": {"excludeSwitches": ["enable-automation"], "extensions": [], "binary": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe", "args": ["--user-data-dir=C:\\Users\\Administrator\\AppData\\Local\\Google\\Chrome\\User Data", "--disable-blink-features=AutomationControlled", "--disable-web-security", "--allow-running-insecure-content", "--remote-debugging-host=127.0.0.1", "--remote-debugging-port=51172", "--lang=zh-CN", "--no-default-browser-check", "--no-first-run", "--no-sandbox", "--test-type", "--window-size=1920,1080", "--start-maximized", "--no-sandbox", "--log-level=0"], "debuggerAddress": "127.0.0.1:51172"}}}}
+[2025-03-10 11:45:54,009][DEBUG] Starting new HTTP connection (1): localhost:51173
+[2025-03-10 11:45:54,017][DEBUG] http://localhost:51173 "POST /session HTTP/1.1" 400 992
+[2025-03-10 11:45:54,017][DEBUG] Remote response: status=400 | data={"value":{"error":"invalid argument","message":"invalid argument: cannot parse capability: goog:chromeOptions\nfrom invalid argument: unrecognized chrome option: excludeSwitches","stacktrace":"\tGetHandleVerifier [0x0118CE83+25523]\n\t(No symbol) [0x01112364]\n\t(No symbol) [0x00FE06E3]\n\t(No symbol) [0x010077EE]\n\t(No symbol) [0x01009100]\n\t(No symbol) [0x0100419D]\n\t(No symbol) [0x01058112]\n\t(No symbol) [0x01057B32]\n\t(No symbol) [0x01059306]\n\t(No symbol) [0x0105910A]\n\t(No symbol) [0x0104D5F6]\n\t(No symbol) [0x0101C55F]\n\t(No symbol) [0x0101D8A4]\n\tGetHandleVerifier [0x014926C3+3193843]\n\tGetHandleVerifier [0x014A6999+3276489]\n\tGetHandleVerifier [0x014A0EBC+3253228]\n\tGetHandleVerifier [0x0122B070+673184]\n\t(No symbol) [0x0111B3ED]\n\t(No symbol) [0x01118518]\n\t(No symbol) [0x011186B9]\n\t(No symbol) [0x0110AE40]\n\tBaseThreadInitThunk [0x76335D49+25]\n\tRtlInitializeExceptionChain [0x774FBD6B+107]\n\tRtlGetAppContainerNamedObjectPath [0x774FBCF1+561]\n"}} | headers=HTTPHeaderDict({'Content-Length': '992', 'Content-Type': 'application/json; charset=utf-8', 'cache-control': 'no-cache'})
+[2025-03-10 11:45:54,017][DEBUG] Finished Request
+[2025-03-10 11:45:54,017][ERROR] 浏览器初始化失败: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	GetHandleVerifier [0x0118CE83+25523]
+	(No symbol) [0x01112364]
+	(No symbol) [0x00FE06E3]
+	(No symbol) [0x010077EE]
+	(No symbol) [0x01009100]
+	(No symbol) [0x0100419D]
+	(No symbol) [0x01058112]
+	(No symbol) [0x01057B32]
+	(No symbol) [0x01059306]
+	(No symbol) [0x0105910A]
+	(No symbol) [0x0104D5F6]
+	(No symbol) [0x0101C55F]
+	(No symbol) [0x0101D8A4]
+	GetHandleVerifier [0x014926C3+3193843]
+	GetHandleVerifier [0x014A6999+3276489]
+	GetHandleVerifier [0x014A0EBC+3253228]
+	GetHandleVerifier [0x0122B070+673184]
+	(No symbol) [0x0111B3ED]
+	(No symbol) [0x01118518]
+	(No symbol) [0x011186B9]
+	(No symbol) [0x0110AE40]
+	BaseThreadInitThunk [0x76335D49+25]
+	RtlInitializeExceptionChain [0x774FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x774FBCF1+561]
+
+[2025-03-10 11:45:54,023][ERROR] 流程中断: 初始化失败
+[2025-03-10 12:09:41,488][INFO] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-10 12:09:44,453][ERROR] 💥 错误发生: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	GetHandleVerifier [0x00C2CED3+25523]
+	(No symbol) [0x00BB23B4]
+	(No symbol) [0x00A806E3]
+	(No symbol) [0x00AA77EE]
+	(No symbol) [0x00AA9100]
+	(No symbol) [0x00AA419D]
+	(No symbol) [0x00AF8112]
+	(No symbol) [0x00AF7B32]
+	(No symbol) [0x00AF9306]
+	(No symbol) [0x00AF910A]
+	(No symbol) [0x00AED5F6]
+	(No symbol) [0x00ABC55F]
+	(No symbol) [0x00ABD8A4]
+	GetHandleVerifier [0x00F32713+3193843]
+	GetHandleVerifier [0x00F469E9+3276489]
+	GetHandleVerifier [0x00F40F0C+3253228]
+	GetHandleVerifier [0x00CCB0C0+673184]
+	(No symbol) [0x00BBB43D]
+	(No symbol) [0x00BB8568]
+	(No symbol) [0x00BB8709]
+	(No symbol) [0x00BAAE90]
+	BaseThreadInitThunk [0x76335D49+25]
+	RtlInitializeExceptionChain [0x774FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x774FBCF1+561]
+
+[2025-03-10 12:10:00,299][INFO] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-10 12:10:01,127][ERROR] 💥 错误发生: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	GetHandleVerifier [0x0125CED3+25523]
+	(No symbol) [0x011E23B4]
+	(No symbol) [0x010B06E3]
+	(No symbol) [0x010D77EE]
+	(No symbol) [0x010D9100]
+	(No symbol) [0x010D419D]
+	(No symbol) [0x01128112]
+	(No symbol) [0x01127B32]
+	(No symbol) [0x01129306]
+	(No symbol) [0x0112910A]
+	(No symbol) [0x0111D5F6]
+	(No symbol) [0x010EC55F]
+	(No symbol) [0x010ED8A4]
+	GetHandleVerifier [0x01562713+3193843]
+	GetHandleVerifier [0x015769E9+3276489]
+	GetHandleVerifier [0x01570F0C+3253228]
+	GetHandleVerifier [0x012FB0C0+673184]
+	(No symbol) [0x011EB43D]
+	(No symbol) [0x011E8568]
+	(No symbol) [0x011E8709]
+	(No symbol) [0x011DAE90]
+	BaseThreadInitThunk [0x76335D49+25]
+	RtlInitializeExceptionChain [0x774FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x774FBCF1+561]
+
+[2025-03-10 13:25:51,357][INFO] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-10 13:25:54,247][ERROR] 💥 严重错误: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	GetHandleVerifier [0x00F8CED3+25523]
+	(No symbol) [0x00F123B4]
+	(No symbol) [0x00DE06E3]
+	(No symbol) [0x00E077EE]
+	(No symbol) [0x00E09100]
+	(No symbol) [0x00E0419D]
+	(No symbol) [0x00E58112]
+	(No symbol) [0x00E57B32]
+	(No symbol) [0x00E59306]
+	(No symbol) [0x00E5910A]
+	(No symbol) [0x00E4D5F6]
+	(No symbol) [0x00E1C55F]
+	(No symbol) [0x00E1D8A4]
+	GetHandleVerifier [0x01292713+3193843]
+	GetHandleVerifier [0x012A69E9+3276489]
+	GetHandleVerifier [0x012A0F0C+3253228]
+	GetHandleVerifier [0x0102B0C0+673184]
+	(No symbol) [0x00F1B43D]
+	(No symbol) [0x00F18568]
+	(No symbol) [0x00F18709]
+	(No symbol) [0x00F0AE90]
+	BaseThreadInitThunk [0x76335D49+25]
+	RtlInitializeExceptionChain [0x774FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x774FBCF1+561]
+
+[2025-03-10 13:26:07,659][INFO] patching driver executable C:\Users\Administrator\appdata\roaming\undetected_chromedriver\undetected_chromedriver.exe
+[2025-03-10 13:26:08,475][ERROR] 💥 严重错误: Message: invalid argument: cannot parse capability: goog:chromeOptions
+from invalid argument: unrecognized chrome option: excludeSwitches
+Stacktrace:
+	GetHandleVerifier [0x00A8CED3+25523]
+	(No symbol) [0x00A123B4]
+	(No symbol) [0x008E06E3]
+	(No symbol) [0x009077EE]
+	(No symbol) [0x00909100]
+	(No symbol) [0x0090419D]
+	(No symbol) [0x00958112]
+	(No symbol) [0x00957B32]
+	(No symbol) [0x00959306]
+	(No symbol) [0x0095910A]
+	(No symbol) [0x0094D5F6]
+	(No symbol) [0x0091C55F]
+	(No symbol) [0x0091D8A4]
+	GetHandleVerifier [0x00D92713+3193843]
+	GetHandleVerifier [0x00DA69E9+3276489]
+	GetHandleVerifier [0x00DA0F0C+3253228]
+	GetHandleVerifier [0x00B2B0C0+673184]
+	(No symbol) [0x00A1B43D]
+	(No symbol) [0x00A18568]
+	(No symbol) [0x00A18709]
+	(No symbol) [0x00A0AE90]
+	BaseThreadInitThunk [0x76335D49+25]
+	RtlInitializeExceptionChain [0x774FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x774FBCF1+561]
+
+[2025-03-10 15:57:54,202][INFO] patching driver executable D:\AI_System\venv\Scripts\chromedriver.exe
+[2025-03-10 15:57:54,202][ERROR] ❌ 驱动初始化失败: [Errno 2] No such file or directory: 'D:\\AI_System\\venv\\Scripts\\chromedriver.exe'
+[2025-03-10 15:57:54,202][ERROR] 💥 错误发生: 浏览器初始化失败
+[2025-03-10 16:03:38,359][INFO] patching driver executable D:\AI_System\venv\Scripts\chromedriver.exe
+[2025-03-10 16:03:40,233][INFO] 🚀 浏览器启动成功
+[2025-03-10 16:03:43,834][INFO] 🌐 正在加载频道...
+[2025-03-10 16:04:13,847][ERROR] 💥 错误发生: Message: 
+Stacktrace:
+	GetHandleVerifier [0x0094CE83+25523]
+	(No symbol) [0x008D2364]
+	(No symbol) [0x007A06E3]
+	(No symbol) [0x007E8B79]
+	(No symbol) [0x007E8ECB]
+	(No symbol) [0x00831B32]
+	(No symbol) [0x0080D844]
+	(No symbol) [0x0082F273]
+	(No symbol) [0x0080D5F6]
+	(No symbol) [0x007DC55F]
+	(No symbol) [0x007DD8A4]
+	GetHandleVerifier [0x00C526C3+3193843]
+	GetHandleVerifier [0x00C66999+3276489]
+	GetHandleVerifier [0x00C60EBC+3253228]
+	GetHandleVerifier [0x009EB070+673184]
+	(No symbol) [0x008DB3ED]
+	(No symbol) [0x008D8518]
+	(No symbol) [0x008D86B9]
+	(No symbol) [0x008CAE40]
+	BaseThreadInitThunk [0x76775D49+25]
+	RtlInitializeExceptionChain [0x77B2BD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x77B2BCF1+561]
+
+[2025-03-10 16:04:13,971][INFO] 🛑 浏览器已关闭
+[2025-03-10 16:38:28,762][INFO] 🚀 浏览器初始化成功
+[2025-03-10 16:38:30,796][INFO] 🔄 正在定位目标服务器...
+[2025-03-10 16:39:01,073][WARNING] ⚠ [服务器] 策略1尝试失败
+[2025-03-10 16:39:31,591][WARNING] ⚠ [服务器] 策略2尝试失败
+[2025-03-10 16:40:01,858][WARNING] ⚠ [服务器] 策略3尝试失败
+[2025-03-10 16:40:01,858][ERROR] ❌ 服务器定位失败，进入手动模式
+[2025-03-10 16:40:01,974][INFO] 🔧 调试信息已保存: server_error_20250310_164001_01.*
+[2025-03-10 16:40:20,749][INFO] 🔄 正在定位目标频道...
+[2025-03-10 16:40:20,763][INFO] ✅ [频道] 策略1定位成功: //div[contains(@aria-label, "生成图片")]
+[2025-03-10 16:40:20,847][INFO] ✅ 已进入目标频道
+[2025-03-10 16:40:20,873][INFO] ✅ [输入框] 策略1定位成功: //div[@role="textbox"][contains(@aria-label, "消息")]
+[2025-03-10 16:40:20,886][INFO] ⌨ 已提交生成请求
+[2025-03-10 16:40:20,886][INFO] ⏳ 等待生成结果...
+[2025-03-10 16:45:20,890][INFO] 🎉 流程执行成功！
+[2025-03-10 16:45:20,895][INFO] 🛑 浏览器已安全关闭
+[2025-03-10 17:00:19,166][INFO] 🚀 浏览器初始化成功
+[2025-03-10 17:00:20,814][INFO] 🔄 正在定位目标服务器...
+[2025-03-10 17:00:50,917][WARNING] ⚠ [服务器] 策略1尝试失败
+[2025-03-10 17:01:20,946][WARNING] ⚠ [服务器] 策略2尝试失败
+[2025-03-10 17:01:51,307][WARNING] ⚠ [服务器] 策略3尝试失败
+[2025-03-10 17:01:51,307][ERROR] ❌ 服务器定位失败，进入手动模式
+[2025-03-10 17:01:51,436][INFO] 🔧 调试信息已保存: server_error_20250310_170151_01.*
+[2025-03-10 17:02:43,483][INFO] 🔄 正在定位目标频道...
+[2025-03-10 17:02:43,495][INFO] ✅ [频道] 策略1定位成功: //div[contains(@aria-label, "生成图片")]
+[2025-03-10 17:02:43,587][INFO] ✅ 已进入目标频道
+[2025-03-10 17:02:43,610][INFO] ✅ [输入框] 策略1定位成功: //div[@role="textbox"][contains(@aria-label, "消息")]
+[2025-03-10 17:02:43,618][INFO] ⌨ 已提交生成请求
+[2025-03-10 17:02:43,619][INFO] ⏳ 等待生成结果...
+[2025-03-10 17:07:43,628][INFO] 🎉 流程执行成功！
+[2025-03-10 17:07:43,629][INFO] 🛑 浏览器已安全关闭
+[2025-03-10 19:58:57,050][INFO] 🚀 浏览器初始化成功
+[2025-03-10 19:58:58,517][ERROR] 💥 流程异常: 'PrecisionDiscordBot' object has no attribute 'navigate_server'
+[2025-03-10 19:58:58,518][INFO] 🛑 浏览器已关闭
+[2025-03-10 19:59:14,452][INFO] 🚀 浏览器初始化成功
+[2025-03-10 19:59:16,070][ERROR] 💥 流程异常: 'PrecisionDiscordBot' object has no attribute 'navigate_server'
+[2025-03-10 19:59:16,071][INFO] 🛑 浏览器已关闭
+[2025-03-10 21:26:21,603][INFO] 🚀 浏览器初始化成功
+[2025-03-10 21:26:22,272][INFO] 🔄 正在定位服务器...
+[2025-03-10 21:26:52,671][ERROR] ❌ 服务器定位失败: Message: 
+Stacktrace:
+	GetHandleVerifier [0x006ACE83+25523]
+	(No symbol) [0x00632364]
+	(No symbol) [0x005006E3]
+	(No symbol) [0x00548B79]
+	(No symbol) [0x00548ECB]
+	(No symbol) [0x00591B32]
+	(No symbol) [0x0056D844]
+	(No symbol) [0x0058F273]
+	(No symbol) [0x0056D5F6]
+	(No symbol) [0x0053C55F]
+	(No symbol) [0x0053D8A4]
+	GetHandleVerifier [0x009B26C3+3193843]
+	GetHandleVerifier [0x009C6999+3276489]
+	GetHandleVerifier [0x009C0EBC+3253228]
+	GetHandleVerifier [0x0074B070+673184]
+	(No symbol) [0x0063B3ED]
+	(No symbol) [0x00638518]
+	(No symbol) [0x006386B9]
+	(No symbol) [0x0062AE40]
+	BaseThreadInitThunk [0x75EE5D49+25]
+	RtlInitializeExceptionChain [0x772CBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x772CBCF1+561]
+
+[2025-03-10 21:26:52,764][ERROR] 💥 致命错误: Message: 
+Stacktrace:
+	GetHandleVerifier [0x006ACE83+25523]
+	(No symbol) [0x00632364]
+	(No symbol) [0x005006E3]
+	(No symbol) [0x00548B79]
+	(No symbol) [0x00548ECB]
+	(No symbol) [0x00591B32]
+	(No symbol) [0x0056D844]
+	(No symbol) [0x0058F273]
+	(No symbol) [0x0056D5F6]
+	(No symbol) [0x0053C55F]
+	(No symbol) [0x0053D8A4]
+	GetHandleVerifier [0x009B26C3+3193843]
+	GetHandleVerifier [0x009C6999+3276489]
+	GetHandleVerifier [0x009C0EBC+3253228]
+	GetHandleVerifier [0x0074B070+673184]
+	(No symbol) [0x0063B3ED]
+	(No symbol) [0x00638518]
+	(No symbol) [0x006386B9]
+	(No symbol) [0x0062AE40]
+	BaseThreadInitThunk [0x75EE5D49+25]
+	RtlInitializeExceptionChain [0x772CBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x772CBCF1+561]
+
+[2025-03-10 21:26:52,764][INFO] 🛑 浏览器已关闭
+[2025-03-11 11:56:24,870][INFO] 🚀 浏览器初始化成功
+[2025-03-11 11:56:43,200][INFO] 🌐 正在加载目标频道...
+[2025-03-11 11:57:28,313][ERROR] 💥 致命错误: Message: 
+Stacktrace:
+	GetHandleVerifier [0x00B9CE83+25523]
+	(No symbol) [0x00B22364]
+	(No symbol) [0x009F06E3]
+	(No symbol) [0x00A38B79]
+	(No symbol) [0x00A38ECB]
+	(No symbol) [0x00A81B32]
+	(No symbol) [0x00A5D844]
+	(No symbol) [0x00A7F273]
+	(No symbol) [0x00A5D5F6]
+	(No symbol) [0x00A2C55F]
+	(No symbol) [0x00A2D8A4]
+	GetHandleVerifier [0x00EA26C3+3193843]
+	GetHandleVerifier [0x00EB6999+3276489]
+	GetHandleVerifier [0x00EB0EBC+3253228]
+	GetHandleVerifier [0x00C3B070+673184]
+	(No symbol) [0x00B2B3ED]
+	(No symbol) [0x00B28518]
+	(No symbol) [0x00B286B9]
+	(No symbol) [0x00B1AE40]
+	BaseThreadInitThunk [0x75D85D49+25]
+	RtlInitializeExceptionChain [0x772FBD6B+107]
+	RtlGetAppContainerNamedObjectPath [0x772FBCF1+561]
+
+[2025-03-11 11:57:28,417][INFO] 🛑 浏览器已安全关闭

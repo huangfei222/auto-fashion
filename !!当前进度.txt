@@ -1,0 +1,67 @@
+[AI系统部署追踪 v2]
+► 当前阶段：自动化对接完成
+► 待解决问题：自建服务器元素定位
+► 关键文件路径：
+   - 主脚本：D:\AI_System\modules\mj_auto.py
+   - 配置：D:\AI_System\config\platforms.json
+► 目录指纹（运行下方命令获取）：
+   certutil -hashfile .deploy_lock SHA256
+
+[操作记录]
+2024-03-08 14:30: 
+   执行：python main.py --phase=3
+   变更：修改config/color_rules.json第45行
+   结果：成功生成50个设计文件
+
+D:\AI_System
+├─ .deploy_lock      # 系统标识文件（勿删）
+├─ config/           # 所有配置文件
+│  ├─ platforms.json
+│  └─ color_rules.json
+├─ scripts/          # 脚本文件
+│  ├─ main.py
+│  └─ utils.py
+├─ logs/             # 日志文件
+├─ published/        # 输出目录
+└─ chrome_profile/   # 浏览器数据
+
+
+跨对话衔接协议
+当需要新对话时，直接发送以下 标准化消息：
+
+text
+复制
+【AI系统续部署请求】
+► 当前路径：D:\AI_System（指纹：a1b2c3d）
+► 阶段：元素定位开发中（进度70%）
+► 最后错误：
+   文件：scripts\locators.py 第88行
+   报错：NoSuchElementException: Could not find element
+► 需继续：
+   优化自建服务器的CSS选择器策略
+   验证chrome_profile登录状态
+DeepSeek响应规则
+当收到上述格式消息时，我将：
+
+保持目录结构不变
+所有新建文件必须放入 D:\AI_System 下的标准子目录
+
+文件命名强制规范
+
+配置：config/{功能}_v{版本}.json（如 color_v2.json）
+
+脚本：scripts/阶段_{序号}.py（如 阶段3_元素定位.py）
+
+版本递进规则
+每次变更后需更新文件名版本号：
+
+text
+复制
+原文件：config\color_v1.json
+新文件：config\color_v2.json（旧版本保留）
+用户操作清单
+场景	操作	命令/文本
+日常保存	1. 更新进度文件
+2. 记录操作日志	echo 当前阶段：xxx >> !!当前进度.txt
+重新对话	发送固定格式消息	复制粘贴模板内容
+错误恢复	回滚到指定版本	copy config\color_v2.json config\color_current.json /y
