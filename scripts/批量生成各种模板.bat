@@ -1,49 +1,71 @@
 @echo off
+title AI模板生成系统
+color 0A
 setlocal enabledelayedexpansion
 
-echo 正在清理旧数据...
-del /q D:\AI_System\data\raw\* /s >nul 2>&1
+echo.
+echo ██████╗ ██╗███╗   ██╗███████╗
+echo ██╔══██╗██║████╗  ██║██╔════╝
+echo ██████╔╝██║██╔██╗ ██║█████╗  
+echo ██╔══██╗██║██║╚██╗██║██╔══╝  
+echo ██║  ██║██║██║ ╚████║███████╗
+echo ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝
+echo.
 
-echo 正在生成PPT模板...
-call :run_script ppt_generator.py
-if errorlevel 1 (
-    echo PPT模板生成失败，错误码：!errorlevel!
-    exit /b 1
-)
+:menu
+cls
+echo 请选择操作：
+echo 1. 生成全部模板
+echo 2. 仅生成PPT模板
+echo 3. 仅生成设计素材
+echo 4. 打开输出目录
+echo 5. 查看日志
+echo 6. 退出
+set /p choice="请输入选项数字："
 
-echo 正在生成各类请柬...
-call :run_script card_maker.py
-if errorlevel 1 (
-    echo 请柬生成失败，错误码：!errorlevel!
-    exit /b 1
-)
+if "%choice%"=="1" goto all
+if "%choice%"=="2" goto ppt
+if "%choice%"=="3" goto design
+if "%choice%"=="4" goto open
+if "%choice%"=="5" goto log
+if "%choice%"=="6" exit
 
-echo 正在生成表格模板...
-call :run_script table_builder.py
-if errorlevel 1 (
-    echo 表格生成失败，错误码：!errorlevel!
-    exit /b 1
-)
+goto menu
 
-echo 正在生成电子书模板...
-call :run_script EPUB电子书.py
-if errorlevel 1 (
-    echo 电子书生成失败，错误码：!errorlevel!
-    exit /b 1
-)
+:all
+call :run_script "ppt_generator.py"
+call :run_script "card_maker.py"
+call :run_script "table_builder.py"
+call :run_script "EPUB电子书.py"
+goto success
 
-echo 正在打开成果目录...
-timeout /t 2 >nul
-explorer D:\AI_System\data\raw
-exit /b 0
+:ppt
+call :run_script "ppt_generator.py"
+goto success
+
+:design
+call :run_script "card_maker.py"
+call :run_script "table_builder.py"
+goto success
+
+:open
+start explorer "D:\AI_System\data\raw"
+goto menu
+
+:log
+notepad "D:\AI_System\scripts\gen_log.txt"
+goto menu
 
 :run_script
-set "script=%~1"
-echo [%time%] 开始执行：%script%
-python "D:\AI_System\scripts\%script%"
-if errorlevel 1 (
-    echo [%time%] 执行失败：%script%
+echo [%time%] 正在执行：%~1
+python "%~1" >> "D:\AI_System\scripts\gen_log.txt" 2>&1
+if %errorlevel% neq 0 (
+    echo [%time%] 执行失败：%~1 >> "D:\AI_System\scripts\gen_log.txt"
     exit /b 1
 )
-echo [%time%] 成功完成：%script%
 exit /b 0
+
+:success
+echo 操作已完成！按任意键返回菜单...
+pause >nul
+goto menu

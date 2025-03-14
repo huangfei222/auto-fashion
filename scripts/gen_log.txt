@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "D:\AI_System\scripts\ppt_generator.py", line 2, in <module>
+    from pptx import Presentation
+ModuleNotFoundError: No module named 'pptx'
+[15:31:51.84] 执行失败：ppt_generator.py 
+Traceback (most recent call last):
+  File "D:\AI_System\scripts\card_maker.py", line 56, in generate_cards
+    print(f"\u2705 {card_type}请柬已生成：{card_type}请柬_{timestamp}.png")
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 0: illegal multibyte sequence
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\AI_System\scripts\card_maker.py", line 62, in <module>
+    generate_cards()
+  File "D:\AI_System\scripts\card_maker.py", line 59, in generate_cards
+    print(f"\u274c {card_type}请柬生成失败：{str(e)}")
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' in position 0: illegal multibyte sequence
+[15:31:52.06] 执行失败：card_maker.py 
+Traceback (most recent call last):
+  File "D:\AI_System\scripts\table_builder.py", line 2, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+[15:31:52.10] 执行失败：table_builder.py 
+Traceback (most recent call last):
+  File "D:\AI_System\scripts\EPUB电子书.py", line 4, in <module>
+    from ebooklib import epub
+ModuleNotFoundError: No module named 'ebooklib'
+[15:31:52.14] 执行失败：EPUB电子书.py 
