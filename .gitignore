@@ -1,0 +1,39 @@
+# 基础过滤规则（2025年最新版）
+### Python开发环境 ###
+__pycache__/
+*.py[cod]
+.python-version
+venv/
+
+### 系统文件 ###
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+### 日志与临时文件 ###
+logs/
+*.log
+temp/
+
+### IDE配置 ###
+.idea/
+.vscode/
+*.code-workspace
+
+### 生成文件 ###
+output/
+Downloads/
+*.glb
+*.exr
+*.zip
+*.exe
+
+### 大文件管理 ###
+# 超过10MB的文件需用Git LFS管理
+*.[pP][nN][gG]
+*.[jJ][pP][gG]
+*.[pP][sS][dD]
+
+### 特殊文件 ###
+!.gitignore  # 强制跟踪本文件
