@@ -1,0 +1,1 @@
+nconvert -rtype lanczos -resize 3840 2160  -wmopacity 30 -wmflag top-left -wmfile "D:\AI_System\assets\wallpaper\raw\creatorai0316_50827_golden_cross_christian_symbolism_stained_gl_e7c2d507-00de-4d56-84d6-fead248d8324.png" -out webp -q 80 

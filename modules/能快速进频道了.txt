@@ -1,0 +1,143 @@
+# mj_2025_final.py
+import os
+import time
+import logging
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from undetected_chromedriver import Chrome, ChromeOptions
+
+# ===================== 精准配置 =====================
+CONFIG = {
+    "server_id": "1344917223021744221",
+    "channel_id": "1344921569541095446",
+    "prompt": "/imagine 赛博朋克风格手机壳 --v 6 --ar 18:32",
+    "download_path": r"D:\AI_System\Downloads",
+    "user_data_dir": r"C:\Users\Administrator\AppData\Local\Google\Chrome\User Data",
+    "chrome_bin": r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+}
+# =================================================
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s][%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("D:/AI_System/operation.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+class DiscordBot2025:
+    def __init__(self):
+        self.driver = None
+        self._clean_processes()
+
+    def _clean_processes(self):
+        os.system("taskkill /F /IM chrome.exe /T 2>nul")
+        os.system("taskkill /F /IM chromedriver.exe /T 2>nul")
+        time.sleep(2)
+        logger.info("✅ 进程清理完成")
+
+    def _init_driver(self):
+        options = ChromeOptions()
+        options.add_argument(f"--user-data-dir={CONFIG['user_data_dir']}")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.binary_location = CONFIG["chrome_bin"]
+        
+        prefs = {"download.default_directory": CONFIG["download_path"]}
+        options.add_experimental_option("prefs", prefs)
+
+        try:
+            self.driver = Chrome(
+                options=options,
+                headless=False,
+                version_main=135,
+                driver_executable_path=r"D:\AI_System\venv\Scripts\chromedriver.exe"
+            )
+            logger.info("🚀 浏览器启动成功")
+            return True
+        except Exception as e:
+            logger.error(f"❌ 浏览器启动失败: {str(e)}")
+            return False
+
+    def _select_server(self):
+        """精准选择服务器"""
+        server_selector = f'div[data-list-item-id="guildsnav___{CONFIG["server_id"]}"]'
+        server = WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, server_selector))
+        )
+        server.click()
+        logger.info("🔗 服务器选择成功")
+
+    def _select_channel(self):
+        """精准选择频道"""
+        channel_xpath = '//div[contains(@class, "name__2ea32") and text()="生成图片"]'
+        channel = WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.XPATH, channel_xpath)))
+        channel.click()
+        logger.info("📌 频道选择成功")
+
+    def _input_prompt(self):
+        """精准输入提示词"""
+        input_box = WebDriverWait(self.driver, 30).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[data-slate-node="element"]')))
+        
+        # 模拟真实输入
+        self.driver.execute_script("arguments[0].click();", input_box)
+        for char in CONFIG["prompt"]:
+            input_box.send_keys(char)
+            time.sleep(0.08 + (ord(char)%3)*0.02)  # 随机输入间隔
+        input_box.send_keys(Keys.ENTER)
+        logger.info("⌨ 提示词输入完成")
+
+    def _wait_generation(self):
+        """精准等待生成"""
+        img_selector = 'a[data-role="img"][href*="attachments"]'
+        WebDriverWait(self.driver, 600).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, img_selector)))
+        logger.info("🖼️ 图片生成确认")
+
+    def execute(self):
+        try:
+            if not self._init_driver():
+                return
+
+            self.driver.get("https://discord.com/channels/@me")
+            time.sleep(3)
+            
+            # 选择服务器
+            self._select_server()
+            
+            # 选择频道
+            self._select_channel()
+            
+            # 输入提示词
+            self._input_prompt()
+            
+            # 等待生成
+            self._wait_generation()
+            
+            logger.info("✅ 所有操作已完成")
+
+        except Exception as e:
+            logger.error(f"💥 流程中断: {str(e)}")
+            self._save_debug()
+        finally:
+            if self.driver:
+                self.driver.quit()
+                logger.info("🛑 浏览器已关闭")
+
+    def _save_debug(self):
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        try:
+            self.driver.save_screenshot(f"D:/AI_System/debug_{timestamp}.png")
+            logger.info(f"🔧 调试截图已保存: debug_{timestamp}.png")
+        except Exception as e:
+            logger.error(f"⚠ 截图失败: {str(e)}")
+
+if __name__ == "__main__":
+    os.makedirs(CONFIG["download_path"], exist_ok=True)
+    bot = DiscordBot2025()
+    bot.execute()

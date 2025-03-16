@@ -1,0 +1,13 @@
+schtasks /create /tn "TrendScraping" /tr "python D:\AI_System\modules\trend_scraper.py" /sc DAILY /st 00:30
+
+设置计划任务
+
+按Win+R输入taskschd.msc
+
+右键"任务计划程序库" → 创建任务
+
+名称：DailyTrendScraping
+
+触发器：每天00:30
+
+操作：启动程序 → 选择run_scraper.bat

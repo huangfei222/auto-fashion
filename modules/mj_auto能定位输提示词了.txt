@@ -1,0 +1,154 @@
+# mj_auto_fixed.py
+import os
+import time
+import logging
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from undetected_chromedriver import Chrome, ChromeOptions
+
+# ===================== 配置区 =====================
+CONFIG = {
+    "server_id": "1344917223021744221",
+    "channel_id": "1344921569541095446",
+    "server_icon_src": "https://cdn.discordapp.com/icons/1344917223021744221/",
+    "prompt": "/imagine 赛博朋克风格手机壳 --v 5 --ar 9:16",
+    "download_path": r"D:\AI_System\Downloads"
+}
+# ================================================
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(asctime)s][%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("D:/AI_System/operation.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
+
+class DiscordBotPro:
+    def __init__(self):
+        self.driver = None
+        self._clean_processes()
+
+    def _clean_processes(self):
+        os.system("taskkill /F /IM chrome.exe /T 2>nul")
+        os.system("taskkill /F /IM chromedriver.exe /T 2>nul")
+        time.sleep(2)
+        logger.info("✅ 进程清理完成")
+
+    def _init_driver(self):
+        options = ChromeOptions()
+        options.add_argument(r"--user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        
+        try:
+            driver = Chrome(
+                options=options,
+                headless=False,
+                version_main=134,
+                driver_executable_path=r"D:\AI_System\venv\Scripts\chromedriver.exe"
+            )
+            logger.info("🚀 浏览器启动成功")
+            return driver
+        except Exception as e:
+            logger.error(f"❌ 浏览器启动失败: {str(e)}")
+            return None
+
+    def _smart_wait(self, selector, by=By.CSS_SELECTOR, timeout=30):
+        """增强型元素定位"""
+        for attempt in range(3):
+            try:
+                element = WebDriverWait(self.driver, timeout).until(
+                    EC.element_to_be_clickable((by, selector))
+                )
+                self._highlight(element)
+                return element
+            except:
+                if attempt == 2:
+                    self._save_debug()
+                    raise
+                logger.warning(f"定位重试 {attempt+1}/3")
+                time.sleep(2)
+
+    def _highlight(self, element):
+        """可视化标记元素"""
+        self.driver.execute_script(
+            "arguments[0].style.outline='3px solid #00ff00'",
+            element
+        )
+        time.sleep(0.5)
+
+    def _save_debug(self):
+        """保存调试信息"""
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        try:
+            if self.driver:
+                self.driver.save_screenshot(f"D:/AI_System/debug_{timestamp}.png")
+                with open(f"D:/AI_System/page_{timestamp}.html", "w", encoding="utf-8") as f:
+                    f.write(self.driver.page_source)
+            logger.info(f"🔧 调试文件已保存: debug_{timestamp}.*")
+        except Exception as e:
+            logger.error(f"⚠ 调试保存失败: {str(e)}")
+
+    def execute(self):
+        try:
+            self.driver = self._init_driver()
+            if not self.driver:
+                raise RuntimeError("浏览器初始化失败")
+
+            # 访问目标频道
+            self.driver.get(f"https://discord.com/channels/{CONFIG['server_id']}/{CONFIG['channel_id']}")
+            logger.info("🌐 正在加载频道页面...")
+
+            # 定位服务器
+            icon_selector = f'img[src^="{CONFIG["server_icon_src"]}"]'
+            icon = self._smart_wait(icon_selector, timeout=60)
+            server = self.driver.execute_script(
+                "return arguments[0].closest('div[role=\"treeitem\"]')", 
+                icon
+            )
+            self.driver.execute_script("arguments[0].click();", server)
+            logger.info("🔗 服务器定位成功")
+
+            # 输入提示词（关键修改）
+            input_box = self._smart_wait(
+                '[role="textbox"][aria-label*="消息"]:not([disabled])',
+                timeout=60
+            )
+            input_box.send_keys(CONFIG["prompt"])
+            logger.info("⌨ 提示词输入完成")
+
+            # 提交生成（增强等待）
+            WebDriverWait(self.driver, 30).until(
+                lambda d: "disabled" not in d.find_element(
+                    By.CSS_SELECTOR, 
+                    'button[type="submit"]'
+                ).get_attribute("class")
+            )
+            submit_btn = self._smart_wait('button[type="submit"]')
+            submit_btn.click()
+            logger.info("🚀 已提交生成请求")
+
+            # 等待结果
+            self._smart_wait('div[class*="upscaled"]', timeout=300)
+            logger.info("🖼️ 图片生成完成")
+
+            # 下载操作
+            download_btn = self._smart_wait('button[aria-label="下载"]')
+            download_btn.click()
+            logger.info(f"📥 文件保存至: {CONFIG['download_path']}")
+
+        except Exception as e:
+            logger.error(f"💥 流程中断: {str(e)}")
+            self._save_debug()
+        finally:
+            if self.driver:
+                self.driver.quit()
+                logger.info("🛑 浏览器已关闭")
+
+if __name__ == "__main__":
+    os.makedirs(CONFIG["download_path"], exist_ok=True)
+    bot = DiscordBotPro()
+    bot.execute()

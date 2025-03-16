@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcb_wallet_extension=self.webpackChunkcb_wallet_extension||[]).push([[9024],{9024:(e,n,r)=>{r.d(n,{publicKeyFromSeed:()=>s});var t=r(82926),a=r.n(t),i=r(81441),c=r(1048).Buffer;async function s(e,n){const{privateKey:r}=await(0,i.d)(e,n),t=a().sign.keyPair.fromSeed(new Uint8Array(r));return c.from(t.publicKey)}}}]);
+//# sourceMappingURL=9024.js.map

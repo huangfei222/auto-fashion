@@ -1,0 +1,16 @@
+首次运行准备
+
+cmd
+复制
+:: 创建示例模板（管理员CMD运行）
+python -c "from PIL import Image; Image.new('RGBA', (800,800), (0,0,0,0)).save('D:/AI_System/templates/tshirt_template.png')"
+python -c "from PIL import Image; Image.new('RGBA', (3508,4961), (0,0,0,0)).save('D:/AI_System/templates/poster_template.png')"
+日常运行命令
+
+cmd
+复制
+D:
+cd D:\AI_System
+venv\Scripts\activate.bat
+python scripts/stable_factory.py
+✅ 验证步骤

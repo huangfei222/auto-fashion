@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="wallpaper_processing">
+    <Resize mode="4" width="3840" height="2160" unit="0" ratio="false" orientation="false" enlarge="0" resample="7" gamma_correct="false"/>
+    <Watermark filename="D:/AI_System/assets/wallpaper/raw/creatorai0316_50827_golden_cross_christian_symbolism_stained_gl_e7c2d507-00de-4d56-84d6-fead248d8324.png" opacity="30" no_alpha="false" position="0" delta_x="90" delta_y="90" perc="50" size="0" perc_mode="0"/>
+    <Output folder="D:/AI_System/assets/wallpaper/processed" filename="{Filename}_结果" case="0" startIndex="1" format="WEBP">
+        <Options overwrite="1" orgDate="false" keepMeta="true" keepICC="false" keepFolder="false" checkFilesize="false" keepParentFolder="false" keepExtension="false" delOrg="false" multipage="false" allPages="false" openExplorer="false" beep="true" openBrowser="false" clearItems="false"/>
+        <WEBP method="0" quality="80" filesize="128" compress="4" strength="60" sharpness="0" preset="0" sharpyuv="false"/>
+    </Output>
+</XnView_script>

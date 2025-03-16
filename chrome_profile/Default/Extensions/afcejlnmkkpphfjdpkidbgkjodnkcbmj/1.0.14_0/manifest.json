@@ -1,0 +1,36 @@
+{
+   "action": {
+      "default_icon": "32.png"
+   },
+   "background": {
+      "service_worker": "src/pages/background/index.js",
+      "type": "module"
+   },
+   "content_scripts": [ {
+      "css": [  ],
+      "js": [ "src/pages/content/index.js" ],
+      "matches": [ "http://*/*", "https://*/*", "\u003Call_urls>" ]
+   } ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
+   },
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "host_permissions": [ "http://*/*", "https://*/*" ],
+   "icons": {
+      "128": "128.png",
+      "32": "32.png",
+      "48": "48.png",
+      "64": "64.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzpGycO1jTOblktDKTA8JyFFzMYdawmsnUMdWc8C3as2WLrE664a7kQ/bgMNFsM0eg9N1Wz11C0EeBZpUh6NCfcN57t+A9J+Snm1XjE8Yz2ildJg+rbCrL0+S6WjxmO2c/plpy7H62/A6v/j8Y28qiZBcvXlvETPt6S5umBDd/qcwYSUXCParELdw69vUUEFAPTgG2cyfAYtH2Tzr97jlAeElXKmGmUDUoc0TJCC0yc/DjFR+oY09BUnIgnPYHFgf7IAXwFlEkR/Jg2K3Z6CZIukqgj7cK37w0HdBCrGXZ+mDpPXX5mzql+0mAlhHTzGlZNd9B9TnM5RPeT4BRNxMOQIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "permissions": [ "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.14",
+   "web_accessible_resources": [ {
+      "matches": [ "*://*/*" ],
+      "resources": [ "assets/js/*.js", "assets/css/*.css", "assets/svg/*.svg", "icon.svg", "blob/*" ]
+   } ]
+}

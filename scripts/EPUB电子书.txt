@@ -1,0 +1,79 @@
+# EPUB电子书.py
+import os
+from pathlib import Path
+from ebooklib import epub
+from datetime import datetime
+import random
+from faker import Faker
+
+fake = Faker('zh_CN')
+
+def generate_ebook(book_type):
+    book = epub.EpubBook()
+    
+    # 配置模板参数
+    config = {
+        '小说': {
+            'title': f"{fake.word()}传奇",
+            'template': '小说封面.html',
+            'color': '#8B4513'
+        },
+        '学术': {
+            'title': f"{fake.word()}研究",
+            'template': '学术封面.html', 
+            'color': '#003366'
+        },
+        '儿童': {
+            'title': f"小熊{fake.word()}历险记",
+            'template': '儿童封面.html',
+            'color': '#FF69B4'
+        }
+    }
+    
+    # 设置元数据
+    book.set_identifier(f"{datetime.now().timestamp()}")
+    book.set_title(config[book_type]['title'])
+    book.add_author(fake.name())
+    
+    # 添加封面（修复编码问题）
+    with open(f"D:/AI_System/templates/电子书封面/{config[book_type]['template']}", 
+             encoding='utf-8') as f:
+        cover_content = f.read()
+        
+    cover = epub.EpubHtml(
+        title="封面",
+        file_name="cover.xhtml",
+        content=cover_content,
+        media_type="application/xhtml+xml"
+    )
+    book.add_item(cover)
+    
+    # 生成10章内容
+    chapters = []
+    for i in range(1, 11):
+        chapter = epub.EpubHtml(
+            title=f"第{i}章",
+            file_name=f"chap_{i}.xhtml",
+            content=f"""
+            <h1 style="color:{config[book_type]['color']}">第{i}章</h1>
+            <p>{fake.paragraph(nb_sentences=10)}</p>
+            """
+        )
+        chapters.append(chapter)
+        book.add_item(chapter)
+    
+    # 设置目录结构
+    book.toc = chapters
+    book.add_item(epub.EpubNcx())
+    book.add_item(epub.EpubNav())
+    
+    # 保存文件
+    output_dir = Path(f"D:/AI_System/data/raw/电子书模板/{book_type}")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"{book_type}_模板_{datetime.now().strftime('%Y%m%d%H%M')}.epub"
+    epub.write_epub(output_dir / filename, book)
+    print(f"✅ {book_type}电子书已生成：{filename}")
+
+if __name__ == "__main__":
+    for book_type in ['小说', '学术', '儿童']:
+        generate_ebook(book_type)

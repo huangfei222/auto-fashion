@@ -1,0 +1,153 @@
+# Global_AI_Factory.py
+import os
+import sys
+from pathlib import Path
+from PIL import Image, ImageEnhance, ImageCms
+
+class GlobalFactory:
+    def __init__(self):
+        self.base_dir = Path("D:/AI_System")
+        self.platform_specs = {
+            "Amazon": {"format": "TIFF", "color": "CMYK", "dpi": 300, "bleed": 3},
+            "Etsy": {"format": "JPEG", "color": "sRGB", "min_width": 3000},
+            "Redbubble": {"format": "PNG", "transparent": True, "size": 4000},
+            "Shopify": {"formats": ["WEBP", "JPEG"], "sizes": [2048, 1024, 512]}
+        }
+        self._setup_environment()
+
+    def _setup_environment(self):
+        """全自动环境初始化"""
+        # 创建核心目录
+        (self.base_dir/"data/raw").mkdir(exist_ok=True)
+        (self.base_dir/"output").mkdir(exist_ok=True)
+        (self.base_dir/"templates").mkdir(exist_ok=True)
+        
+        # 生成智能模板
+        self._generate_template("poster", 6000, 9000)
+        self._generate_template("phone_case", 2000, 2000)
+        self._generate_template("tshirt", 4500, 5400)
+
+    def _generate_template(self, name, w, h):
+        """智能模板生成系统"""
+        template_path = self.base_dir/"templates"/f"{name}_template.png"
+        if not template_path.exists():
+            img = Image.new("RGB", (w, h), (255,255,255))
+            img.save(template_path, dpi=(300,300))
+
+    def _enhance_image(self, img, min_size):
+        """AI增强引擎"""
+        # 智能放大
+        if img.width < min_size[0] or img.height < min_size[1]:
+            scale = max(min_size[0]/img.width, min_size[1]/img.height)
+            img = img.resize((int(img.width*scale), int(img.height*scale)), Image.Resampling.LANCZOS)
+        
+        # 专业锐化
+        enhancer = ImageEnhance.Sharpness(img)
+        return enhancer.enhance(2.0 if img.width < 3000 else 1.5)
+
+    def _convert_color(self, img, target):
+        """全自动色彩空间转换"""
+        if target == "sRGB":
+            return ImageCms.profileToProfile(img, "sRGB", "sRGB")
+        elif target == "CMYK":
+            return ImageCms.profileToProfile(img, "sRGB", "ISOcoated_v2.icc")
+        return img
+
+    def _process_product(self, img_path, product_type):
+        """智能生产流水线"""
+        try:
+            with Image.open(img_path) as img:
+                # 根据产品类型增强
+                enhancements = {
+                    "poster": (6000, 9000),
+                    "phone_case": (2000, 2000),
+                    "tshirt": (4500, 5400),
+                    "wallpaper": (3840, 2160)
+                }
+                enhanced = self._enhance_image(img, enhancements[product_type])
+                
+                # 应用模板
+                template = Image.open(self.base_dir/"templates"/f"{product_type}_template.png")
+                enhanced.thumbnail((template.width-200, template.height-200))
+                template.paste(enhanced, (
+                    (template.width - enhanced.width)//2, 
+                    int((template.height - enhanced.height)*0.3)
+                )
+                
+                return template
+        except Exception as e:
+            print(f"生产失败: {str(e)}")
+            return None
+
+    def _adapt_for_platform(self, img, platform):
+        """全平台自动适配"""
+        spec = self.platform_specs[platform]
+        
+        # 色彩空间转换
+        img = self._convert_color(img, spec.get("color", "sRGB"))
+        
+        # 尺寸调整
+        if spec.get("min_width") and img.width < spec["min_width"]:
+            new_h = int(spec["min_width"] * img.height / img.width)
+            img = img.resize((spec["min_width"], new_h), Image.Resampling.LANCZOS)
+        
+        # 添加出血边
+        if spec.get("bleed"):
+            bleed_px = int(spec["bleed"] * 300 / 25.4)  # mm转像素
+            new_img = Image.new(img.mode, (img.width+2*bleed_px, img.height+2*bleed_px), (255,255,255))
+            new_img.paste(img, (bleed_px, bleed_px))
+            img = new_img
+        
+        return img
+
+    def _save_platform_file(self, img, platform, product_type, base_name):
+        """保存平台专用文件"""
+        output_dir = self.base_dir/"output"/platform/product_type
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        spec = self.platform_specs[platform]
+        if "formats" in spec:  # Shopify多格式
+            for fmt in spec["formats"]:
+                path = output_dir/f"{base_name}_{spec['sizes'][0]}px.{fmt.lower()}"
+                img.save(path, fmt, quality=95)
+        else:
+            path = output_dir/f"{base_name}.{spec['format'].lower()}"
+            save_args = {"dpi": (spec.get("dpi", 300),)*2}
+            if spec.get("transparent"):
+                img = img.convert("RGBA")
+                data = [(r,g,b,0) if sum((r,g,b)) >= 750 else (r,g,b,a) for (r,g,b,a) in img.getdata()]
+                img.putdata(data)
+            img.save(path, **save_args)
+        print(f"✅ {platform}适配完成: {path.name}")
+
+    def run(self):
+        """一键启动全球生产"""
+        print("="*40)
+        print("  全球电商自动化工厂 v6.0")
+        print("="*40)
+        
+        # 遍历原始文件
+        for product_type in ["poster", "phone_case", "tshirt", "wallpaper"]:
+            input_dir = self.base_dir/"data/raw"/product_type
+            if not input_dir.exists():
+                continue
+            
+            for img_file in input_dir.glob("*"):
+                if img_file.suffix.lower() not in ('.png','.jpg','.jpeg'):
+                    continue
+                
+                # 生产基础成品
+                base_img = self._process_product(img_file, product_type)
+                if not base_img:
+                    continue
+                
+                # 多平台适配
+                for platform in self.platform_specs:
+                    adapted_img = self._adapt_for_platform(base_img.copy(), platform)
+                    self._save_platform_file(adapted_img, platform, product_type, img_file.stem)
+        
+        print("\n⭐ 全平台适配完成！文件位置：")
+        print(f"D:/AI_System/output/平台名称/产品类型")
+
+if __name__ == "__main__":
+    GlobalFactory().run()

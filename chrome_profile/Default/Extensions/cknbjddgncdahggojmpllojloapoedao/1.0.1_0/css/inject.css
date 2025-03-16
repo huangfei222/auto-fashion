@@ -1,0 +1,31 @@
+.prompt-helper-edrfghthju {
+    position: fixed;
+    bottom: 5px;
+    right: 0;
+    z-index: 9999;
+    padding: 5px 20px;
+    cursor: pointer;
+    background: #fff;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+.Midjourney-Prompt-Helper {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+.prompt-helper-edrfghthju:hover .close-prompt-helper-edrfthsrgbh{
+    display: block;
+}
+
+.close-prompt-helper-edrfthsrgbh {
+    display: none;
+    position: absolute;
+    right: 60px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 50% 50%;
+    bottom: 28px;
+    background: #eee;
+    color: #fff;
+}

@@ -1,0 +1,71 @@
+# -*- coding: utf-8 -*-
+import sys
+import os
+import random
+import time  # 新增此行
+from PIL import Image, ImageDraw, ImageFont
+from pathlib import Path
+
+def create_card(card_type='婚礼'):
+    try:
+        print(f"🎨 正在设计{card_type}请柬...")
+        
+        # 中文字体解决方案（增加备选字体）
+        font_list = [
+            "C:/Windows/Fonts/simhei.ttf",    # 黑体
+            "C:/Windows/Fonts/msyh.ttc",      # 微软雅黑
+            "C:/Windows/Fonts/simfang.ttf"    # 仿宋
+        ]
+        font_path = next((f for f in font_list if os.path.exists(f)), None)
+        
+        if not font_path:
+            raise FileNotFoundError("未找到系统字体文件")
+        
+        # 创建存储目录
+        save_path = Path(f"D:/AI_System/data/raw/电子模板素材/{card_type}请柬")
+        save_path.mkdir(parents=True, exist_ok=True)
+        
+        # 生成画布（修正颜色生成逻辑）
+        bg_color = (
+            random.randint(200, 255),
+            random.randint(200, 255),
+            random.randint(200, 255)
+        )
+        img = Image.new('RGB', (1200, 800), color=bg_color)
+        draw = ImageDraw.Draw(img)
+        
+        # 添加文字内容（增加异常处理）
+        text_map = {
+            '婚礼': "诚邀您参加\n张先生 & 李女士\n婚礼盛典\n时间：2025年6月6日\n地点：幸福大酒店",
+            '节日': "恭贺新禧\n2025新春快乐\n心想事成 万事如意"
+        }
+        try:
+            font = ImageFont.truetype(font_path, 36)
+        except IOError:
+            font = ImageFont.load_default()
+        
+        draw.multiline_text(
+            (600, 300), 
+            text_map.get(card_type, ""), 
+            fill=(0, 0, 0), 
+            font=font, 
+            align='center', 
+            anchor='mm'
+        )
+        
+        # 保存文件（修正时间戳）
+        timestamp = int(time.time())
+        filename = f"{card_type}请柬_{timestamp}.png"
+        img.save(save_path / filename)
+        print(f"✅ 文件已保存：{save_path / filename}")
+        
+    except Exception as e:
+        print(f"❌ 发生错误：{str(e)}")
+        input("按回车键退出...")
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        create_card(sys.argv[1])
+    else:
+        print("请在命令后添加类型（婚礼/节日）")
+        input("按回车键退出...")
