@@ -1,0 +1,35 @@
+name: 2025免费数字产品流水线
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天北京时间10AM
+  workflow_dispatch:
+
+jobs:
+  generate-and-sell:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 量子克隆
+      uses: actions/checkout@v4
+      with:
+        lfs: true
+
+    - name: 设置AI环境
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: 安装依赖
+      run: |
+        pip install diffusers==2025.3.0
+        pip install gumroad-api==2025.1
+        
+    - name: 生成产品设计
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      run: python generate.py --prompt "$(python prompt_generator.py)"
+
+    - name: 自动上架
+      env:
+        GUMROAD_KEY: ${{ secrets.GUMROAD_KEY }}
+      run: python upload.py --platform gumroad
