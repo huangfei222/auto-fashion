@@ -4,6 +4,7 @@ using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
 using Genesis.Engine.Core.Runtime.Resource;
 using Genesis.Engine.Core.Runtime.Serialization;
+using Genesis.Engine.Core.Runtime.Data;
 
 
 var engine = new EngineBootstrap();
@@ -105,7 +106,35 @@ try
     }
 
 
+    // ===============================
+    // Data Pipeline Test
+    // ===============================
 
+
+    var loader =
+    new JsonDataLoader<RuntimeData>();
+
+
+    var loadedRuntime =
+    loader.Load(
+        "Data/runtime.json"
+    );
+
+
+
+    Logger.Info(
+        $"Loaded Data {loadedRuntime.Id}"
+    );
+
+
+    Logger.Info(
+        $"Type {loadedRuntime.Type}"
+    );
+
+
+    Logger.Info(
+        $"Value {loadedRuntime.Value}"
+    );
 
     // ===============================
     // Entity System Test

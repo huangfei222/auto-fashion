@@ -1,0 +1,27 @@
+EngineBootstrap
+        |
+        |
+RuntimeContext
+        |
+        |
++----------------------+
+|                      |
+ResourceManager    Serialization
+|                      |
+↓                      ↓
+ConfigManager       JSON Data
+|
+↓
+FactoryManager
+|
+↓
+EntityManager
+|
+↓
+ComponentManager
+|
+↓
+SystemManager
+|
+↓
+EngineLoop

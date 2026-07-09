@@ -3,77 +3,198 @@ using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
 using Genesis.Engine.Core.Runtime.Resource;
+using Genesis.Engine.Core.Runtime.Serialization;
+
 
 var engine = new EngineBootstrap();
 
+
 try
 {
+
     engine.Start();
 
-    var resourceManager = new ResourceManager();
 
-    var resource = new RuntimeConfigResource(
-        "runtime.test",
-        "Resource Loaded"
+
+    // ===============================
+    // Resource System Test
+    // ===============================
+
+
+    var resourceManager =
+        new ResourceManager();
+
+
+
+    var runtimeResource =
+        new RuntimeConfigResource(
+            "runtime.test",
+            "Resource Loaded"
+        );
+
+
+
+    resourceManager.Register(
+        runtimeResource
     );
 
-    resourceManager.Register(resource);
 
-    var loaded = resourceManager.Get<RuntimeConfigResource>("runtime.test");
 
-    if (loaded is not null)
+    var loadedResource =
+        resourceManager.Get<RuntimeConfigResource>(
+            "runtime.test"
+        );
+
+
+
+    if(loadedResource is not null)
     {
-        Logger.Info(loaded.Value);
-    }
-    else
-    {
-        Logger.Info("Warning: RuntimeConfigResource 'runtime.test' not found.");
+        Logger.Info(
+            loadedResource.Value
+        );
     }
 
-    var entity = new Entity(
-        new EntityId(3001),
-        "RuntimeObject"
+
+
+
+    // ===============================
+    // Serialization Test
+    // ===============================
+
+
+    var serializer =
+        new JsonSerializer<RuntimeData>();
+
+
+
+    var runtimeData =
+        new RuntimeData
+        {
+            Id = 3001,
+            Type = "Runtime",
+            Value = 500
+        };
+
+
+
+    var jsonData =
+        serializer.Serialize(
+            runtimeData
+        );
+
+
+
+    Logger.Info(
+        jsonData
     );
 
-    engine.Entities.Add(entity);
 
-    var data = new RuntimeDataComponent("ConfigDriven");
 
-    engine.Components.Add(entity, data);
+    var deserializeData =
+        serializer.Deserialize(
+            jsonData
+        );
+
+
+
+    if(deserializeData is not null)
+    {
+        Logger.Info(
+            $"Deserialize {deserializeData.Id}"
+        );
+    }
+
+
+
+
+    // ===============================
+    // Entity System Test
+    // ===============================
+
+
+    var entity =
+        new Entity(
+            new EntityId(3001),
+            "RuntimeObject"
+        );
+
+
+
+    engine.Entities.Add(
+        entity
+    );
+
+
+
+    // 注意：
+    // 这里必须使用 Component
+    // 不能使用 RuntimeData
+
+
+    var runtimeComponent =
+        new RuntimeDataComponent(
+            "ConfigDriven"
+        );
+
+
+
+    engine.Components.Add(
+        entity,
+        runtimeComponent
+    );
+
+
+
+
+    // ===============================
+    // System Test
+    // ===============================
+
 
     engine.Systems.Add<RuntimeTestSystem>();
 
+
+
     engine.Loop.Run();
 
-    var result = engine.Components.Get<RuntimeDataComponent>(entity);
 
-    if (result is not null)
+
+    var loadedComponent =
+        engine.Components.Get<RuntimeDataComponent>(
+            entity
+        );
+
+
+
+    if(loadedComponent is not null)
     {
-        Logger.Info($"Component Value {result.Value}");
-    }
-    else
-    {
-        Logger.Info($"Warning: RuntimeDataComponent not found for entity {entity.Id}");
+
+        Logger.Info(
+            $"Component Value {loadedComponent.Value}"
+        );
+
     }
 
-    Logger.Info($"Entity Count {engine.Entities.Count()}");
+
+
+    Logger.Info(
+        $"Entity Count {engine.Entities.Count()}"
+    );
+
+
+
 }
-catch (Exception ex)
+catch(Exception ex)
 {
-    // 记录到 Logger 并输出到标准错误，兼容没有 Logger.Error 的情况
-    Logger.Info($"Unhandled exception: {ex}");
-    Console.Error.WriteLine($"Unhandled exception: {ex}");
-    throw;
+
+    Logger.Info(
+        $"Unhandled exception: {ex}"
+    );
+
 }
 finally
 {
-    try
-    {
-        engine.Stop();
-    }
-    catch (Exception stopEx)
-    {
-        Logger.Info($"Error while stopping engine: {stopEx}");
-        Console.Error.WriteLine($"Error while stopping engine: {stopEx}");
-    }
+
+    engine.Stop();
+
 }
