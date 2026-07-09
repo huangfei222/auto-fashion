@@ -1,0 +1,34 @@
+using Genesis.Engine.Core.Bootstrap;
+using Genesis.Engine.Core.Entity;
+using Genesis.Engine.Core.Logging;
+
+
+
+var engine =
+new EngineBootstrap();
+
+
+
+engine.Start();
+
+
+
+var entity =
+new Entity(
+    new EntityId(1001),
+    "Runtime"
+);
+
+
+
+engine.Entities.Add(entity);
+
+
+
+Logger.Info(
+    $"Entity Count {engine.Entities.Count}"
+);
+
+
+
+engine.Stop();

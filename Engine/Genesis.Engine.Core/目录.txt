@@ -1,0 +1,35 @@
+Genesis.Engine.Core
+
+│
+├── Bootstrap
+│   └── EngineBootstrap.cs
+│
+├── Logger
+│   ├── Logger.cs
+│   └── LogLevel.cs
+│
+├── Event
+│   ├── EventBus.cs
+│   └── EventData.cs
+│
+├── Config
+│   └── ConfigManager.cs
+│
+├── Factory
+│   ├── IFactory.cs
+│   └── FactoryManager.cs
+│
+├── Runtime
+│   │
+│   ├── Entity
+│   │   ├── Entity.cs
+│   │   ├── EntityId.cs
+│   │   └── EntityManager.cs
+│   │
+│   ├── System
+│   │   └── EngineSystem.cs
+│   │
+│   └── RuntimeContext.cs
+│
+└── Tests
+    （这里以后不放测试代码）

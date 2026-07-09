@@ -94,3 +94,55 @@ Genesis/
 ├── docker-compose.yml
 ├── .gitignore
 └── .editorconfig
+
+Genesis.Engine.Core
+
+
+├── Bootstrap
+│
+│   └── EngineBootstrap.cs
+│
+
+
+├── Logging
+│
+│   └── Logger.cs
+│
+
+
+├── Events
+│
+│   ├── EventBus.cs
+│   └── EventData.cs
+│
+
+
+├── Config
+│
+│   └── ConfigManager.cs
+│
+
+
+├── Factory
+│
+│   ├── IFactory.cs
+│   ├── FactoryManager.cs
+│   └── EntityFactory.cs
+│
+
+
+├── Runtime
+│
+│   └── RuntimeContext.cs
+│
+
+
+├── Entity
+│
+│   ├── Entity.cs
+│   ├── EntityId.cs
+│   └── EntityManager.cs
+│
+
+
+└── Tests
