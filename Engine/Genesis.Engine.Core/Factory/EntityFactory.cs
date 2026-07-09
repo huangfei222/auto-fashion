@@ -1,11 +1,11 @@
 using Genesis.Engine.Core.Config;
-using Genesis.Engine.Core.Entity;
-
+using Genesis.Engine.Core.Runtime.Entities;
 
 namespace Genesis.Engine.Core.Factory;
 
 
-public class EntityFactory : IFactory<Entity>
+public class EntityFactory 
+    : IFactory<Entity>
 {
 
     private readonly ConfigManager config;
@@ -17,7 +17,6 @@ public class EntityFactory : IFactory<Entity>
     {
         this.config = config;
     }
-
 
 
     public Entity Create(
@@ -35,7 +34,7 @@ public class EntityFactory : IFactory<Entity>
         return new Entity
         (
             new EntityId(id),
-            data["type"].ToString()
+            data["type"]?.ToString() ?? "Unknown"
         );
 
     }

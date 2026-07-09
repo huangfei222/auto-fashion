@@ -1,48 +1,21 @@
 using Genesis.Engine.Core.Bootstrap;
-using Genesis.Engine.Core.Entity;
+using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Logging;
 
-
-
-var engine =
-new EngineBootstrap();
-
-
+var engine = new EngineBootstrap();
 
 engine.Start();
 
+var entityManager = new EntityManager();
 
-
-TestConfig.Load(
-    engine.Config
+var entity = new Entity
+(
+    new EntityId(1001),
+    "Runtime"
 );
 
+entityManager.Add(entity);
 
-
-var factory =
-engine.Factory.Get<Entity>();
-
-
-
-var entity =
-factory.Create(1001);
-
-
-
-engine.Entities.Add(entity);
-
-
-
-Logger.Info(
-    $"Entity Type {entity.Type}"
-);
-
-
-
-Logger.Info(
-    $"Entity Count {engine.Entities.Count}"
-);
-
-
+Logger.Info($"Entity Count {entityManager.Count()}");
 
 engine.Stop();

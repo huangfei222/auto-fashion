@@ -1,25 +1,19 @@
-namespace Genesis.Engine.Core.Runtime.Entity;
+namespace Genesis.Engine.Core.Runtime.Entities;
 
 
 public class Entity
 {
+    public EntityId Id { get; }
 
-
-    public EntityId Id
-    {
-        get;
-    }
-
+    public string Type { get; }
 
 
     public Entity(
-        EntityId id
+        EntityId id,
+        string type
     )
     {
-
-        Id=id;
-
+        Id = id;
+        Type = type;
     }
-
-
 }

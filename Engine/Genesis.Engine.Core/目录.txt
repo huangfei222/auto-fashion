@@ -1,14 +1,13 @@
 Genesis.Engine.Core
 
-│
 ├── Bootstrap
 │   └── EngineBootstrap.cs
 │
-├── Logger
+├── Logging
 │   ├── Logger.cs
 │   └── LogLevel.cs
 │
-├── Event
+├── Events
 │   ├── EventBus.cs
 │   └── EventData.cs
 │
@@ -17,19 +16,17 @@ Genesis.Engine.Core
 │
 ├── Factory
 │   ├── IFactory.cs
-│   └── FactoryManager.cs
+│   ├── FactoryManager.cs
+│   └── EntityFactory.cs
 │
-├── Runtime
-│   │
-│   ├── Entity
-│   │   ├── Entity.cs
-│   │   ├── EntityId.cs
-│   │   └── EntityManager.cs
-│   │
-│   ├── System
-│   │   └── EngineSystem.cs
-│   │
-│   └── RuntimeContext.cs
-│
-└── Tests
-    （这里以后不放测试代码）
+└── Runtime
+    │
+    ├── Entities
+    │   ├── Entity.cs
+    │   ├── EntityId.cs
+    │   └── EntityManager.cs
+    │
+    ├── Systems
+    │   └── EngineSystem.cs
+    │
+    └── RuntimeContext.cs

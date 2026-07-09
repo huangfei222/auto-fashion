@@ -1,54 +1,28 @@
-namespace Genesis.Engine.Core.Runtime.Entity;
+using Genesis.Engine.Core.Logging;
+
+
+namespace Genesis.Engine.Core.Runtime.Entities;
 
 
 public class EntityManager
 {
 
-
-    private int counter=0;
-
+    private readonly List<Entity> entities = new();
 
 
-    private readonly Dictionary<int,Entity>
-    entities
-    =
-    new();
-
-
-
-    public Entity Create()
+    public void Add(Entity entity)
     {
+        entities.Add(entity);
 
-
-        counter++;
-
-
-        var entity =
-        new Entity(
-            new EntityId(counter)
+        Logger.Info(
+            $"Entity Added {entity.Id.Value}"
         );
-
-
-        entities[counter]=entity;
-
-
-        return entity;
-
     }
 
 
-
-
-    public Entity Get(
-        int id
-    )
+    public int Count()
     {
-
-
-        return entities[id];
-
-
+        return entities.Count;
     }
-
 
 }

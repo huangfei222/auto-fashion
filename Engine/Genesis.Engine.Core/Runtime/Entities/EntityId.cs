@@ -1,24 +1,13 @@
-namespace Genesis.Engine.Core.Runtime.Entity;
+namespace Genesis.Engine.Core.Runtime.Entities;
 
 
-public readonly struct EntityId
+public class EntityId
 {
+    public int Value { get; }
 
 
-    public int Value
+    public EntityId(int value)
     {
-        get;
+        Value = value;
     }
-
-
-    public EntityId(
-        int value
-    )
-    {
-
-        Value=value;
-
-    }
-
-
 }
