@@ -1,0 +1,46 @@
+# ==================== .NET / Visual Studio ====================
+bin/
+obj/
+.vs/
+*.suo
+*.user
+*.pdb
+*.exe
+*.dll
+
+# ==================== Godot 引擎缓存 ====================
+.godot/
+.import/
+*.import
+*.godot
+export_*/
+
+# ==================== 编译打包产物 ====================
+Build/
+*.log
+logs/
+
+# ==================== 数据库备份 ====================
+*.sql.backup
+*.dump
+
+# ==================== Obsidian 知识库过滤【关键】 ====================
+.obsidian/
+.obsidian/cache
+.obsidian/trash
+.obsidian/workspace.json
+*.canvas.temp
+._*
+
+# ==================== 环境密钥配置 ====================
+.env
+.env.local
+.env.secret
+
+# ==================== 系统垃圾文件 ====================
+Thumbs.db
+.DS_Store
+
+# ==================== 编辑器 ====================
+.vscode/
+.idea/
