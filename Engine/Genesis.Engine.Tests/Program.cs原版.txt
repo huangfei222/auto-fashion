@@ -40,6 +40,10 @@ engine.Components.Add(
 );
 
 
+engine.Systems.Add<RuntimeTestSystem>();
+
+
+engine.Loop.Run();
 
 var result =
 engine.Components.Get<RuntimeDataComponent>(

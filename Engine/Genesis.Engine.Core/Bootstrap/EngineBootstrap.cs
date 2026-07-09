@@ -30,6 +30,8 @@ public class EngineBootstrap
 
     public SystemManager Systems { get; }
 
+    public EngineLoop Loop {get;}
+
 
     public EngineBootstrap()
     {
@@ -50,6 +52,8 @@ public class EngineBootstrap
         Components =new ComponentManager();
 
         Systems =new SystemManager();
+
+        Loop =new EngineLoop(Systems);
     }
 
 

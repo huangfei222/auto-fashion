@@ -41,7 +41,7 @@ public class ComponentManager
 
 
 
-    public T Get<T>(
+    public T? Get<T>(
         Entity entity
     )
     where T : Component

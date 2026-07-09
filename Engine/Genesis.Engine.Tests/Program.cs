@@ -2,6 +2,7 @@ using Genesis.Engine.Core.Bootstrap;
 using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
+using Genesis.Engine.Core.Runtime.Resource;
 
 
 
@@ -13,6 +14,35 @@ new EngineBootstrap();
 engine.Start();
 
 
+var resourceManager =
+new ResourceManager();
+
+
+
+var resource =
+new RuntimeConfigResource(
+    "runtime.test",
+    "Resource Loaded"
+);
+
+
+
+resourceManager.Register(
+    resource
+);
+
+
+
+var loaded =
+resourceManager.Get<RuntimeConfigResource>(
+    "runtime.test"
+);
+
+
+
+Logger.Info(
+    loaded!.Value
+);
 
 var entity =
 new Entity
@@ -43,9 +73,7 @@ engine.Components.Add(
 engine.Systems.Add<RuntimeTestSystem>();
 
 
-engine.Systems.Update(
-    0.016f
-);
+engine.Loop.Run();
 
 var result =
 engine.Components.Get<RuntimeDataComponent>(
