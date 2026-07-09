@@ -1,6 +1,7 @@
 using Genesis.Engine.Core.Bootstrap;
 using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Runtime.Entities;
+using Genesis.Engine.Core.Runtime.Components;
 
 
 
@@ -13,28 +14,10 @@ engine.Start();
 
 
 
-engine.EventBus.Subscribe(
-    "EntityCreated",
-    data =>
-    {
-
-        var entity =
-        (Entity)data;
-
-
-        Logger.Info(
-            $"Created Entity {entity.Id.Value}"
-        );
-
-    }
-);
-
-
-
 var entity =
 new Entity
 (
-    new EntityId(2001),
+    new EntityId(3001),
     "RuntimeObject"
 );
 
@@ -44,8 +27,35 @@ engine.Entities.Add(entity);
 
 
 
+var data =
+new RuntimeDataComponent(
+    "ConfigDriven"
+);
+
+
+
+engine.Components.Add(
+    entity,
+    data
+);
+
+
+
+var result =
+engine.Components.Get<RuntimeDataComponent>(
+    entity
+);
+
+
+
 Logger.Info(
-    $"Total Entity {engine.Entities.Count()}"
+    $"Component Value {result.Value}"
+);
+
+
+
+Logger.Info(
+    $"Entity Count {engine.Entities.Count()}"
 );
 
 

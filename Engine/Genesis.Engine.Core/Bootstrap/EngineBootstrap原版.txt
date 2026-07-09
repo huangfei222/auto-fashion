@@ -35,7 +35,7 @@ public class EngineBootstrap
 
         Runtime =new RuntimeContext();
 
-        Entities =new EntityManager();
+        Entities =new EntityManager(EventBus);
 
         EntityFactory =new EntityFactory(Config);
 
