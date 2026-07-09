@@ -2,7 +2,7 @@ using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Events;
 using Genesis.Engine.Core.Config;
 using Genesis.Engine.Core.Factory;
-using Genesis.Engine.Core.Entity;
+using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime;
 
 
@@ -31,11 +31,15 @@ public class EngineBootstrap
 
         Config = new ConfigManager();
 
-        Factory = new FactoryManager();
+        Factory =new FactoryManager();
+
+        Runtime =new RuntimeContext();
 
         Entities =new EntityManager();
 
-        Runtime = new RuntimeContext();
+        EntityFactory =new EntityFactory(Config);
+
+        Factory.Register<Entity>(EntityFactory);
     }
 
 

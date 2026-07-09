@@ -1,21 +1,53 @@
 using Genesis.Engine.Core.Bootstrap;
-using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Logging;
+using Genesis.Engine.Core.Runtime.Entities;
 
-var engine = new EngineBootstrap();
+
+
+var engine =
+new EngineBootstrap();
+
+
 
 engine.Start();
 
-var entityManager = new EntityManager();
 
-var entity = new Entity
-(
-    new EntityId(1001),
-    "Runtime"
+
+engine.EventBus.Subscribe(
+    "EntityCreated",
+    data =>
+    {
+
+        var entity =
+        (Entity)data;
+
+
+        Logger.Info(
+            $"Created Entity {entity.Id.Value}"
+        );
+
+    }
 );
 
-entityManager.Add(entity);
 
-Logger.Info($"Entity Count {entityManager.Count()}");
+
+var entity =
+new Entity
+(
+    new EntityId(2001),
+    "RuntimeObject"
+);
+
+
+
+engine.Entities.Add(entity);
+
+
+
+Logger.Info(
+    $"Total Entity {engine.Entities.Count()}"
+);
+
+
 
 engine.Stop();
