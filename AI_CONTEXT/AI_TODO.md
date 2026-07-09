@@ -1,10 +1,12 @@
-AI\_TODO
+\# AI\_TODO
 
 Project：Genesis Engine
 
-Last Updated：2026-07-07
+Last Updated：2026-07-09
 
 Status：Active
+
+
 
 当前最高优先级（P0）
 
@@ -22,53 +24,51 @@ Status：Active
 
 
 
-下一阶段（P1）
-
-Core Engine
+下一阶段（P1） Core Engine
 
 任务：
 
-□ Logger
+✅ Logger
 
-□ EventBus
+✅ EventBus
 
-□ ConfigManager
+✅ ConfigManager
 
-□ Factory
+✅ Factory
 
-□ ResourceManager
+✅ ResourceManager
 
-□ Engine Bootstrap
+✅ Engine Bootstrap
 
-全部完成后进入：
+✅ Entity
 
-Core Validation。
+✅ Component System
 
+✅ System Framework
 
+✅ Engine Runtime Loop
 
-第三阶段（P2）
-
-Engine System
-
-□ Entity
-
-□ ECS
-
-□ Scene
-
-□ Save
-
-□ Network
-
-□ Time
-
-□ Math
+全部完成后进入：Core Validation。
 
 
 
-第四阶段（P3）
+第三阶段（P2） Engine System
 
-Framework
+☐ Serialization
+
+☐ Scene
+
+☐ Save
+
+☐ Network
+
+☐ Time
+
+☐ Math
+
+
+
+第四阶段（P3） Framework
 
 □ Combat
 
@@ -100,9 +100,7 @@ Framework
 
 
 
-第五阶段（P4）
-
-Game Content
+第五阶段（P4） Game Content
 
 □ Maps
 
@@ -120,9 +118,7 @@ Game Content
 
 
 
-第六阶段（P5）
-
-Playable Demo
+第六阶段（P5） Playable Demo
 
 目标：
 
@@ -151,6 +147,8 @@ Playable Demo
 更新 CHANGELOG
 
 不得遗漏。
+
+
 
 End of File.
 

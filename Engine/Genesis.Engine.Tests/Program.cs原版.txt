@@ -2,66 +2,78 @@ using Genesis.Engine.Core.Bootstrap;
 using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
+using Genesis.Engine.Core.Runtime.Resource;
 
+var engine = new EngineBootstrap();
 
+try
+{
+    engine.Start();
 
-var engine =
-new EngineBootstrap();
+    var resourceManager = new ResourceManager();
 
+    var resource = new RuntimeConfigResource(
+        "runtime.test",
+        "Resource Loaded"
+    );
 
+    resourceManager.Register(resource);
 
-engine.Start();
+    var loaded = resourceManager.Get<RuntimeConfigResource>("runtime.test");
 
+    if (loaded is not null)
+    {
+        Logger.Info(loaded.Value);
+    }
+    else
+    {
+        Logger.Info("Warning: RuntimeConfigResource 'runtime.test' not found.");
+    }
 
+    var entity = new Entity(
+        new EntityId(3001),
+        "RuntimeObject"
+    );
 
-var entity =
-new Entity
-(
-    new EntityId(3001),
-    "RuntimeObject"
-);
+    engine.Entities.Add(entity);
 
+    var data = new RuntimeDataComponent("ConfigDriven");
 
+    engine.Components.Add(entity, data);
 
-engine.Entities.Add(entity);
+    engine.Systems.Add<RuntimeTestSystem>();
 
+    engine.Loop.Run();
 
+    var result = engine.Components.Get<RuntimeDataComponent>(entity);
 
-var data =
-new RuntimeDataComponent(
-    "ConfigDriven"
-);
+    if (result is not null)
+    {
+        Logger.Info($"Component Value {result.Value}");
+    }
+    else
+    {
+        Logger.Info($"Warning: RuntimeDataComponent not found for entity {entity.Id}");
+    }
 
-
-
-engine.Components.Add(
-    entity,
-    data
-);
-
-
-engine.Systems.Add<RuntimeTestSystem>();
-
-
-engine.Loop.Run();
-
-var result =
-engine.Components.Get<RuntimeDataComponent>(
-    entity
-);
-
-
-
-Logger.Info(
-    $"Component Value {result.Value}"
-);
-
-
-
-Logger.Info(
-    $"Entity Count {engine.Entities.Count()}"
-);
-
-
-
-engine.Stop();
+    Logger.Info($"Entity Count {engine.Entities.Count()}");
+}
+catch (Exception ex)
+{
+    // 记录到 Logger 并输出到标准错误，兼容没有 Logger.Error 的情况
+    Logger.Info($"Unhandled exception: {ex}");
+    Console.Error.WriteLine($"Unhandled exception: {ex}");
+    throw;
+}
+finally
+{
+    try
+    {
+        engine.Stop();
+    }
+    catch (Exception stopEx)
+    {
+        Logger.Info($"Error while stopping engine: {stopEx}");
+        Console.Error.WriteLine($"Error while stopping engine: {stopEx}");
+    }
+}

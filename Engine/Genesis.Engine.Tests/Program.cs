@@ -3,95 +3,198 @@ using Genesis.Engine.Core.Logging;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
 using Genesis.Engine.Core.Runtime.Resource;
+using Genesis.Engine.Core.Runtime.Serialization;
+
+
+var engine = new EngineBootstrap();
+
+
+try
+{
+
+    engine.Start();
 
 
 
-var engine =
-new EngineBootstrap();
+    // ===============================
+    // Resource System Test
+    // ===============================
+
+
+    var resourceManager =
+        new ResourceManager();
 
 
 
-engine.Start();
-
-
-var resourceManager =
-new ResourceManager();
-
-
-
-var resource =
-new RuntimeConfigResource(
-    "runtime.test",
-    "Resource Loaded"
-);
+    var runtimeResource =
+        new RuntimeConfigResource(
+            "runtime.test",
+            "Resource Loaded"
+        );
 
 
 
-resourceManager.Register(
-    resource
-);
+    resourceManager.Register(
+        runtimeResource
+    );
 
 
 
-var loaded =
-resourceManager.Get<RuntimeConfigResource>(
-    "runtime.test"
-);
+    var loadedResource =
+        resourceManager.Get<RuntimeConfigResource>(
+            "runtime.test"
+        );
 
 
 
-Logger.Info(
-    loaded!.Value
-);
-
-var entity =
-new Entity
-(
-    new EntityId(3001),
-    "RuntimeObject"
-);
+    if(loadedResource is not null)
+    {
+        Logger.Info(
+            loadedResource.Value
+        );
+    }
 
 
 
-engine.Entities.Add(entity);
+
+    // ===============================
+    // Serialization Test
+    // ===============================
+
+
+    var serializer =
+        new JsonSerializer<RuntimeData>();
 
 
 
-var data =
-new RuntimeDataComponent(
-    "ConfigDriven"
-);
+    var runtimeData =
+        new RuntimeData
+        {
+            Id = 3001,
+            Type = "Runtime",
+            Value = 500
+        };
 
 
 
-engine.Components.Add(
-    entity,
-    data
-);
-
-
-engine.Systems.Add<RuntimeTestSystem>();
-
-
-engine.Loop.Run();
-
-var result =
-engine.Components.Get<RuntimeDataComponent>(
-    entity
-);
+    var jsonData =
+        serializer.Serialize(
+            runtimeData
+        );
 
 
 
-Logger.Info(
-    $"Component Value {result.Value}"
-);
+    Logger.Info(
+        jsonData
+    );
 
 
 
-Logger.Info(
-    $"Entity Count {engine.Entities.Count()}"
-);
+    var deserializeData =
+        serializer.Deserialize(
+            jsonData
+        );
 
 
 
-engine.Stop();
+    if(deserializeData is not null)
+    {
+        Logger.Info(
+            $"Deserialize {deserializeData.Id}"
+        );
+    }
+
+
+
+
+    // ===============================
+    // Entity System Test
+    // ===============================
+
+
+    var entity =
+        new Entity(
+            new EntityId(3001),
+            "RuntimeObject"
+        );
+
+
+
+    engine.Entities.Add(
+        entity
+    );
+
+
+
+    // 注意：
+    // 这里必须使用 Component
+    // 不能使用 RuntimeData
+
+
+    var runtimeComponent =
+        new RuntimeDataComponent(
+            "ConfigDriven"
+        );
+
+
+
+    engine.Components.Add(
+        entity,
+        runtimeComponent
+    );
+
+
+
+
+    // ===============================
+    // System Test
+    // ===============================
+
+
+    engine.Systems.Add<RuntimeTestSystem>();
+
+
+
+    engine.Loop.Run();
+
+
+
+    var loadedComponent =
+        engine.Components.Get<RuntimeDataComponent>(
+            entity
+        );
+
+
+
+    if(loadedComponent is not null)
+    {
+
+        Logger.Info(
+            $"Component Value {loadedComponent.Value}"
+        );
+
+    }
+
+
+
+    Logger.Info(
+        $"Entity Count {engine.Entities.Count()}"
+    );
+
+
+
+}
+catch(Exception ex)
+{
+
+    Logger.Info(
+        $"Unhandled exception: {ex}"
+    );
+
+}
+finally
+{
+
+    engine.Stop();
+
+}
