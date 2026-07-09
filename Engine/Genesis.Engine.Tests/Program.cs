@@ -40,6 +40,12 @@ engine.Components.Add(
 );
 
 
+engine.Systems.Add<RuntimeTestSystem>();
+
+
+engine.Systems.Update(
+    0.016f
+);
 
 var result =
 engine.Components.Get<RuntimeDataComponent>(

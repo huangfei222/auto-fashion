@@ -6,7 +6,7 @@ Genesis Engine
 
 Version:
 
-v0.2.0-core
+v0.2.1-core
 
 Status:
 
@@ -238,6 +238,36 @@ Next:
 
 Entity Event Integration
 
+Sprint 2 Progress
+
+Completed:
+
+✔ Logger
+
+✔ EventBus
+
+✔ ConfigManager
+
+✔ FactoryManager
+
+✔ Bootstrap
+
+✔ RuntimeContext
+
+✔ Entity System
+
+✔ Entity Lifecycle
+
+✔ Component System Foundation
+
+Current Version:
+
+v0.2.1-core
+
+Next:
+
+Task 014 - System Framework
+
 五、当前目录结构状态
 
 Genesis.Engine.Core
@@ -288,7 +318,13 @@ Genesis.Engine.Core
 
 │ │ └── EngineSystem.cs
 
-│ │
+│ └──Components
+
+│          └──Component.cs
+
+│          └──ComponentManager.cs
+
+│          └──RuntimeDataComponent.cs
 
 │ └── RuntimeContext.cs
 
@@ -308,13 +344,35 @@ Genesis.Engine.Core
 
 ✔ 完成 EntityFactory 配置驱动实体创建
 
+✔ 完成 Component System Foundation
+
 当前目标:
 
-▶ 完善 Entity + Factory 整套运行验证
+▶ Task 012：Entity 生命周期 + EventBus 集成
 
 下一目标:
 
-Sprint 3 ECS Architecture
+Task 014 - System Framework
+
+ECS 完整链路规划：
+
+Entity
+
+|
+
+Component
+
+|
+
+System.Update ()
+
+|
+
+EventBus
+
+|
+
+Logger
 
 七、当前模块状态
 
@@ -344,11 +402,11 @@ develop
 
 Version:
 
-v0.2.0-core
+v0.2.1-core
 
 Previous:
 
-v0.1.0-pre
+v0.2.0-core
 
 十、当前风险
 
@@ -380,33 +438,65 @@ AI 可持续接管
 
 不提前开发游戏内容
 
-十一、下一阶段计划
+⚠ ECS 阶段硬性约束：
 
-Task 012：Entity 生命周期 + EventBus 集成
+❌ Player
+
+❌ Monster
+
+❌ Skill
+
+❌ Item
+
+Core 只提供通用底层能力，禁止任何业务实体。
+
+十一、下一阶段计划
 
 当前进行任务:
 
-Task 010
-
-Entity System + EntityFactory 整合验证
+Task 012：Entity 生命周期 + EventBus 集成
 
 目标:
 
-完成配置驱动实体创建、实体容器管理完整链路。
+Entity 创建 / 销毁触发对应 EventBus 事件，打通实体生命周期消息链路。
 
-完成后:
+完成后任务序列：
 
-Genesis Engine 将拥有:
+Task 013 - Component System
 
-对象创建能力
+→ Task 014 - System Framework
 
-对象管理能力
+Task 014 建设内容：
 
-运行时对象生命周期能力
+Runtime/Systems
 
-下一任务:
+├── SystemBase.cs
 
-Sprint3 ECS Architecture
+├── SystemManager.cs
+
+最终形成标准 ECS 执行循环：
+
+Entity
+
+|
+
+PositionComponent
+
+MovementComponent
+
+DataComponent
+
+|
+
+System.Update()
+
+|
+
+EventBus
+
+|
+
+Logger
 
 十二、开发规则提醒
 
@@ -456,7 +546,7 @@ Next Task
 
 Genesis Engine 当前进入：
 
-Core Engine Construction Phase。
+真正引擎 ECS 架构开发阶段，脱离单纯项目初始化阶段。
 
 End of File.
 

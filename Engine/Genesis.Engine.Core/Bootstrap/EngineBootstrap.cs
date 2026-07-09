@@ -5,6 +5,7 @@ using Genesis.Engine.Core.Factory;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime;
 using Genesis.Engine.Core.Runtime.Components;
+using Genesis.Engine.Core.Runtime.Systems;
 
 
 namespace Genesis.Engine.Core.Bootstrap;
@@ -27,6 +28,8 @@ public class EngineBootstrap
 
     public ComponentManager Components { get; }
 
+    public SystemManager Systems { get; }
+
 
     public EngineBootstrap()
     {
@@ -45,6 +48,8 @@ public class EngineBootstrap
         Factory.Register<Entity>(EntityFactory);
 
         Components =new ComponentManager();
+
+        Systems =new SystemManager();
     }
 
 
@@ -84,13 +89,9 @@ public class EngineBootstrap
 
     public void Stop()
     {
-
+        Systems.Shutdown();
         Runtime.Stop();
-
-
-        Logger.Info(
-            "Genesis Engine Stopped"
-        );
+        Logger.Info("Genesis Engine Stopped");
 
     }
 

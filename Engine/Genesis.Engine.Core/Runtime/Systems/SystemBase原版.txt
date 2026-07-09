@@ -1,11 +1,13 @@
-namespace Genesis.Engine.Core.Runtime.Systems;
+namespace Genesis.Engine.Core.Runtime;
 
 
 public abstract class SystemBase
 {
 
+
     public virtual void Initialize()
     {
+
 
     }
 
@@ -16,6 +18,7 @@ public abstract class SystemBase
     )
     {
 
+
     }
 
 
@@ -23,6 +26,8 @@ public abstract class SystemBase
     public virtual void Shutdown()
     {
 
+
     }
+
 
 }

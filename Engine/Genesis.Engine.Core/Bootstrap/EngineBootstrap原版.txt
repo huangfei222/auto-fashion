@@ -4,6 +4,7 @@ using Genesis.Engine.Core.Config;
 using Genesis.Engine.Core.Factory;
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime;
+using Genesis.Engine.Core.Runtime.Components;
 
 
 namespace Genesis.Engine.Core.Bootstrap;
@@ -24,6 +25,8 @@ public class EngineBootstrap
 
     public RuntimeContext Runtime { get; }
 
+    public ComponentManager Components { get; }
+
 
     public EngineBootstrap()
     {
@@ -40,6 +43,8 @@ public class EngineBootstrap
         EntityFactory =new EntityFactory(Config);
 
         Factory.Register<Entity>(EntityFactory);
+
+        Components =new ComponentManager();
     }
 
 

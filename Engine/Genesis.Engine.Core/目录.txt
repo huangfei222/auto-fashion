@@ -1,32 +1,29 @@
 Genesis.Engine.Core
-
 ├── Bootstrap
-│   └── EngineBootstrap.cs
-│
+│ └── EngineBootstrap
 ├── Logging
-│   ├── Logger.cs
-│   └── LogLevel.cs
-│
+│ ├── Logger.cs
+│ └── LogLevel.cs
 ├── Events
-│   ├── EventBus.cs
-│   └── EventData.cs
-│
+│ ├── EventBus.cs
+│ └── EventData.cs
 ├── Config
-│   └── ConfigManager.cs
-│
+│ └── ConfigManager.cs
 ├── Factory
-│   ├── IFactory.cs
-│   ├── FactoryManager.cs
-│   └── EntityFactory.cs
+│ ├── IFactory.cs
+│ ├── FactoryManager.cs
+│ └── EntityFactory.cs
+├── Runtime
 │
-└── Runtime
-    │
-    ├── Entities
-    │   ├── Entity.cs
-    │   ├── EntityId.cs
-    │   └── EntityManager.cs
-    │
-    ├── Systems
-    │   └── EngineSystem.cs
-    │
-    └── RuntimeContext.cs
+│ ├── Entities
+│ │ ├── Entity.cs
+│ │ ├── EntityId.cs
+│ │ └── EntityManager.cs
+│ │
+│ ├── Systems
+│ │ └── EngineSystem.cs
+│ └──Components
+│          └──Component.cs
+│          └──ComponentManager.cs
+│          └──RuntimeDataComponent.cs
+│ └── RuntimeContext.cs

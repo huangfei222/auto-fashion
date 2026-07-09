@@ -1,38 +1,27 @@
-namespace Genesis.Engine.Core.Runtime;
+namespace Genesis.Engine.Core.Runtime.Systems;
 
 
 public class SystemManager
 {
 
-
     private readonly List<SystemBase> systems
-    =
-    new();
+        =
+        new();
 
 
 
-    public void Add(
-        SystemBase system
-    )
+    public void Add<T>()
+        where T:SystemBase,new()
     {
+
+        var system =
+        new T();
+
 
         systems.Add(system);
 
-    }
 
-
-
-    public void Initialize()
-    {
-
-        foreach(
-            var system in systems
-        )
-        {
-
-            system.Initialize();
-
-        }
+        system.Initialize();
 
     }
 
@@ -40,16 +29,19 @@ public class SystemManager
 
 
     public void Update(
-        float delta
+        float deltaTime
     )
     {
 
         foreach(
-            var system in systems
+            var system 
+            in systems
         )
         {
 
-            system.Update(delta);
+            system.Update(
+                deltaTime
+            );
 
         }
 
@@ -61,7 +53,8 @@ public class SystemManager
     {
 
         foreach(
-            var system in systems
+            var system 
+            in systems
         )
         {
 
@@ -69,7 +62,9 @@ public class SystemManager
 
         }
 
-    }
 
+        systems.Clear();
+
+    }
 
 }
