@@ -399,80 +399,37 @@ namespace Genesis.Engine.Core.Services
 
             try
             {
+                // 尝试从容器解析 SerializationManager
                 if (!serviceContainer.TryResolve<SerializationManager>(out var serMgr) || serMgr == null)
                 {
                     LogInfo($"ServiceLoader: SerializationManager not found; skipping auto-register for instance {instTypeName}.");
                     return;
                 }
 
-                var instType = instance?.GetType();
-                if (instType == null)
+                if (instance == null)
                 {
-                    LogInfo($"ServiceLoader: Instance type is null; skipping auto-register for instance {instTypeName}.");
+                    LogInfo($"ServiceLoader: Instance is null; skipping auto-register for {instTypeName}.");
                     return;
                 }
 
-                var interfaces = instType.GetInterfaces() ?? Array.Empty<Type>();
-
-                foreach (var iface in interfaces)
+                try
                 {
-                    if (iface == null) continue;
-                    if (!iface.IsGenericType) continue;
-
-                    Type? genDef;
-                    try { genDef = iface.GetGenericTypeDefinition(); }
-                    catch { continue; }
-
-                    if (genDef != typeof(ISerializer<>)) continue;
-
-                    var genericArgs = iface.GetGenericArguments();
-                    if (genericArgs == null || genericArgs.Length == 0) continue;
-
-                    var targetType = genericArgs[0];
-                    if (targetType == null) continue;
-
-                    try
-                    {
-                        var registerMethodInfo = typeof(SerializationManager).GetMethod("Register");
-                        if (registerMethodInfo == null) continue;
-
-                        MethodInfo? registerMethod = null;
-                        try
-                        {
-                            registerMethod = registerMethodInfo.MakeGenericMethod(targetType);
-                        }
-                        catch
-                        {
-                            continue;
-                        }
-
-                        if (registerMethod == null) continue;
-
-                        registerMethod.Invoke(serMgr, new object[] { instance });
-
-                        var targetName = targetType.FullName ?? targetType.Name ?? "<unknown>";
-                        var instName = instType.FullName ?? instTypeName;
-                        LogInfo($"ServiceLoader: Auto-registered serializer for {targetName} from instance {instName}.");
-                    }
-                    catch (TargetInvocationException tie)
-                    {
-                        var tn = targetType?.FullName ?? "<unknown>";
-                        LogWarning($"ServiceLoader: Failed to auto-register serializer for {tn}: {tie.InnerException?.Message ?? tie.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        var tn = targetType?.FullName ?? "<unknown>";
-                        LogWarning($"ServiceLoader: Failed to auto-register serializer for {tn}: {ex.Message}");
-                    }
+                    // 委托给 SerializationManager 处理具体的接口检测与注册
+                    serMgr.RegisterFromInstance(instance);
+                    LogInfo($"ServiceLoader: Auto-register serializers delegated to SerializationManager for instance {instTypeName}.");
                 }
-
-                LogInfo($"ServiceLoader: Auto-register serializers completed for instance {instTypeName}.");
+                catch (Exception ex)
+                {
+                    LogWarning($"ServiceLoader: SerializationManager.RegisterFromInstance threw for {instTypeName}: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
                 LogWarning($"ServiceLoader: Error during auto-registering serializers for {instTypeName}: {ex.Message}");
             }
         }
+
+
 
 
 #pragma warning restore CS8601

@@ -395,7 +395,6 @@ namespace Genesis.Engine.Core.Services
 #pragma warning disable CS8601
         private void TryAutoRegisterSerializers(object instance)
         {
-            // diagnostic name for logs
             string instTypeName = instance?.GetType().FullName ?? "<unknown>";
 
             try
@@ -406,86 +405,30 @@ namespace Genesis.Engine.Core.Services
                     return;
                 }
 
-                // ensure instance type is non-null for compiler
-                var instType = instance?.GetType();
-                if (instType == null)
+                if (instance == null)
                 {
-                    LogInfo($"ServiceLoader: Instance type is null; skipping auto-register for instance {instTypeName}.");
+                    LogInfo($"ServiceLoader: Instance is null; skipping auto-register for {instTypeName}.");
                     return;
                 }
 
-                var interfaces = instType.GetInterfaces() ?? Array.Empty<Type>();
-
-                foreach (var iface in interfaces)
+                try
                 {
-                    if (iface == null) continue;
-                    if (!iface.IsGenericType) continue;
-
-                    // safe generic check
-                    Type? genDef;
-                    try
-                    {
-                        genDef = iface.GetGenericTypeDefinition();
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-
-                    if (genDef != typeof(ISerializer<>)) continue;
-
-                    var genericArgs = iface.GetGenericArguments();
-                    if (genericArgs == null || genericArgs.Length == 0) continue;
-
-                    var targetType = genericArgs[0];
-                    if (targetType == null) continue;
-
-                    try
-                    {
-                        // get Register method info safely
-                        var registerMethodInfo = typeof(SerializationManager).GetMethod("Register");
-                        if (registerMethodInfo == null) continue;
-
-                        MethodInfo? registerMethod = null;
-                        try
-                        {
-                            // MakeGenericMethod can throw; catch and skip if it does
-                            registerMethod = registerMethodInfo.MakeGenericMethod(targetType);
-                        }
-                        catch
-                        {
-                            // cannot construct generic method for this target type; skip
-                            continue;
-                        }
-
-                        if (registerMethod == null) continue;
-
-                        // invoke the register method
-                        registerMethod.Invoke(serMgr, new object[] { instance });
-
-                        var targetName = targetType.FullName ?? targetType.Name ?? "<unknown>";
-                        var instName = instType.FullName ?? instTypeName;
-                        LogInfo($"ServiceLoader: Auto-registered serializer for {targetName} from instance {instName}.");
-                    }
-                    catch (TargetInvocationException tie)
-                    {
-                        var tn = targetType?.FullName ?? "<unknown>";
-                        LogWarning($"ServiceLoader: Failed to auto-register serializer for {tn}: {tie.InnerException?.Message ?? tie.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        var tn = targetType?.FullName ?? "<unknown>";
-                        LogWarning($"ServiceLoader: Failed to auto-register serializer for {tn}: {ex.Message}");
-                    }
+                    serMgr.RegisterFromInstance(instance);
+                    LogInfo($"ServiceLoader: Auto-register serializers delegated to SerializationManager for instance {instTypeName}.");
                 }
-
-                LogInfo($"ServiceLoader: Auto-register serializers completed for instance {instTypeName}.");
+                catch (Exception ex)
+                {
+                    LogWarning($"ServiceLoader: SerializationManager.RegisterFromInstance threw for {instTypeName}: {ex.Message}");
+                }
             }
             catch (Exception ex)
             {
                 LogWarning($"ServiceLoader: Error during auto-registering serializers for {instTypeName}: {ex.Message}");
             }
         }
+
+
+
 #pragma warning restore CS8601
 
         private void LogInfo(string msg) => TryLoggerInvoke("Info", msg);
