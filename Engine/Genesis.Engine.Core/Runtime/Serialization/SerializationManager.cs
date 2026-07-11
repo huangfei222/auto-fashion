@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Collections.Concurrent;
 using System.Text.Json;
 using Genesis.Engine.Core.Logging;
@@ -92,6 +93,62 @@ namespace Genesis.Engine.Core.Runtime.Serialization
                 throw;
             }
         }
+
+        /// <summary>
+        /// Inspect an instance for implementations of ISerializer&lt;T&gt; and register them.
+        /// Safe: ignores non-generic or incompatible interfaces and logs failures.
+        /// </summary>
+        public void RegisterFromInstance(object instance)
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+
+            var instType = instance.GetType();
+            try
+            {
+                var interfaces = instType.GetInterfaces();
+                foreach (var iface in interfaces)
+                {
+                    if (iface == null) continue;
+                    if (!iface.IsGenericType) continue;
+
+                    Type genDef;
+                    try { genDef = iface.GetGenericTypeDefinition(); }
+                    catch { continue; }
+
+                    if (genDef != typeof(ISerializer<>)) continue;
+
+                    var genericArgs = iface.GetGenericArguments();
+                    if (genericArgs == null || genericArgs.Length == 0) continue;
+
+                    var targetType = genericArgs[0];
+                    if (targetType == null) continue;
+
+                    try
+                    {
+                        // Use reflection to call Register<T>(ISerializer<T>) with the concrete T
+                        var registerMethod = typeof(SerializationManager).GetMethod(nameof(Register));
+                        if (registerMethod == null) continue;
+
+                        var constructed = registerMethod.MakeGenericMethod(targetType);
+                        constructed.Invoke(this, new object[] { instance });
+                        Logger.Info($"SerializationManager: Registered serializer for {targetType.FullName} from instance {instType.FullName}");
+                    }
+                    catch (TargetInvocationException tie)
+                    {
+                        Logger.Warn($"SerializationManager: RegisterFromInstance failed for {targetType.FullName}: {tie.InnerException?.Message ?? tie.Message}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Warn($"SerializationManager: RegisterFromInstance failed for {targetType.FullName}: {ex.Message}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"SerializationManager: Error during RegisterFromInstance for {instType.FullName}: {ex.Message}");
+            }
+        }
+
 
         /// <summary>
         /// Non-generic serialize for runtime types. Tries registered serializer first, then System.Text.Json.
