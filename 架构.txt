@@ -1,0 +1,13 @@
+我建议 AI_CONTEXT 不要只有一个文件。
+而是固定成下面这样：
+Genesis/
+AI_CONTEXT/
+├── AI_PROJECT_CONTEXT.md      ⭐ 项目入口（永久）
+├── AI_CURRENT_STATUS.md       ⭐ 当前开发状态（持续更新）
+├── AI_TODO.md                 ⭐ 下一步开发计划（持续更新）
+├── AI_MODULE_INDEX.md         ⭐ 所有模块索引（持续更新）
+├── AI_CHANGE_RULES.md         ⭐ AI 修改规则（永久）
+├── AI_SESSION_TEMPLATE.md     ⭐ 每次开发记录模板（永久）
+├── AI_STARTUP_CHECKLIST.md    ⭐ AI 开工检查清单（永久）
+└── README.md                  ⭐ AI_CONTEXT 使用说明
+这是我建议升级的地方。

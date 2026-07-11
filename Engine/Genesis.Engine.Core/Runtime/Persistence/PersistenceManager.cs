@@ -1,0 +1,156 @@
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Genesis.Engine.Core.Runtime.Serialization;
+using Genesis.Engine.Core.Logging;
+
+namespace Genesis.Engine.Core.Runtime.Persistence
+{
+    /// <summary>
+    /// PersistenceManager
+    /// - 向后兼容：提供无参构造（内部创建默认 SerializationManager 并注册 SaveDataJsonSerializer）
+    /// - 推荐：通过 DI 注入 SerializationManager（构造器注入）
+    /// - 提供泛型与非泛型、同步与异步的 Save/Load 方法
+    /// </summary>
+    public class PersistenceManager
+    {
+        private readonly SerializationManager serializationManager;
+
+        /// <summary>
+        /// 向后兼容的无参构造器（保留，但建议使用 DI 注入）
+        /// </summary>
+        [Obsolete("Use PersistenceManager(SerializationManager) via DI for consistent serializer registration", false)]
+        public PersistenceManager()
+        {
+            serializationManager = new SerializationManager();
+
+            try
+            {
+                // 注册默认 SaveData 序列化器，避免无参构造路径缺少序列化器的问题
+                serializationManager.Register<SaveData>(new Genesis.Engine.Core.Runtime.Serialization.SaveDataJsonSerializer());
+                Logger.Info("PersistenceManager: Registered default SaveDataJsonSerializer in internal SerializationManager.");
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"PersistenceManager: Failed to register default SaveData serializer in internal SerializationManager: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 推荐的 DI 构造器：注入容器中的 SerializationManager
+        /// </summary>
+        public PersistenceManager(SerializationManager serializationManager)
+        {
+            this.serializationManager = serializationManager ?? throw new ArgumentNullException(nameof(serializationManager));
+        }
+
+        public void Save<T>(string path, T data)
+        {
+            try
+            {
+                var json = serializationManager.Serialize(data);
+                var dir = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                File.WriteAllText(path, json);
+                Logger.Info($"PersistenceManager: Saved data to {path}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"PersistenceManager: Save failed for {path}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public void Save(string path, object data)
+        {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            var method = typeof(SerializationManager).GetMethod("Serialize")?.MakeGenericMethod(data.GetType());
+            if (method == null) throw new InvalidOperationException("No serializer method available.");
+            var json = (string)method.Invoke(serializationManager, new object[] { data })!;
+            var dir = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            File.WriteAllText(path, json);
+            Logger.Info($"PersistenceManager: Saved data (non-generic) to {path}");
+        }
+
+        public T Load<T>(string path)
+        {
+            try
+            {
+                if (!File.Exists(path)) throw new FileNotFoundException($"PersistenceManager: Load file not found {path}");
+                var json = File.ReadAllText(path);
+                var data = serializationManager.Deserialize<T>(json);
+                Logger.Info($"PersistenceManager: Loaded data from {path}");
+                return data;
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"PersistenceManager: Load failed for {path}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public SaveData Load(string path)
+        {
+            return Load<SaveData>(path);
+        }
+
+        public async Task SaveAsync<T>(string path, T data)
+        {
+            try
+            {
+                var json = serializationManager.Serialize(data);
+                var dir = Path.GetDirectoryName(path);
+                if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                await File.WriteAllTextAsync(path, json).ConfigureAwait(false);
+                Logger.Info($"PersistenceManager: Saved data async to {path}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"PersistenceManager: Async save failed for {path}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public Task SaveAsync(string path, object data)
+        {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            var method = typeof(SerializationManager).GetMethod("Serialize")?.MakeGenericMethod(data.GetType());
+            if (method == null) throw new InvalidOperationException("No serializer method available.");
+            var json = (string)method.Invoke(serializationManager, new object[] { data })!;
+            var dir = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            return File.WriteAllTextAsync(path, json);
+        }
+
+        public async Task<T> LoadAsync<T>(string path)
+        {
+            try
+            {
+                if (!File.Exists(path)) throw new FileNotFoundException($"PersistenceManager: Load file not found {path}");
+                var json = await File.ReadAllTextAsync(path).ConfigureAwait(false);
+                var data = serializationManager.Deserialize<T>(json);
+                Logger.Info($"PersistenceManager: Loaded data async from {path}");
+                return data;
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"PersistenceManager: Async load failed for {path}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public Task<SaveData> LoadAsync(string path)
+        {
+            return LoadAsync<SaveData>(path);
+        }
+    }
+}

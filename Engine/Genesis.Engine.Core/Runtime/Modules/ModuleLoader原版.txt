@@ -1,0 +1,171 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Genesis.Engine.Core.Logging;
+using Genesis.Engine.Core.Config;
+using Genesis.Engine.Core.Services;
+
+namespace Genesis.Engine.Core.Runtime.Modules
+{
+    public class ModuleLoader
+    {
+        private readonly ServiceContainer serviceContainer;
+        private readonly ConfigManager configManager;
+
+        public ModuleLoader(ServiceContainer serviceContainer, ConfigManager configManager)
+        {
+            this.serviceContainer = serviceContainer ?? throw new ArgumentNullException(nameof(serviceContainer));
+            this.configManager = configManager ?? throw new ArgumentNullException(nameof(configManager));
+        }
+
+        // 从配置的 ModuleDefinition 列表加载模块实例
+        public List<IEngineModule> Load(List<ModuleDefinition> modules)
+        {
+            var result = new List<IEngineModule>();
+
+            if (modules == null || modules.Count == 0)
+            {
+                Logger.Info("ModuleLoader: No modules configured.");
+                return result;
+            }
+
+            foreach (var moduleDef in modules.OrderBy(m => m.Order))
+            {
+                try
+                {
+                    if (moduleDef == null)
+                    {
+                        Logger.Warn("ModuleLoader: Encountered null module definition, skipping.");
+                        continue;
+                    }
+
+                    if (!moduleDef.Enabled)
+                    {
+                        Logger.Info($"ModuleLoader: Module {moduleDef.Type} is disabled, skipping.");
+                        continue;
+                    }
+
+                    var type = ResolveModuleType(moduleDef.Type);
+                    if (type == null)
+                    {
+                        Logger.Info($"Module Not Found {moduleDef.Type}");
+                        continue;
+                    }
+
+                    var instance = CreateModuleInstance(type);
+                    if (instance == null)
+                    {
+                        Logger.Warn($"ModuleLoader: Failed to instantiate module {moduleDef.Type}");
+                        continue;
+                    }
+
+                    Logger.Info($"Load Module {moduleDef.Type}");
+                    result.Add(instance);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"ModuleLoader: Exception loading module {moduleDef?.Type}: {ex.Message}");
+                }
+            }
+
+            return result.OrderBy(x => x.Order).ToList();
+        }
+
+        private Type? ResolveModuleType(string typeName)
+        {
+            if (string.IsNullOrWhiteSpace(typeName)) return null;
+
+            // 尝试全名解析
+            var t = Type.GetType(typeName, false, true);
+            if (t != null) return t;
+
+            // 在已加载程序集里按短名或全名查找
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (var asm in assemblies)
+            {
+                try
+                {
+                    var found = asm.GetTypes().FirstOrDefault(x =>
+                        string.Equals(x.Name, typeName, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(x.FullName, typeName, StringComparison.OrdinalIgnoreCase));
+                    if (found != null) return found;
+                }
+                catch (ReflectionTypeLoadException)
+                {
+                    // 忽略无法加载的程序集类型
+                }
+            }
+
+            return null;
+        }
+
+        private IEngineModule? CreateModuleInstance(Type moduleType)
+        {
+            // 优先尝试构造器注入：支持 ConfigManager 或 ServiceContainer 注入
+            var ctors = moduleType.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+                                  .OrderByDescending(c => c.GetParameters().Length);
+
+            foreach (var ctor in ctors)
+            {
+                var parameters = ctor.GetParameters();
+                var args = new object?[parameters.Length];
+                var canUse = true;
+
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    var pType = parameters[i].ParameterType;
+
+                    if (pType == typeof(ServiceContainer) || pType.IsAssignableFrom(typeof(ServiceContainer)))
+                    {
+                        args[i] = serviceContainer;
+                        continue;
+                    }
+
+                    if (pType == typeof(ConfigManager) || pType.IsAssignableFrom(typeof(ConfigManager)))
+                    {
+                        args[i] = configManager;
+                        continue;
+                    }
+
+                    // 尝试从容器解析
+                    if (serviceContainer.TryResolve(pType, out var resolved))
+                    {
+                        args[i] = resolved;
+                        continue;
+                    }
+
+                    canUse = false;
+                    break;
+                }
+
+                if (!canUse) continue;
+
+                try
+                {
+                    var inst = ctor.Invoke(args);
+                    if (inst is IEngineModule module) return module;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn($"ModuleLoader: Constructor invocation failed for {moduleType.FullName}: {ex.Message}");
+                }
+            }
+
+            // 回退到无参构造
+            try
+            {
+                if (Activator.CreateInstance(moduleType) is IEngineModule simple)
+                {
+                    return simple;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"ModuleLoader: Activator.CreateInstance failed for {moduleType.FullName}: {ex.Message}");
+            }
+
+            return null;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Genesis Engine Configuration",
+  "type": "object",
+  "properties": {
+    "Modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Type": { "type": "string" },
+          "Enabled": { "type": "boolean" },
+          "Order": { "type": "integer" },
+          "Config": {}
+        },
+        "required": ["Type"]
+      }
+    },
+    "Services": {
+      "type": "object",
+      "properties": {
+        "Services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Type": { "type": "string" },
+              "Id": { "type": "string" },
+              "Assembly": { "type": "string" },
+              "Enabled": { "type": "boolean" },
+              "DependsOn": { "type": "array", "items": { "type": "string" } },
+              "Config": {}
+            },
+            "required": ["Type"]
+          }
+        }
+      }
+    },
+    "Runtime": { "type": "object" }
+  }
+}

@@ -1,0 +1,148 @@
+我建议的真正项目目录（最终版）
+Genesis/
+│
+├── .github/
+│   ├── workflows/
+│   ├── ISSUE_TEMPLATE/
+│   └── PULL_REQUEST_TEMPLATE.md
+│
+├── AI_CONTEXT/
+│
+├── Docs/
+│   ├── ADR/
+│   └── Standards/
+│
+├── Specs/
+│   ├── Engine/
+│   ├── Framework/
+│   └── Game/
+│
+├── Engine/
+│   ├── Core/
+│   ├── Entity/
+│   ├── Event/
+│   ├── Factory/
+│   ├── Config/
+│   ├── Network/
+│   ├── Resource/
+│   ├── Scene/
+│   ├── Save/
+│   ├── Logger/
+│   ├── Time/
+│   └── Math/
+│
+├── Framework/
+│   ├── Combat/
+│   ├── Skill/
+│   ├── Buff/
+│   ├── Inventory/
+│   ├── Equipment/
+│   ├── Quest/
+│   ├── NPC/
+│   ├── Drop/
+│   ├── Guild/
+│   ├── Team/
+│   ├── Trade/
+│   ├── Mail/
+│   ├── Chat/
+│   ├── Dungeon/
+│   └── Ranking/
+│
+├── Game/
+│   ├── Configs/
+│   ├── Maps/
+│   ├── NPC/
+│   ├── Monsters/
+│   ├── Items/
+│   ├── Skills/
+│   ├── Effects/
+│   ├── Story/
+│   ├── Audio/
+│   └── UI/
+│
+├── Client/
+│   └── Godot/
+│
+├── Server/
+│   └── Genesis.Server/
+│
+├── Shared/
+│   ├── Contracts/
+│   ├── Protocol/
+│   └── Common/
+│
+├── Database/
+│   ├── Migrations/
+│   ├── Seeds/
+│   └── Scripts/
+│
+├── Docker/
+│   ├── dev/
+│   ├── test/
+│   └── production/
+│
+├── Resources/
+├── Tests/
+├── Tools/
+├── Scripts/
+├── Build/
+├── Roadmap/
+│
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── .gitignore
+└── .editorconfig
+
+Genesis.Engine.Core
+
+
+├── Bootstrap
+│
+│   └── EngineBootstrap.cs
+│
+
+
+├── Logging
+│
+│   └── Logger.cs
+│
+
+
+├── Events
+│
+│   ├── EventBus.cs
+│   └── EventData.cs
+│
+
+
+├── Config
+│
+│   └── ConfigManager.cs
+│
+
+
+├── Factory
+│
+│   ├── IFactory.cs
+│   ├── FactoryManager.cs
+│   └── EntityFactory.cs
+│
+
+
+├── Runtime
+│
+│   └── RuntimeContext.cs
+│
+
+
+├── Entity
+│
+│   ├── Entity.cs
+│   ├── EntityId.cs
+│   └── EntityManager.cs
+│
+
+
+└── Tests

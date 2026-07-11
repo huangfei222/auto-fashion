@@ -1,0 +1,79 @@
+Genesis.Engine.Core
+
+├── Bootstrap
+│   └── EngineBootstrap
+
+├── Logging
+│   ├── Logger.cs
+│   └── LogLevel.cs
+
+├── Events
+│   ├── EventBus.cs
+│   └── EventData.cs
+
+├── Config
+│   └── ConfigManager.cs
+      └──EngineConfiguration.cs
+      └──ResourceConfiguration.cs
+      └──RuntimeConfiguration.cs
+
+├── Factory
+│   ├── IFactory.cs
+│   ├── FactoryManager.cs
+│   └── EntityFactory.cs
+
+├── Runtime
+│
+│   ├── Entities
+│   │   ├── Entity.cs
+│   │   ├── EntityId.cs
+│   │   └── EntityManager.cs
+│   │
+│   ├── Systems
+│   │   └── EngineSystem.cs
+│
+│   ├── Components
+│   │        └── Component.cs
+│   │        └── ComponentManager.cs
+│   │        └── RuntimeDataComponent.cs
+│   ├──Resource
+│  │                └──IResource.cs
+│  │                └──ResourceHandle.cs
+│  │                     └──ResourceManager.cs
+│  ├──Serialization
+│  │          └──ISerializer.cs
+│  │           └──JsonSerializer.cs
+│  ├──Persistence
+│  │               └──PersistenceManager.cs  
+│  │               └──SaveData.cs
+│  ├──Internal 
+│  │                └──IRuntimeServiceContainer.cs
+│  │                 └──RuntimeServiceContainer.cs
+│  │
+│  ├──Data
+│  │           └──IDataLoader.cs
+│  │            └──JsonDataLoader.cs
+│  │ 
+│  ├──Modules │             
+│  │                  └──ComponentModule.cs
+│  │               └──EntityModule.cs
+│  │               └──IEngineModule.cs
+│  │                └──ModuleManager.cs
+│  │                └──SystemModule.cs          
+│  │                      ├── ModuleDefinition.cs                  
+│  │                      ├── ModuleLoader.cs
+│  │
+│  ├──Services
+│  │               └──ServiceContainer.cs
+│  │               └──ServiceDescriptor.cs
+│  │                 ├── ServiceDefinition.cs
+│  │                ├── ServiceConfiguration.cs
+│  │               └── ServiceLoader.cs
+│  │ 
+│  │ 
+│  │ 
+│  │ 
+│  └── RuntimeContext.cs
+│  │ 
+│  │ 
+│

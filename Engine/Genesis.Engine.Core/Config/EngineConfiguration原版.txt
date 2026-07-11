@@ -1,0 +1,53 @@
+using Genesis.Engine.Core.Runtime.Modules;
+
+
+using Genesis.Engine.Core.Services;
+
+
+namespace Genesis.Engine.Core.Config;
+
+
+public class EngineConfiguration
+{
+
+
+    public ServiceConfiguration Services
+    {
+        get;
+        set;
+    }
+    =
+    new();
+
+
+
+    public List<ModuleDefinition> Modules
+    {
+        get;
+        set;
+    }
+    =
+    new();
+
+
+
+    public RuntimeConfiguration Runtime
+    {
+        get;
+        set;
+    }
+    =
+    new();
+
+
+
+    public List<ResourceConfiguration> Resources
+    {
+        get;
+        set;
+    }
+    =
+    new();
+
+
+}
