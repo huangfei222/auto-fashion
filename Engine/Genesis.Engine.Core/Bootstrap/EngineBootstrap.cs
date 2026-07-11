@@ -142,6 +142,76 @@ namespace Genesis.Engine.Core.Bootstrap
                 }
             }
 
+            // Ensure EngineLoop is present after ServiceLoader runs (fix for "EngineLoop not registered")
+            try
+            {
+                if (!Services.Has<EngineLoop>())
+                {
+                    // Try to instantiate via flexible helper first (will use container if possible)
+                    if (!InstantiateAndRegister(typeof(EngineLoop)))
+                    {
+                        // Fallback: try to resolve SystemManager and create EngineLoop with it
+                        try
+                        {
+                            SystemManager? sysMgr = null;
+                            try { Services.TryResolve<SystemManager>(out sysMgr); } catch { sysMgr = null; }
+
+                            object? instance = null;
+                            if (sysMgr != null)
+                            {
+                                // Try constructor EngineLoop(SystemManager)
+                                try { instance = Activator.CreateInstance(typeof(EngineLoop), sysMgr); } catch { instance = null; }
+                            }
+
+                            // Last resort: parameterless ctor (if exists)
+                            if (instance == null)
+                            {
+                                try { instance = Activator.CreateInstance(typeof(EngineLoop)); } catch { instance = null; }
+                            }
+
+                            if (instance != null)
+                            {
+                                // Register both concrete type and any EngineLoop-like interface if present
+                                try { Services.Register(typeof(EngineLoop), instance); } catch { /* ignore */ }
+
+                                // If EngineLoop implements an interface like IEngineLoop, register that too
+                                var iface = instance.GetType().GetInterfaces()
+                                                .FirstOrDefault(i => i.Name.IndexOf("EngineLoop", StringComparison.OrdinalIgnoreCase) >= 0);
+                                if (iface != null)
+                                {
+                                    try
+                                    {
+                                        var regGen = typeof(ServiceContainer).GetMethods()
+                                            .FirstOrDefault(m => m.Name.Equals("Register", StringComparison.OrdinalIgnoreCase) && m.IsGenericMethod && m.GetParameters().Length == 1);
+                                        if (regGen != null)
+                                        {
+                                            var constructed = regGen.MakeGenericMethod(iface);
+                                            constructed.Invoke(Services, new object[] { instance });
+                                        }
+                                    }
+                                    catch { /* ignore */ }
+                                }
+
+                                Logger.Info("EngineBootstrap: Registered default EngineLoop (post-ServiceLoader).");
+                            }
+                            else
+                            {
+                                Logger.Warn("EngineBootstrap: EngineLoop instance could not be created in fallback registration.");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.Warn($"EngineBootstrap: EngineLoop fallback registration failed: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn($"EngineBootstrap: EngineLoop presence check failed: {ex.Message}");
+            }
+
+
             if (registeredCount == 0)
             {
                 throw new Exception("No services registered by ServiceLoader. Ensure configuration lists services correctly.");
@@ -235,31 +305,6 @@ namespace Genesis.Engine.Core.Bootstrap
                 }
             }
 
-            // Ensure EngineLoop exists (optional)
-            try
-            {
-                if (!Services.Has<EngineLoop>())
-                {
-                    if (!InstantiateAndRegister(typeof(EngineLoop)))
-                    {
-                        try
-                        {
-                            var instance = Activator.CreateInstance(typeof(EngineLoop));
-                            if (instance != null) Services.Register(typeof(EngineLoop), instance);
-                            Logger.Info("EngineBootstrap: Registered default EngineLoop.");
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.Warn($"EngineBootstrap: Could not create EngineLoop: {ex.Message}");
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Warn($"EngineBootstrap: EngineLoop registration attempt failed: {ex.Message}");
-            }
-
 
             // SystemManager
             if (!Services.Has<SystemManager>())
@@ -278,6 +323,7 @@ namespace Genesis.Engine.Core.Bootstrap
                 }
             }
 
+            
             // RuntimeContext
             if (!Services.Has<RuntimeContext>())
             {

@@ -125,7 +125,6 @@ namespace Genesis.Engine.Core.Runtime.Serialization
 
                     try
                     {
-                        // Use reflection to call Register<T>(ISerializer<T>) with the concrete T
                         var registerMethod = typeof(SerializationManager).GetMethod(nameof(Register));
                         if (registerMethod == null) continue;
 
