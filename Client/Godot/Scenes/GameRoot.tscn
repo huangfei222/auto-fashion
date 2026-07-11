@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cta7yfxx686gt"]
+
+[ext_resource type="Script" path="res://Scripts/Core/GameBootstrap.gd" id="1_a6mot"]
+
+[node name="GameRoot" type="Node"]
+script = ExtResource("1_a6mot")

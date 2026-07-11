@@ -1,0 +1,23 @@
+using Genesis.Engine.Core.Services;
+
+
+namespace Genesis.Engine.Core.Runtime.Modules;
+
+
+public interface IEngineModule
+{
+
+
+    void Register(
+        ServiceContainer services
+    );
+
+
+
+    void Initialize();
+
+
+
+    void Shutdown();
+
+}

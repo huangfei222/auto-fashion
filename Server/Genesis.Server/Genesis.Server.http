@@ -1,0 +1,6 @@
+@Genesis.Server_HostAddress = http://localhost:5107
+
+GET {{Genesis.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
