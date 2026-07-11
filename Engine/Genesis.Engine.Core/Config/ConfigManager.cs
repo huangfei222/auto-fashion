@@ -1,39 +1,180 @@
-namespace Genesis.Engine.Core.Config;
+using System;
+using System.Collections.Concurrent;
+using System.IO;
+using System.Text.Json;
 
-
-public class ConfigManager
+namespace Genesis.Engine.Core.Config
 {
-
-    private readonly Dictionary<string, object> configs = new();
-
-
-    public void Register<T>(
-        string key,
-        T data
-    )
+    /// <summary>
+    /// ConfigManager
+    /// - 负责加载 EngineConfiguration（JSON）
+    /// - 支持在运行时按类型或按名称注册任意配置对象（Register）
+    /// - 支持 TryGet/Get 以供其他服务解析配置
+    /// </summary>
+    public class ConfigManager
     {
-        if(data == null)
+        private readonly ConcurrentDictionary<Type, object> registry = new();
+        private readonly ConcurrentDictionary<string, object> namedRegistry = new(StringComparer.OrdinalIgnoreCase);
+        private EngineConfiguration? engineConfiguration;
+
+        /// <summary>
+        /// Load EngineConfiguration from JSON file. Returns null if file not found or parse failed.
+        /// Also registers the loaded EngineConfiguration into the runtime registry (by type and by name "engine").
+        /// </summary>
+        public EngineConfiguration? LoadEngineConfiguration(string path)
         {
-            throw new ArgumentNullException(nameof(data));
+            if (string.IsNullOrWhiteSpace(path)) throw new ArgumentNullException(nameof(path));
+            if (!File.Exists(path)) return null;
+
+            var json = File.ReadAllText(path);
+            EngineConfiguration? cfg = null;
+            try
+            {
+                cfg = JsonSerializer.Deserialize<EngineConfiguration>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+            catch (Exception ex)
+            {
+                // 解析失败，记录并返回 null
+                Console.WriteLine($"[Error] ConfigManager: Failed to parse EngineConfiguration from '{path}': {ex.Message}");
+                return null;
+            }
+
+            // 基本校验：确保 Services 节存在且每个 service 至少包含 Type 字段
+            var validationError = ValidateEngineConfigurationBasic(cfg);
+            if (!string.IsNullOrEmpty(validationError))
+            {
+                Console.WriteLine($"[Error] ConfigManager: EngineConfiguration validation failed: {validationError}");
+                return null;
+            }
+
+            engineConfiguration = cfg;
+            if (cfg != null)
+            {
+                // register into runtime registry for Get<T>() / TryGet<T>()
+                registry[typeof(EngineConfiguration)] = cfg;
+                namedRegistry["engine"] = cfg;
+            }
+
+            return cfg;
         }
 
-        configs[key] = data;
+        private string? ValidateEngineConfigurationBasic(EngineConfiguration? cfg)
+        {
+            if (cfg == null) return "EngineConfiguration is null.";
+
+            // Services object must exist
+            if (cfg.Services == null) return "Missing 'Services' section.";
+
+            // Services.Services must be a non-empty list (can be empty but should exist)
+            var svcList = cfg.Services.Services;
+            if (svcList == null) return "Missing 'Services.Services' array.";
+
+            // Validate each service entry has Type (non-empty)
+            for (int i = 0; i < svcList.Count; i++)
+            {
+                var s = svcList[i];
+                if (s == null) return $"Service entry at index {i} is null.";
+                if (string.IsNullOrWhiteSpace(s.Type)) return $"Service entry at index {i} missing required 'Type' field.";
+            }
+
+            // Modules optional but if present, each must have Type
+            if (cfg.Modules != null)
+            {
+                for (int i = 0; i < cfg.Modules.Count; i++)
+                {
+                    var m = cfg.Modules[i];
+                    if (m == null) return $"Module entry at index {i} is null.";
+                    if (string.IsNullOrWhiteSpace(m.Type)) return $"Module entry at index {i} missing required 'Type' field.";
+                }
+            }
+
+            // Basic runtime section presence is optional; no further checks here
+            return null;
+        }
+
+
+        /// <summary>
+        /// Register a configuration object instance for later retrieval by type.
+        /// Overwrites any previously registered instance of the same type.
+        /// </summary>
+        public void Register<T>(T instance) where T : class
+        {
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            registry[typeof(T)] = instance!;
+        }
+
+        /// <summary>
+        /// Register a configuration object instance for later retrieval by name.
+        /// Overwrites any previously registered instance with the same key.
+        /// </summary>
+        public void Register(string key, object instance)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            namedRegistry[key] = instance;
+        }
+
+        /// <summary>
+        /// Try to get a registered configuration object by type.
+        /// Returns true if found.
+        /// </summary>
+        public bool TryGet<T>(out T? instance) where T : class
+        {
+            if (registry.TryGetValue(typeof(T), out var obj) && obj is T t)
+            {
+                instance = t;
+                return true;
+            }
+
+            instance = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Try to get a registered configuration object by name.
+        /// Returns true if found and can be cast to T.
+        /// </summary>
+        public bool TryGet<T>(string key, out T? instance) where T : class
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (namedRegistry.TryGetValue(key, out var obj) && obj is T t)
+            {
+                instance = t;
+                return true;
+            }
+
+            instance = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Get a registered configuration object by type or throw if not present.
+        /// Special-cases EngineConfiguration to return loaded configuration.
+        /// </summary>
+        public T Get<T>() where T : class
+        {
+            if (typeof(T) == typeof(EngineConfiguration))
+            {
+                if (engineConfiguration == null)
+                    throw new InvalidOperationException("ConfigManager: EngineConfiguration not loaded.");
+                return engineConfiguration as T ?? throw new InvalidOperationException("ConfigManager: Type mismatch for EngineConfiguration.");
+            }
+
+            if (TryGet<T>(out var inst) && inst != null) return inst;
+            throw new InvalidOperationException($"ConfigManager: No registered configuration of type {typeof(T).FullName}.");
+        }
+
+        /// <summary>
+        /// Get a registered configuration object by name or throw if not present.
+        /// </summary>
+        public T Get<T>(string key) where T : class
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (TryGet<T>(key, out var inst) && inst != null) return inst;
+            throw new InvalidOperationException($"ConfigManager: No registered configuration with key '{key}'.");
+        }
     }
-
-
-    public T Get<T>(
-        string key
-    )
-    {
-        return (T)configs[key];
-    }
-
-
-    public bool Exists(
-        string key
-    )
-    {
-        return configs.ContainsKey(key);
-    }
-
 }

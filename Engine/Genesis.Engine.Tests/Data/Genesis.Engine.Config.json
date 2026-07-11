@@ -1,0 +1,97 @@
+{
+  "Modules": [
+    { "Type": "EntityModule", "Enabled": true, "Order": 0 },
+    { "Type": "ComponentModule", "Enabled": true, "Order": 10 },
+    { "Type": "SystemModule", "Enabled": true, "Order": 20 }
+  ],
+
+  "Services": {
+    "Services": [
+      {
+        "Id": "config",
+        "Type": "Genesis.Engine.Core.Config.ConfigManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": [],
+        "Config": {}
+      },
+      {
+        "Id": "logger",
+        "Type": "Genesis.Engine.Core.Logging.LoggerService, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["config"],
+        "Config": {}
+      },
+      {
+        "Id": "eventbus",
+        "Type": "Genesis.Engine.Core.Events.EventBus, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["config"],
+        "Config": {}
+      },
+      {
+        "Id": "serialization",
+        "Type": "Genesis.Engine.Core.Runtime.Serialization.SerializationManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["config"],
+        "Config": {}
+      },
+      {
+        "Id": "persistence",
+        "Type": "Genesis.Engine.Core.Runtime.Persistence.PersistenceManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["serialization"],
+        "Config": {}
+      },
+      {
+        "Id": "factory",
+        "Type": "Genesis.Engine.Core.Factory.FactoryManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["eventbus"],
+        "Config": {}
+      },
+      {
+        "Id": "entityfactory",
+        "Type": "Genesis.Engine.Core.Factory.EntityFactory, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["factory", "config"],
+        "Config": {}
+      },
+      {
+        "Id": "resource",
+        "Type": "Genesis.Engine.Core.Runtime.Resource.ResourceManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["config"],
+        "Config": {}
+      },
+      {
+        "Id": "runtime",
+        "Type": "Genesis.Engine.Core.Runtime.RuntimeContext, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["serialization", "persistence", "resource"],
+        "Config": {}
+      },
+      {
+        "Id": "saveDataSerializer",
+        "Type": "Genesis.Engine.Core.Runtime.Serialization.SaveDataJsonSerializer, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["serialization"],
+        "Config": {}
+      },
+
+      {
+        "Id": "system",
+        "Type": "Genesis.Engine.Core.Runtime.Systems.SystemManager, Genesis.Engine.Core",
+        "Assembly": "Genesis.Engine.Core",
+        "DependsOn": ["runtime"],
+        "Config": {}
+      }
+    ]
+  },
+
+  "Resources": [],
+
+  "Runtime": {
+    "AutoRegisterSerializers": true
+  }
+
+}

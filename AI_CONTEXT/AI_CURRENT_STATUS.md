@@ -1,1144 +1,153 @@
-\# AI Current Status
+AI_CURRENT_STATUS
+项目概况
+项目: Genesis Engine
+版本: v0.2.6-core  
+状态: Active  
+最后更新: 2026-07-11
 
+当前阶段与里程碑
+当前阶段: Core Engine Development（Phase 2）
+当前里程碑: Core Engine Architecture Foundation
+当前冲刺: Sprint 2 - Core Engine v0.1（已完成）
+冲刺状态: 100% Complete
 
+本次更新要点
+已完成关键修复与改进
 
-Project:
+ServiceLoader：增强了反射实例化与自动注册序列化器的健壮性，加入更严格的空值保护与诊断日志，已在 ServiceLoader.TryAutoRegisterSerializers 中完成必要的防护与局部警告控制。
 
-Genesis Engine
+SerializationManager：加入了通用回退序列化策略（基于 System.Text.Json），优先使用已注册 ISerializer<T>，无专用序列化器时回退到内置 JSON 序列化，保证任意 POCO 与集合在运行时可序列化/反序列化。
 
+PersistenceManager DI 迁移：测试与示例已迁移为优先通过容器解析 PersistenceManager，避免直接调用已标记为 Obsolete 的无参构造；引导逻辑保证 SerializationManager 在 PersistenceManager 之前注册。
 
+构建与运行验证：dotnet build 与 dotnet run 均通过；持久化同步/异步保存加载测试通过；模块加载、运行时循环、资源加载、序列化与持久化流程在本地验证通过。
 
-Version:
+当前已知与受控项
 
-v0.2.4-core
+可空性警告：为解决复杂反射路径下的静态分析问题，在 TryAutoRegisterSerializers 方法局部使用了 #pragma 抑制 CS8601，运行时已做充分检查。该抑制为受控项，计划在中期重构以彻底消除。
 
+向后兼容：PersistenceManager() 无参构造仍保留以兼容旧代码，已标记为 Obsolete；长期计划在下一个主版本移除该构造并发布迁移指南。
 
+当前模块与系统状态
+Core Foundation: Stable
 
-Status:
+Logger System: ✔
 
-Active
+EventBus System: ✔
 
+ConfigManager: ✔
 
+FactoryManager: ✔
 
-Last Updated:
+EngineBootstrap: ✔
 
-2026-07-09
+Runtime System: Stable
 
+RuntimeContext: ✔
 
+Runtime Lifecycle: ✔
 
+Update Loop: ✔
 
+ECS 与工厂: Stable
 
+Entity System: ✔
 
+EntityFactory: ✔
 
-\# 一、项目阶段
+Component System: ✔
 
+Resource 与模块: Foundation Complete
 
+ResourceManager: ✔
 
+ModuleManager / ModuleLoader: ✔
 
+Serialization 与 Persistence: Foundation Complete with enhancements
 
-Current Phase:
+SerializationManager: ✔ (新增 System.Text.Json 回退)
 
+PersistenceManager: ✔ (已迁移为 DI 优先使用)
 
+Service Container: Foundation Complete
 
-Phase 2
+ServiceContainer / Register / Resolve: ✔
 
-Core Engine Development
+验证与测试状态
+构建: PASS
+运行时: PASS
+已验证功能:
 
+Engine Startup ✔
 
+Service Registration ✔
 
+Module Loading / Initialize / Shutdown ✔
 
+Resource Loading ✔
 
-Current Milestone:
+Serialization ✔
 
+Persistence Save / Load ✔
 
+Entity Creation / Component Attach ✔
 
-Core Engine Foundation
+System Execution / Runtime Loop ✔
 
+测试项目资源文件自动复制输出 ✔
 
+风险与待办（优先级排序）
+移除 PersistenceManager() 无参构造（中期）
 
+任务：替换仓库中所有直接 new PersistenceManager() 的调用为容器解析；在下一个主版本删除无参构造并发布迁移指南。
 
+消除 TryAutoRegisterSerializers 的 #pragma 抑制（中期）
 
-Current Sprint:
+任务：重构该方法以满足编译器可空性检查，或拆分为更小的可测试函数。
 
+CI 与测试覆盖（短期）
 
+任务：在 CI 中加入 dotnet test、单元/集成测试，逐步把 nullable 警告与 Obsolete 警告纳入质量门。
 
-Sprint 2 - Core Engine v0.1
+Task021 完成（下一阶段核心目标）
 
+目标：实现完全配置驱动的 Service 与 Module 加载，消除 EngineBootstrap 内部硬编码实例化。
 
+文档与迁移说明（短期）
 
+任务：更新 README、UPGRADE.md，加入 DI 使用示例、序列化器注册示例与迁移步骤。
 
+下一步计划（短期到中期）
+短期（今周）
 
+把 PersistenceTest 与示例统一为容器解析 PersistenceManager（已完成）。
 
+在 CI 中运行 dotnet build / dotnet test 并修复发现的问题。
 
-\# 二、当前版本状态
+把 TryAutoRegisterSerializers 的抑制点加注释并提交变更。
 
+中期（1–2 周）
 
+重构 TryAutoRegisterSerializers，消除 #pragma。
 
+扫描并替换仓库中所有直接构造 PersistenceManager 的调用。
 
+为 SerializationManager 的回退策略编写单元测试（POCO、集合、嵌套类型）。
 
-Engine:
+长期（下个主版本）
 
+删除 PersistenceManager() 无参构造并发布破坏性变更说明。
 
+把 nullable warnings 清零并把关键警告提升为 CI 阻断项。
 
-In Development
+完成 Task021，实现完全配置驱动的服务与模块加载。
 
+变更记录（本次更新摘要）
+2026-07-11: 合并 ServiceLoader 可空性与日志修复；合并 SerializationManager 回退序列化实现；迁移测试为 DI 优先；本地构建与运行验证通过；记录受控 #pragma 抑制点与后续重构计划。
 
+联系与责任人
+当前负责人: fei
+建议沟通渠道: 项目仓库 PR 与 Issue；每日站会更新 Task021 进度。
 
-
-
-Framework:
-
-
-
-Not Started
-
-
-
-
-
-Game:
-
-
-
-Not Started
-
-
-
-
-
-Documentation:
-
-
-
-Completed
-
-
-
-
-
-Client:
-
-
-
-Bootstrap Completed
-
-
-
-
-
-Server:
-
-
-
-Bootstrap Completed
-
-
-
-
-
-
-
-\# 三、已完成内容
-
-
-
-
-
-
-
-\## Documentation
-
-
-
-
-
-✔ DOC-001 Architecture\_Constitution
-
-
-
-✔ DOC-002 Project\_Directory\_Standard
-
-
-
-✔ DOC-003 Naming\_Convention
-
-
-
-✔ DOC-004 Config\_Specification
-
-
-
-✔ DOC-005 AI\_Development\_Contract
-
-
-
-✔ DOC-006 Module\_Interface\_Standard
-
-
-
-✔ DOC-007 EventBus\_Specification
-
-
-
-✔ DOC-008 Engineering\_Coding\_Standard
-
-
-
-✔ DOC-009 Development\_Workflow
-
-
-
-✔ DOC-010 Architecture\_Decision\_Record\_Guide
-
-
-
-
-
-
-
-\## Project Bootstrap
-
-
-
-
-
-✔ Project Directory
-
-
-
-✔ Git Repository
-
-
-
-✔ Docker Environment
-
-
-
-✔ PostgreSQL Container
-
-
-
-✔ ASP.NET Core Server
-
-
-
-✔ Godot Client Project
-
-
-
-✔ Shared Protocol Foundation
-
-
-
-✔ Client Server Ping Communication
-
-
-
-
-
-
-
-\## AI Context System
-
-
-
-
-
-✔ AI\_PROJECT\_CONTEXT
-
-
-
-✔ AI\_CURRENT\_STATUS
-
-
-
-
-
-Pending:
-
-
-
-
-
-⬜ AI\_TODO
-
-
-
-⬜ AI\_MODULE\_INDEX
-
-
-
-⬜ AI\_CHANGE\_RULES
-
-
-
-⬜ AI\_STARTUP\_CHECKLIST
-
-
-
-⬜ AI\_SESSION\_TEMPLATE
-
-
-
-
-
-
-
-\# 四、Engine Core 当前完成情况
-
-
-
-
-
-
-
-\## Genesis.Engine.Core
-
-
-
-
-
-Completed:
-
-
-
-
-
-✔ Core Project Created
-
-
-
-✔ Core Added Into Solution
-
-
-
-✔ Logger System
-
-
-
-✔ EventBus System
-
-
-
-✔ ConfigManager System
-
-
-
-✔ FactoryManager System
-
-
-
-✔ EngineBootstrap
-
-
-
-
-
-\## Runtime System
-
-
-
-
-
-Completed:
-
-
-
-
-
-✔ RuntimeContext
-
-
-
-✔ Engine Lifecycle
-
-
-
-
-
-Lifecycle:
-
-
-
-
-
-Initialize
-
-
-
-↓
-
-
-
-Start
-
-
-
-↓
-
-
-
-Update
-
-
-
-↓
-
-
-
-Stop
-
-
-
-
-
-
-
-\## Runtime Validation
-
-
-
-
-
-Completed:
-
-
-
-
-
-✔ Genesis.Engine.Tests
-
-
-
-✔ Core Reference
-
-
-
-✔ Runtime Startup Test
-
-
-
-
-
-Test Result:
-
-
-
-
-
-\[Info] Genesis Engine Starting
-
-
-
-\[Info] Genesis Engine Started
-
-
-
-\[Info] Runtime Test Running
-
-
-
-\[Info] Genesis Engine Stopped
-
-
-
-
-
-
-
-Status:
-
-
-
-PASS
-
-
-
-\## Sprint 2 Entity System
-
-
-
-Completed:
-
-
-
-✔ EntityId
-
-
-
-✔ Entity
-
-
-
-✔ EntityManager
-
-
-
-✔ Entity Lifecycle Test
-
-
-
-Current:
-
-
-
-Core Engine Entity Foundation
-
-
-
-Next:
-
-Sprint 3 ECS Architecture
-
-
-
-\## Sprint 2 Entity Factory
-
-
-
-Completed:
-
-
-
-✔ Entity System
-
-
-
-✔ EntityManager
-
-
-
-✔ EntityFactory
-
-
-
-✔ Config Driven Entity Creation
-
-
-
-Architecture:
-
-
-
-Config
-
-↓
-
-Factory
-
-↓
-
-Entity
-
-↓
-
-EntityManager
-
-
-
-Next:
-
-Entity Event Integration
-
-
-
-\## Sprint 2 Progress
-
-
-
-Completed:
-
-✔ Logger
-
-✔ EventBus
-
-✔ ConfigManager
-
-✔ FactoryManager
-
-✔ Bootstrap
-
-✔ Entity System
-
-✔ Component System
-
-✔ System Framework
-
-✔ Engine Loop
-
-✔ Resource System
-
-
-
-Current Version:
-
-v0.2.4-core
-
-
-
-Architecture:
-
-Resource
-
-↓
-
-Config
-
-↓
-
-Factory
-
-↓
-
-Entity
-
-↓
-
-Component
-
-↓
-
-System
-
-↓
-
-Runtime Loop
-
-
-
-Next:
-
-Task 017 - Serialization System
-
-
-
-\# 五、当前目录结构状态
-
-
-
-
-
-
-
-Genesis.Engine.Core
-
-
-
-├── Bootstrap
-
-│   └── EngineBootstrap
-
-
-
-├── Logging
-
-│   ├── Logger.cs
-
-│   └── LogLevel.cs
-
-
-
-├── Events
-
-│   ├── EventBus.cs
-
-│   └── EventData.cs
-
-
-
-├── Config
-
-│   └── ConfigManager.cs
-
-
-
-├── Factory
-
-│   ├── IFactory.cs
-
-│   ├── FactoryManager.cs
-
-│   └── EntityFactory.cs
-
-
-
-├── Runtime
-
-│
-
-│   ├── Entities
-
-│   │   ├── Entity.cs
-
-│   │   ├── EntityId.cs
-
-│   │   └── EntityManager.cs
-
-│   │
-
-│   ├── Systems
-
-│   │   └── EngineSystem.cs
-
-│
-
-│   ├── Components
-
-│   │        └── Component.cs
-
-│   │        └── ComponentManager.cs
-
-│   │        └── RuntimeDataComponent.cs
-
-│   ├──Resource
-
-│  │                └──IResource.cs
-
-│  │                └──ResourceHandle.cs
-
-│   │                     └──ResourceManager.cs
-
-│  │
-
-│  │
-
-│  │
-
-│  │
-
-│   └── RuntimeContext.cs
-
-│
-
-│
-
-│
-
-
-
-
-
-\# 六、当前开发目标
-
-
-
-
-
-
-
-已完成:
-
-
-
-✔ 完成 Sprint 1 Project Bootstrap
-
-✔ 完成 Client / Server 基础链路
-
-✔ 完成 Core Engine 基础模块
-
-✔ 完成 Engine 生命周期验证
-
-✔ 完成 Entity 基础对象体系
-
-✔ 完成 EntityFactory 配置驱动实体创建
-
-✔ 完成 Component System
-
-✔ 完成 System Framework
-
-✔ 完成 Engine Loop
-
-✔ 完成 Resource System
-
-
-
-当前目标:
-
-▶ Task 015：Runtime Loop Integration（已完成）
-
-
-
-下一目标:
-
-Task 017 - Serialization System
-
-
-
-Serialization 设计目标：
-
-Save
-
-&#x20;|
-
-Serializer
-
-&#x20;|
-
-Resource
-
-&#x20;|
-
-Entity State
-
-为未来：
-
-• 存档
-
-• 网络同步
-
-• 数据持久化
-
-打基础。
-
-
-
-完整标准运行循环：
-
-Entity
-
-↓
-
-Component
-
-↓
-
-System
-
-↓
-
-EventBus
-
-↓
-
-Logger
-
-
-
-Engine.Run() 内部流程
-
-&#x20;     ↓
-
-while loop
-
-&#x20;     ↓
-
-System Update
-
-&#x20;     ↓
-
-Event Process
-
-&#x20;     ↓
-
-Logger
-
-
-
-
-
-\# 七、当前模块状态
-
-
-
-
-
-
-
-Engine Core:
-
-
-
-ACTIVE
-
-
-
-
-
-Framework:
-
-
-
-WAITING
-
-
-
-
-
-Game:
-
-
-
-WAITING
-
-
-
-
-
-Content:
-
-
-
-WAITING
-
-
-
-
-
-
-
-\# 八、当前 Git 分支
-
-
-
-
-
-
-
-Branch:
-
-
-
-develop
-
-
-
-
-
-
-
-\# 九、当前版本号
-
-
-
-
-
-
-
-Version:
-
-
-
-v0.2.4-core
-
-
-
-Previous:
-
-
-
-v0.2.1-core
-
-
-
-
-
-
-
-\# 十、当前风险
-
-
-
-
-
-
-
-当前技术风险:
-
-
-
-低
-
-
-
-已解决:
-
-
-
-✔ Core 项目结构问题
-
-✔ Logger 命名冲突问题
-
-✔ Runtime 生命周期设计问题
-
-✔ Entity 命名空间歧义问题
-
-✔ EventBus 语法编译错误
-
-
-
-当前重点:
-
-
-
-保持 Engine Core 架构稳定。
-
-
-
-严格遵守:
-
-\- 模块职责分离
-
-\- 单向依赖
-
-\- AI 可持续接管
-
-\- 不提前开发游戏内容
-
-
-
-⚠ ECS 阶段硬性约束：
-
-❌ Player
-
-❌ Monster
-
-❌ Skill
-
-❌ Item
-
-Core 只提供通用底层能力，禁止任何业务实体。
-
-
-
-
-
-
-
-\# 十一、下一阶段计划
-
-
-
-
-
-
-
-当前已完成任务清单：
-
-Task 012：Entity 生命周期 + EventBus 集成
-
-Task 013 - Component System
-
-Task 014 - System Framework
-
-Task 015 - Runtime Loop Integration
-
-
-
-下一项任务：
-
-Task 017：Serialization System
-
-
-
-建设目标：
-
-实现通用序列化层，支撑实体状态持久化、存档、网络同步。
-
-
-
-
-
-
-
-\# 十二、开发规则提醒
-
-
-
-
-
-
-
-禁止:
-
-
-
-❌ 开发游戏玩法
-
-❌ 添加角色系统
-
-❌ 添加技能系统
-
-❌ 添加装备系统
-
-❌ 添加地图系统
-
-
-
-当前阶段只允许:
-
-
-
-Engine Core Development
-
-
-
-
-
-
-
-\# 十三、AI 接管规则
-
-
-
-
-
-
-
-任何 AI 接手项目时:
-
-
-
-必须首先阅读:
-
-
-
-AI\_PROJECT\_CONTEXT.md
-
-AI\_CURRENT\_STATUS.md
-
-
-
-确认:
-
-
-
-Current Sprint
-
-Current Version
-
-Completed Modules
-
-Next Task
-
-
-
-未经确认禁止修改架构。
-
-
-
-
-
-
-
-\# 十四、备注
-
-
-
-
-
-
-
-本文件必须在每次开发结束后更新。
-
-所有重大架构变化必须记录。
-
-
-
-Genesis Engine 当前进入：
-
-完整ECS运行引擎开发阶段，具备实体、组件、系统、主循环、资源完整底层链路。
-
-
-
-End of File.
-
+附注
+本文档为项目当前状态快照，后续每次关键合并或里程碑完成时请更新 AI_CURRENT_STATUS.md 并在 PR 中标注变更要点与验证步骤

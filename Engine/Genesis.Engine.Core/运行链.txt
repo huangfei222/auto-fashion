@@ -1,27 +1,31 @@
 EngineBootstrap
         |
+        ↓
+ServiceContainer
         |
-RuntimeContext
+        ↓
+Runtime Services
         |
+        ↓
+Resource
         |
-+----------------------+
-|                      |
-ResourceManager    Serialization
-|                      |
-↓                      ↓
-ConfigManager       JSON Data
-|
-↓
-FactoryManager
-|
-↓
-EntityManager
-|
-↓
-ComponentManager
-|
-↓
-SystemManager
-|
-↓
+        ↓
+Serialization
+        |
+        ↓
+Persistence
+        |
+        ↓
+Entity
+        |
+        ↓
+Component
+        |
+        ↓
+System
+        |
+        ↓
 EngineLoop
+        |
+        ↓
+Logger

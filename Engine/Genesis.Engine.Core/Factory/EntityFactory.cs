@@ -1,42 +1,48 @@
+using System;
 using Genesis.Engine.Core.Config;
-using Genesis.Engine.Core.Runtime.Entities;
+using Genesis.Engine.Core.Services;
 
-namespace Genesis.Engine.Core.Factory;
-
-
-public class EntityFactory 
-    : IFactory<Entity>
+namespace Genesis.Engine.Core.Factory
 {
-
-    private readonly ConfigManager config;
-
-
-    public EntityFactory(
-        ConfigManager config
-    )
+    /// <summary>
+    /// EntityFactory - minimal, robust implementation that resolves ConfigManager from ServiceContainer safely.
+    /// </summary>
+    public class EntityFactory
     {
-        this.config = config;
+        private readonly ConfigManager configManager;
+
+        public EntityFactory(ServiceContainer services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            // Prefer generic TryResolve<T>
+            if (services.TryResolve<ConfigManager>(out var cfg))
+            {
+                configManager = cfg!;
+            }
+            else
+            {
+                // Fallback: try non-generic resolution by Type
+                if (services.TryResolve(typeof(ConfigManager), out var inst) && inst is ConfigManager cm)
+                {
+                    configManager = cm;
+                }
+                else
+                {
+                    // Last resort: throw a clear exception so caller can fix DI registration
+                    throw new InvalidOperationException("EntityFactory: ConfigManager not registered in ServiceContainer.");
+                }
+            }
+        }
+
+        // Example factory method (adjust to your real entity creation API)
+        public object Create(string entityType)
+        {
+            // Use configManager to create entity according to configuration
+            // Placeholder: return a simple object or throw if unknown
+            if (string.IsNullOrWhiteSpace(entityType)) throw new ArgumentNullException(nameof(entityType));
+            // TODO: implement actual entity creation using configManager
+            return new { Type = entityType };
+        }
     }
-
-
-    public Entity Create(
-        int id
-    )
-    {
-
-        var data =
-        config.Get<Dictionary<string,object>>
-        (
-            id.ToString()
-        );
-
-
-        return new Entity
-        (
-            new EntityId(id),
-            data["type"]?.ToString() ?? "Unknown"
-        );
-
-    }
-
 }

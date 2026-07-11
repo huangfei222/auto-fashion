@@ -1,10 +1,17 @@
 using Genesis.Engine.Core.Bootstrap;
 using Genesis.Engine.Core.Logging;
+
 using Genesis.Engine.Core.Runtime.Entities;
 using Genesis.Engine.Core.Runtime.Components;
+using Genesis.Engine.Core.Runtime.Systems;
+
 using Genesis.Engine.Core.Runtime.Resource;
 using Genesis.Engine.Core.Runtime.Serialization;
+using Genesis.Engine.Core.Runtime.Data;
 
+using Genesis.Engine.Core.Runtime;
+using Genesis.Engine.Core.Events;
+using Genesis.Engine.Core.Runtime.Modules;
 
 var engine = new EngineBootstrap();
 
@@ -13,6 +20,12 @@ try
 {
 
     engine.Start();
+
+
+    ServiceContainerTest.Run();
+
+
+    PersistenceTest.Run();
 
 
 
@@ -49,9 +62,31 @@ try
 
     if(loadedResource is not null)
     {
+
         Logger.Info(
             loadedResource.Value
         );
+
+    }
+
+
+
+    // ===============================
+    // Service Container Test
+    // ===============================
+
+
+    var eventBus =
+        engine.Services.Get<EventBus>();
+
+
+    if(eventBus != null)
+    {
+
+        Logger.Info(
+            "Service Container OK"
+        );
+
     }
 
 
@@ -99,10 +134,47 @@ try
 
     if(deserializeData is not null)
     {
+
         Logger.Info(
             $"Deserialize {deserializeData.Id}"
         );
+
     }
+
+
+
+
+    // ===============================
+    // Data Pipeline Test
+    // ===============================
+
+
+    var loader =
+        new JsonDataLoader<RuntimeData>();
+
+
+
+    var loadedRuntime =
+        loader.Load(
+            "Data/runtime.json"
+        );
+
+
+
+    Logger.Info(
+        $"Loaded Data {loadedRuntime.Id}"
+    );
+
+
+    Logger.Info(
+        $"Type {loadedRuntime.Type}"
+    );
+
+
+    Logger.Info(
+        $"Value {loadedRuntime.Value}"
+    );
+
 
 
 
@@ -120,15 +192,22 @@ try
 
 
 
-    engine.Entities.Add(
+    var entityManager =
+        engine.Services.Get<EntityManager>();
+
+
+
+    entityManager.Add(
         entity
     );
 
 
 
-    // 注意：
-    // 这里必须使用 Component
-    // 不能使用 RuntimeData
+
+
+    // ===============================
+    // Component System Test
+    // ===============================
 
 
     var runtimeComponent =
@@ -138,10 +217,17 @@ try
 
 
 
-    engine.Components.Add(
+    var componentManager =
+        engine.Services.Get<ComponentManager>();
+
+
+
+    componentManager.Add(
         entity,
         runtimeComponent
     );
+
+
 
 
 
@@ -151,16 +237,44 @@ try
     // ===============================
 
 
-    engine.Systems.Add<RuntimeTestSystem>();
+    var systemManager =
+        engine.Services.Get<SystemManager>();
 
 
 
-    engine.Loop.Run();
+    systemManager.Add<RuntimeTestSystem>();
 
+
+
+
+
+
+    // ===============================
+    // Runtime Loop
+    // ===============================
+
+
+    var loop =
+        engine.Services.Get<EngineLoop>();
+
+
+
+    loop.Run();
+
+
+
+
+
+
+
+    // ===============================
+    // Component Verify
+    // ===============================
 
 
     var loadedComponent =
-        engine.Components.Get<RuntimeDataComponent>(
+        componentManager
+        .Get<RuntimeDataComponent>(
             entity
         );
 
@@ -177,8 +291,11 @@ try
 
 
 
+
+
+
     Logger.Info(
-        $"Entity Count {engine.Entities.Count()}"
+        $"Entity Count {entityManager.Count()}"
     );
 
 

@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Concurrent;
+using Genesis.Engine.Core.Logging;
+
+namespace Genesis.Engine.Core.Runtime.Serialization
+{
+    public class SerializationManager
+    {
+        private readonly ConcurrentDictionary<Type, object> serializers = new();
+
+        public void Register<T>(ISerializer<T> serializer)
+        {
+            if (serializer == null) throw new ArgumentNullException(nameof(serializer));
+            serializers[typeof(T)] = serializer;
+            Logger.Info($"SerializationManager: Registered serializer for {typeof(T).Name}");
+        }
+
+        public bool TryGetSerializer<T>(out ISerializer<T>? serializer)
+        {
+            if (serializers.TryGetValue(typeof(T), out var obj) && obj is ISerializer<T> s)
+            {
+                serializer = s;
+                return true;
+            }
+
+            serializer = default;
+            return false;
+        }
+
+        public string Serialize<T>(T data)
+        {
+            if (TryGetSerializer<T>(out var serializer) && serializer != null)
+            {
+                return serializer.Serialize(data);
+            }
+
+            throw new InvalidOperationException($"No serializer registered for {typeof(T).FullName}");
+        }
+
+        public T Deserialize<T>(string json)
+        {
+            if (TryGetSerializer<T>(out var serializer) && serializer != null)
+            {
+                return serializer.Deserialize(json);
+            }
+
+            throw new InvalidOperationException($"No serializer registered for {typeof(T).FullName}");
+        }
+    }
+}

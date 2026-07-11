@@ -1,0 +1,79 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Genesis.Engine.Core.Services;
+using Genesis.Engine.Core.Logging;
+
+namespace Genesis.Engine.Core.Runtime.Modules
+{
+    public class ModuleManager
+    {
+        private readonly List<IEngineModule> modules;
+        private readonly ServiceContainer services;
+
+        public ModuleManager(ServiceContainer services)
+        {
+            this.services = services ?? throw new ArgumentNullException(nameof(services));
+            modules = new List<IEngineModule>();
+        }
+
+        // 添加已实例化的模块
+        public void Add(IEngineModule module)
+        {
+            if (module == null) throw new ArgumentNullException(nameof(module));
+            modules.Add(module);
+
+            try
+            {
+                module.Register(services);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"ModuleManager: Exception during Register for {module.Name}: {ex.Message}");
+            }
+        }
+
+        // 保留泛型 Add 以兼容旧代码
+        public void Add<T>() where T : IEngineModule, new()
+        {
+            Add(new T());
+        }
+
+        public void Initialize()
+        {
+            foreach (var module in modules.OrderBy(x => x.Order))
+            {
+                try
+                {
+                    Logger.Info($"Initialize Module {module.Name}");
+                    module.Initialize();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"ModuleManager: Exception initializing {module.Name}: {ex.Message}");
+                }
+            }
+        }
+
+        public void Shutdown()
+        {
+            foreach (var module in modules.OrderByDescending(x => x.Order))
+            {
+                try
+                {
+                    Logger.Info($"Shutdown Module {module.Name}");
+                    module.Shutdown();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"ModuleManager: Exception shutting down {module.Name}: {ex.Message}");
+                }
+            }
+        }
+
+        public IEnumerable<IEngineModule> GetModules()
+        {
+            return modules.OrderBy(x => x.Order);
+        }
+    }
+}

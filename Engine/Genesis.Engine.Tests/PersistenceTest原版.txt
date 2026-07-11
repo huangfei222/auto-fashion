@@ -1,0 +1,61 @@
+using Genesis.Engine.Core.Runtime.Persistence;
+using Genesis.Engine.Core.Logging;
+
+
+
+public static class PersistenceTest
+{
+
+
+    public static void Run()
+    {
+
+        var manager =
+        new PersistenceManager();
+
+
+
+        var data =
+        new SaveData();
+
+
+        data.Entities.Add(
+            new
+            {
+                Id = 5001,
+                Type = "RuntimeObject"
+            }
+        );
+
+
+
+        string path =
+        "save.json";
+
+
+
+        manager.Save(
+            path,
+            data
+        );
+
+
+
+        Logger.Info(
+            "Save Completed"
+        );
+
+
+
+        var loaded =
+        manager.Load(path);
+
+
+
+        Logger.Info(
+            $"Loaded Count {loaded.Entities.Count}"
+        );
+
+    }
+
+}

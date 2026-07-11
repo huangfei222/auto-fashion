@@ -1,0 +1,16 @@
+namespace Genesis.Engine.Core.Runtime.Serialization;
+
+
+public class SerializationData
+{
+
+    public int Id { get; set; }
+
+
+    public string Type { get; set; } = "";
+
+
+    public Dictionary<string,object> Values {get;set;}
+        = new();
+
+}

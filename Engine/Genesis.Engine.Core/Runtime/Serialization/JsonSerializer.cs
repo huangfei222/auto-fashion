@@ -5,16 +5,13 @@ namespace Genesis.Engine.Core.Runtime.Serialization;
 
 
 public class JsonSerializer<T>
-    :
-    ISerializer<T>
+    : ISerializer<T>
 {
 
-    public string Serialize(
-        T data
-    )
+    public string Serialize(T data)
     {
 
-        return JsonSerializer.Serialize(
+        return System.Text.Json.JsonSerializer.Serialize(
             data
         );
 
@@ -22,26 +19,12 @@ public class JsonSerializer<T>
 
 
 
-    public T Deserialize(
-        string data
-    )
+    public T Deserialize(string json)
     {
 
-        var result =
-            System.Text.Json.JsonSerializer.Deserialize<T>(
-                data
-            );
-
-
-        if(result == null)
-        {
-            throw new InvalidOperationException(
-                "Deserialize returned null"
-            );
-        }
-
-
-        return result;
+        return System.Text.Json.JsonSerializer.Deserialize<T>(
+            json
+        )!;
 
     }
 

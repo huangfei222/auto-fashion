@@ -13,6 +13,9 @@ Genesis.Engine.Core
 
 ├── Config
 │   └── ConfigManager.cs
+      └──EngineConfiguration.cs
+      └──ResourceConfiguration.cs
+      └──RuntimeConfiguration.cs
 
 ├── Factory
 │   ├── IFactory.cs
@@ -36,12 +39,41 @@ Genesis.Engine.Core
 │   ├──Resource
 │  │                └──IResource.cs
 │  │                └──ResourceHandle.cs
-│   │                     └──ResourceManager.cs
+│  │                     └──ResourceManager.cs
 │  ├──Serialization
 │  │          └──ISerializer.cs
 │  │           └──JsonSerializer.cs
+│  ├──Persistence
+│  │               └──PersistenceManager.cs  
+│  │               └──SaveData.cs
+│  ├──Internal 
+│  │                └──IRuntimeServiceContainer.cs
+│  │                 └──RuntimeServiceContainer.cs
 │  │
-│   └── RuntimeContext.cs
-│
-│
+│  ├──Data
+│  │           └──IDataLoader.cs
+│  │            └──JsonDataLoader.cs
+│  │ 
+│  ├──Modules │             
+│  │                  └──ComponentModule.cs
+│  │               └──EntityModule.cs
+│  │               └──IEngineModule.cs
+│  │                └──ModuleManager.cs
+│  │                └──SystemModule.cs          
+│  │                      ├── ModuleDefinition.cs                  
+│  │                      ├── ModuleLoader.cs
+│  │
+│  ├──Services
+│  │               └──ServiceContainer.cs
+│  │               └──ServiceDescriptor.cs
+│  │                 ├── ServiceDefinition.cs
+│  │                ├── ServiceConfiguration.cs
+│  │               └── ServiceLoader.cs
+│  │ 
+│  │ 
+│  │ 
+│  │ 
+│  └── RuntimeContext.cs
+│  │ 
+│  │ 
 │

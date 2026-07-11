@@ -1,0 +1,22 @@
+{
+  "Modules":
+  [
+    {
+      "Type":"EntityModule",
+      "Enabled":true,
+      "Order":1
+    },
+
+    {
+      "Type":"ComponentModule",
+      "Enabled":true,
+      "Order":2
+    },
+
+    {
+      "Type":"SystemModule",
+      "Enabled":true,
+      "Order":3
+    }
+  ]
+}
